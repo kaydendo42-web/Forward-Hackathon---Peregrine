@@ -133,6 +133,17 @@ export function reviewRequest(state: Workspace, id: string, decision: Decision, 
   return replace(state, { ...req, review: decision, reviewNote: cleaned }, 'reviewed', `${req.label}: ${decision}. ${cleaned} (simulated adviser review).`);
 }
 
+export function rewordRequest(state: Workspace, id: string, question: string) {
+  const req = getRequest(state, id); const cleaned = text(question, 'Request wording', 1000);
+  if (req.question === cleaned) return state;
+  return replace(state, { ...req, question: cleaned }, 'request_reworded', `${req.label}: question wording replaced by adviser; open drafts superseded.`);
+}
+
+/** Append an audit-only event (no request changes), e.g. an accepted AI proposal. */
+export function logEvent(state: Workspace, entityId: string, action: string, detail: string) {
+  return change(state, entityId, text(action, 'Event action', 80), text(detail, 'Event detail'));
+}
+
 export function pauseRequest(state: Workspace, id: string, paused: boolean) {
   const req = getRequest(state, id);
   if (req.paused === paused) return state;

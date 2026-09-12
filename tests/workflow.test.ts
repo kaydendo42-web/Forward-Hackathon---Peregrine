@@ -135,3 +135,23 @@ describe('review gates and follow-up', () => {
     expect(state.requests[0].review).toBe('pending');
   });
 });
+
+describe('request rewording', () => {
+  it('replaces the question, supersedes drafts, and is a no-op when unchanged', () => {
+    const state = workflow.queueOutreach(active(), 'alex-taylor', 'initial');
+    const wording = 'FY2026: Provide each dividend statement, including DRP shares.';
+    const next = workflow.rewordRequest(state, reqId, wording);
+    expect(next.requests[0].question).toBe(wording);
+    expect(next.outbox[0].status).toBe('superseded');
+    expect(next.audit.at(-1)?.action).toBe('request_reworded');
+    expect(workflow.rewordRequest(next, reqId, wording)).toBe(next);
+    expect(() => workflow.rewordRequest(next, reqId, '   ')).toThrow(/required/);
+  });
+  it('records a labelled event without touching requests', () => {
+    const state = active();
+    const next = workflow.logEvent(state, 'alex-taylor', 'ai_proposal_accepted', 'follow_up via test-model assist-1');
+    expect(next.version).toBe(state.version + 1);
+    expect(next.requests).toBe(state.requests);
+    expect(next.audit.at(-1)).toMatchObject({ action: 'ai_proposal_accepted', entityId: 'alex-taylor' });
+  });
+});
