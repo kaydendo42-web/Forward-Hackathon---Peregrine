@@ -130,3 +130,7 @@ footer>button { float:right; }
 .draft.sent { border-color:#9fc3a8; }
 .send-confirm { margin-top:10px; padding:12px 14px; border:1px solid #ecd99d; background:#fff6de; border-radius:4px; }
 .send-confirm p { margin:0 0 8px; font-size:12px; }
+.inbox-reply { overflow-wrap:anywhere; }
+.inbox-reply select { display:block; max-width:100%; width:100%; margin-top:5px; padding:9px 10px; background:white; color:var(--ink); border:1px solid #aebac6; border-radius:4px; }
+.inbox-reply select:focus-visible { outline:3px solid #327ebb; outline-offset:3px; }
+.inbox-reply>.text-button { display:block; margin-top:12px; }

@@ -28,7 +28,13 @@ export type Draft = {
 };
 export type AuditEvent = { id: string; at: string; action: string; entityId: string; detail: string };
 export type ReviewChange = { requestId: string; decision: Decision; note: string };
+export type InboxMessage = {
+  messageId: string; inReplyTo: string | null; references: string[]; from: string;
+  date: string; subject: string; text: string; textTruncated: boolean;
+  attachments: { filename: string; size: number; contentType: string }[];
+};
+export type InboxReceipt = { messageId: string; requestId: string; acceptedAt: string; answer: string };
 export type Workspace = {
   schemaVersion: 1; version: number; baselines: Baseline[]; requests: CollectionRequest[];
-  outbox: Draft[]; audit: AuditEvent[];
+  outbox: Draft[]; audit: AuditEvent[]; inbox: InboxMessage[]; inboxReceipts: InboxReceipt[];
 };

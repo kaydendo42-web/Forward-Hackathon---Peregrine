@@ -8,6 +8,9 @@ import { commitWorkspace, keepOriginal, parseSavedWorkspace, readOriginal, sha25
 import { RequestPanel } from './request-panel';
 import { AssistPanel } from './assist-panel';
 import { SendDraft } from './send-draft';
+import { InboxPanel } from './inbox-panel';
+import { checkInbox, importReplies } from '../lib/inbox';
+import { sendDraft } from '../lib/send-client';
 import { download, money } from '../lib/format';
 import { entities, evidencePath, fy26Path, fy26Samples, workbookPath } from '../lib/samples';
 
@@ -88,6 +91,32 @@ export default function Workspace() {
     await keepOriginal(await sha256(bytes), bytes);
     setReviewImport({ version: source.version, changes });
   }
+  async function fetchReplies(passcode: string) {
+    const base = stateRef.current;
+    const result = await checkInbox(passcode);
+    const next = importReplies(base, result.messages);
+    persist(base, next);
+    const added = next.inbox.length - base.inbox.length;
+    setNotice(`Inbox checked: ${added} new ${added === 1 ? 'reply' : 'replies'}. No answers applied automatically.`);
+  }
+  async function sendMailDraft(draftId: string, to: string, passcode: string) {
+    if (locked.current) throw new Error('Another operation is running. Try sending when it finishes.');
+    const base = stateRef.current;
+    const draft = base.outbox.find(d => d.id === draftId && d.status === 'draft');
+    if (!draft) throw new Error('This draft is no longer available to send.');
+    locked.current = true; setBusy(true); setError(''); setNotice('');
+    try {
+      const receipt = await sendDraft(draft, to, passcode);
+      try { persist(base, flow.markSent(base, draftId, receipt)); }
+      catch {
+        throw new Error(`Email was sent to ${receipt.to} (message ID ${receipt.messageId}), but the workspace could not save the receipt. Do not resend. Keep this message ID and reload to reconcile the workspace.`);
+      }
+      setNotice(`Emailed ${receipt.to}. After the family replies, use Check inbox in the Inbox tab.`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Sending failed.');
+      throw e;
+    } finally { locked.current = false; setBusy(false); }
+  }
   const baseline = state.baselines.find(b => b.entityId === entityId);
   const requests = state.requests.filter(r => r.entityId === entityId);
   const selected = requests.find(r => r.id === selectedId) ?? requests[0];
@@ -96,14 +125,14 @@ export default function Workspace() {
 
   return <div className="app-shell">
     <header className="topbar"><a className="brand" href="/">Peregrine<span>Compliance collection</span></a><span className="demo-label">Synthetic demonstration</span></header>
-    <div className="demo-warning">Synthetic data only. Saved in this browser, not a shared client portal. No tax advice, lodgment or live email sending.</div>
+    <div className="demo-warning">Synthetic data only. Saved in this browser, not a shared client portal. Email and AI require configuration. No tax advice or lodgment.</div>
     <div className="workspace-layout">
       <aside className="sidebar" aria-label="Family entities">
         <p className="eyebrow">Taylor family group</p>
         {allEntities.map(entity => <button key={entity.id} className={`entity-button ${entity.id === entityId ? 'active' : ''}`} onClick={() => selectEntity(entity.id)} aria-pressed={entity.id === entityId}>
           <strong>{entity.name}</strong><span>{entity.type} · {state.baselines.some(b => b.entityId === entity.id) ? 'FY25 imported' : 'No baseline'}</span>
         </button>)}
-        <div className="sidebar-bottom"><strong>No live integrations</strong><p>Drive · Xero · email · AI extraction</p><button className="text-button" onClick={() => setTab('Connections')}>Setup plan</button></div>
+        <div className="sidebar-bottom"><strong>Optional email and AI</strong><p>Drive and Xero are not connected.</p><button className="text-button" onClick={() => setTab('Connections')}>Setup plan</button></div>
       </aside>
       <main>
         <div className="page-heading"><div><p className="eyebrow">FY25 baseline / FY26 collection</p><h1>Collection workspace</h1><p>{baseline?.entityName ?? 'Import a synthetic family to begin.'}</p></div>
@@ -122,7 +151,9 @@ export default function Workspace() {
           <ul>{candidate.lines.map(line => <li key={line.id}>{line.id}: {line.label} — {money(line.amountCents)}</li>)}</ul>
           <button disabled={busy} onClick={() => { const pack = candidate; act(s => flow.importBaseline(s, pack), 'Synthetic baseline confirmed.'); setEntityId(pack.entityId); setCandidate(null); }}>Confirm synthetic baseline</button><button onClick={() => setCandidate(null)}>Cancel import</button>
         </section>}
-        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
+        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
+        {tab === 'Inbox' && !clientView && <InboxPanel state={state} entityId={entityId} busy={busy} act={act} check={passcode => void run(() => fetchReplies(passcode))}
+          openRequest={id => { setSelectedId(id); setTab('Requests'); }} />}
         {tab === 'Requests' && <>
           <div className="section-heading"><div><h2>{requests.length ? `${accepted} of ${requests.length} requests reviewed` : 'Prepare the collection season'}</h2><p>{requests.length ? 'Evidence receipt and adviser acceptance are tracked separately.' : 'Download the workbooks below, or load the sample family. Then generate FY26 requests.'}</p></div>
             {!clientView && requests.length > 0 && <div className="button-row"><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'initial'), 'Draft created. No email was sent.')}>Draft initial outreach</button><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'reminder'), 'Reminder draft created. No email was sent.')}>Draft reminder</button></div>}
@@ -151,7 +182,7 @@ export default function Workspace() {
           {state.outbox.filter(d => d.entityId === entityId).toReversed().map(draft => <article className={`draft ${draft.status}`} key={draft.id}><h3>{draft.subject}</h3>
             <p data-testid="draft-status">{draft.status === 'draft' ? 'Draft — not sent' : draft.status === 'sent' ? `Sent to ${draft.to} · ${new Date(draft.sentAt ?? '').toLocaleString('en-AU')} · ${draft.messageId}` : 'Superseded — do not send'}</p>
             <pre>{draft.body}</pre>
-            <div className="button-row"><button disabled={draft.status === 'superseded'} onClick={() => download(draft.body, `${draft.id}.txt`, 'text/plain')}>Download draft</button>{!clientView && <SendDraft draft={draft} busy={busy} act={act} />}</div></article>)}
+            <div className="button-row"><button disabled={draft.status === 'superseded'} onClick={() => download(draft.body, `${draft.id}.txt`, 'text/plain')}>Download draft</button>{!clientView && <SendDraft draft={draft} busy={busy} send={sendMailDraft} />}</div></article>)}
         </section>}
         {tab === 'Files' && <section><h2>Synthetic workbook and evidence files</h2><p>Four separate entity workbooks, three template types. Upload these files to a restricted Google Drive demo folder if useful. The app is not connected to Drive.</p>
           <div className="sample-files">{entities.map(entity => <article key={entity.id}><h3>{entity.name}</h3><a href={workbookPath(entity.id)} download>Download FY25 workbook</a><a href={evidencePath(entity.id)} download>Download FY25 evidence records</a></article>)}</div>
@@ -164,8 +195,8 @@ export default function Workspace() {
           <tr><td>Supabase</td><td>Authenticated entity access, requests, evidence metadata and review events</td><td>Not connected. Browser-local storage is a demo adapter only.</td></tr>
           <tr><td>Google Drive</td><td>Original documents and versioned workpaper copies</td><td>Not connected. Use restricted entity/year folders; OAuth setup is next.</td></tr>
           <tr><td>Xero</td><td>Read-only current-year ledger comparisons</td><td>Not connected. Verify the university account's reporting permissions first.</td></tr>
-          <tr><td>AI extraction</td><td>Propose document fields and follow-up wording with citations</td><td>Not connected. The current requests use explicit demo rules.</td></tr>
-          <tr><td>Email</td><td>Approved requests, responses and bounded reminders</td><td>Draft only. Verified recipients and a durable outbox are required before sending.</td></tr>
+          <tr><td>AI assist</td><td>Propose fields from pasted text, follow-up wording and change requests</td><td>Implemented; requires NIM credentials and the demo passcode. Proposals need adviser acceptance. No PDF/OCR.</td></tr>
+          <tr><td>Email</td><td>Send approved drafts and retrieve family replies</td><td>Implemented; requires a firm Gmail mailbox and App Password. Inbox checks are manual; attachments are metadata only. No scheduler or durable server outbox.</td></tr>
         </tbody></table><p>Jason's guidance changes should be reviewed and versioned before use. Current method: {flow.METHOD_VERSION}. This demo does not monitor or invent ATO changes.</p></section>}
         <footer><span>Peregrine · limited synthetic workpapers, not complete tax returns</span><button className="text-button" onClick={() => setResetConfirm(true)}>Reset demo</button>
           {resetConfirm && <div className="callout"><p>Clear this browser's requests, decisions and drafts? Original uploaded files remain in browser storage.</p><button disabled={busy} onClick={() => { localStorage.removeItem(STORAGE_KEY); const empty = flow.createWorkspace(); stateRef.current = empty; setState(empty); setCandidate(null); setReviewImport(null); setResetConfirm(false); setError(''); setNotice('Demo reset.'); }}>Confirm reset</button><button onClick={() => setResetConfirm(false)}>Keep demo</button></div>}

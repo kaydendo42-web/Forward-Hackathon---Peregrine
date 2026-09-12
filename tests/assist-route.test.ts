@@ -21,7 +21,7 @@ describe('POST /api/assist', () => {
     vi.stubEnv('NVIDIA_NIM_MODEL', 'vendor/kimi-test');
     vi.stubEnv('AI_ASSIST_PASSCODE', 'open-sesame');
   });
-  afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); });
+  afterEach(() => { vi.useRealTimers(); vi.unstubAllEnvs(); vi.unstubAllGlobals(); });
 
   it('503 when the server is not configured, before checking anything else', async () => {
     vi.stubEnv('NVIDIA_NIM_API_KEY', '');
@@ -51,8 +51,23 @@ describe('POST /api/assist', () => {
     expect(url).toBe('https://integrate.api.nvidia.com/v1/chat/completions');
     expect(init.headers.authorization).toBe('Bearer nvapi-test');
     const sent = JSON.parse(init.body);
-    expect(sent).toMatchObject({ model: 'vendor/kimi-test', temperature: 0.1 });
+    expect(sent).toMatchObject({ model: 'vendor/kimi-test', temperature: 0.1, max_tokens: 1500 });
+    expect(sent.reasoning_effort).toBeUndefined();
     expect(sent.messages[0].role).toBe('system');
+  });
+  it('uses Kimi K3 low reasoning effort and a larger bounded output allowance', async () => {
+    vi.stubEnv('NVIDIA_NIM_MODEL', 'moonshotai/kimi-k3');
+    const fetchMock = vi.fn().mockResolvedValue(nimReply('{"items":[{"text":"Please send the July statement.","basis":["issuer A"]}]}'));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await call(good);
+
+    expect(res.status).toBe(200);
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent).toMatchObject({
+      model: 'moonshotai/kimi-k3', temperature: 1, max_tokens: 4096,
+      reasoning_effort: 'low', stream: false,
+    });
   });
   it('502 after one retry when the model keeps returning unusable output', async () => {
     const fetchMock = vi.fn().mockResolvedValue(nimReply('I cannot help with that.'));
@@ -63,9 +78,52 @@ describe('POST /api/assist', () => {
     expect(JSON.parse(fetchMock.mock.calls[1][1].body).messages.at(-1).content).toMatch(/only the JSON object/i);
   });
   it('502 when NIM itself fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('upstream down', { status: 500 })));
+    const fetchMock = vi.fn().mockResolvedValue(new Response('upstream down', { status: 500 }));
+    vi.stubGlobal('fetch', fetchMock);
     const res = await call(good);
     expect(res.status).toBe(502);
     expect((await res.json()).error).toMatch(/model service/i);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+  it('does not retry an upstream 429 response', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response('rate limited', { status: 429 }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await call(good);
+
+    expect(res.status).toBe(502);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+  it('does not retry or expose a network failure', async () => {
+    const fetchMock = vi.fn().mockRejectedValue(new Error('socket failed with secret-provider-detail'));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await call(good);
+    const responseBody = JSON.stringify(await response.json());
+
+    expect(response.status).toBe(502);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(responseBody).toMatch(/model service request failed/i);
+    expect(responseBody).not.toContain('secret-provider-detail');
+  });
+  it('shares one 54-second deadline across an unusable reply and its retry', async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi.fn()
+      .mockImplementationOnce(() => new Promise<Response>(resolve => {
+        setTimeout(() => resolve(nimReply('not JSON')), 30_000);
+      }))
+      .mockImplementationOnce((_url, init: RequestInit) => new Promise<Response>((_resolve, reject) => {
+        init.signal?.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError')));
+      }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const pending = call(good);
+    const result = expect(pending).resolves.toMatchObject({ status: 502 });
+    await vi.advanceTimersByTimeAsync(30_000);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await vi.advanceTimersByTimeAsync(24_000);
+
+    await result;
+    expect(fetchMock.mock.calls[0][1].signal).toBe(fetchMock.mock.calls[1][1].signal);
   });
 });

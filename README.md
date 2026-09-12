@@ -4,15 +4,17 @@ Forward hackathon entry. An adviser-reviewed prior-year workbook supplies the re
 
 **This is a browser-local demonstration on synthetic data.** No Supabase, Google Drive, Xero, scheduler or ATO lodgment is connected. AI proposals and email sending are optional, server-gated add-ons. The interface says so on every screen. See [Limits](#limits) before describing it to anyone.
 
+**Team: [start with the handoff directory](docs/team/README.md).** [Jason: guidance/checklists](docs/team/jason/README.md) · [Thomas: visual design](docs/team/thomas/README.md) · [Kayden + Codex: AI and integration](docs/team/kayden/README.md). Each track has its next deliverable, relevant files and completion checks.
+
 ## Quick start
 
 Requires Node 22+.
 
 ```sh
 npm ci
-npm test            # 68 unit tests (Vitest)
+npm test            # unit and route tests (Vitest)
 npm run typecheck   # next typegen && tsc --noEmit
-npm run test:e2e    # 2 Playwright journeys; starts the dev server itself
+npm run test:e2e    # Playwright journeys; starts the dev server itself
 npm run build
 npm run dev         # http://127.0.0.1:3000
 ```
@@ -60,7 +62,7 @@ One matched dividend schedule does not complete the engagement; the other reques
 | `fixtures/fy25/` | FY25 evidence CSVs and `manifest.json` describing the import contract. See `docs/workbook-guide.md`. |
 | `public/samples/fy26/` | Test evidence: correct, short, wrong-year, wrong-component, company bank balance. |
 | `tools/workbooks/` | Reproducible workbook builder and verifier. Its authoring runtime is not bundled. |
-| `docs/` | Design, implementation checklist, workbook guide. |
+| `docs/` | Design, implementation checklist, workbook guide and `docs/team/` ownership handoffs. |
 
 Import contract, stable line IDs and evidence columns are documented in `docs/workbook-guide.md` and `fixtures/fy25/manifest.json`.
 
@@ -100,7 +102,9 @@ AI_ASSIST_PASSCODE=...       # any shared string; advisers type it once per brow
 
 Set the same three in the Vercel project (Settings → Environment Variables) and redeploy. Without all three, `/api/assist` returns 503 and the panel says so.
 
-Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-origin, zod-validated body, 20 000-character text cap, 20 s timeout, `temperature 0.1`, one retry when the model's JSON is unusable, no content logging. The passcode limits drive-by credit use; it is not authentication. Add a Vercel WAF rate-limit rule on `/api/assist` before any wider audience.
+Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-origin, zod-validated body, 20 000-character text cap, one shared 54-second model-call deadline, one retry when the model's JSON is unusable, no content logging. The passcode limits drive-by credit use; it is not authentication. Add a Vercel WAF rate-limit rule on `/api/assist` before any wider audience.
+
+Kimi K3 uses low reasoning effort, a 4,096-token output allowance and temperature 1, following its documented reasoning interface. Other models retain the existing 1,500-token/temperature-0.1 settings. Live K3 checks encountered upstream rate limiting and timeouts; successful end-to-end model output is still unverified. These settings are a bounded compatibility adjustment, not a claim that provider availability is resolved.
 
 ## Email sending (optional, Gmail SMTP)
 
@@ -119,21 +123,38 @@ SMTP_PASS=xxxx xxxx xxxx xxxx                # its Google App Password (needs 2-
 OUTREACH_ALLOWED_RECIPIENTS=taylorfamilyexample@gmail.com
 ```
 
-Uses the same `AI_ASSIST_PASSCODE` gate. **Inbound is not built yet**: family replies arrive in the firm mailbox but are not read back into the app. See Next milestones.
+Uses the same `AI_ASSIST_PASSCODE` gate. **The live email round trip is verified**: the hosted app sent the synthetic outreach, retrieved the family reply, matched it to Alex's request and saved the relevant answer after explicit acceptance. A second poll produced no duplicate. Adviser review remains separate. See PICKUP.md for the verification record and the Inbox section below for the walkthrough.
 
 ## Deploying
 
-Live: **https://peregrine-forward-hackathon.vercel.app** (Vercel project `peregrine-forward-hackathon`, branch `feat/compliance-demo`). Both browser journeys pass against it.
+Live: **https://peregrine-forward-hackathon.vercel.app** (Vercel project `peregrine-forward-hackathon`, default GitHub branch `feat/compliance-demo`). The original two browser journeys were checked against the live URL; the expanded four-journey suite covers the Inbox locally with mocked mail. The actual hosted email round trip was verified separately.
 
-The app is Next.js 16 with only static routes, no environment variables and no server storage. `vercel.json` pins the framework preset; without it a CLI-created project defaults to static hosting of `public/` and the app root 404s.
+The app is Next.js 16 with server routes for AI assist, sending and inbox checks. Optional integrations require server environment variables; workflow state remains browser-local. `vercel.json` pins the framework preset; without it a CLI-created project defaults to static hosting of `public/` and the app root 404s.
 
-Vercel import settings: framework **Next.js**, root directory `/`, build `npm run build`, install `npm ci`, Node 22. Create a **new** project with a hackathon-specific name; do not attach it to the existing `peregrine-partners` / `peregrinepartners` projects. Keep deployment protection on for previews.
+Use the existing `peregrine-forward-hackathon` project. Settings: framework **Next.js**, root directory `/`, build `npm run build`, install `npm ci`, Node 22. The `peregrine-partners` / `peregrinepartners` projects are unrelated. Keep deployment protection on for previews. The recorded setup uses manual CLI deployments; GitHub auto-deploy is not configured.
+
+## Inbox: family → Peregrine
+
+The same firm mailbox sends and receives. `SMTP_USER` is the firm address; `OUTREACH_ALLOWED_RECIPIENTS` contains family addresses allowed for both sending and inbox collection. The app does not create a mailbox for you. For a personal Gmail account, IMAP is already enabled; there is no enable/disable toggle ([Google guidance](https://support.google.com/mail/answer/75726?hl=en)). The demo uses the firm's App Password for SMTP and IMAP. Enter credentials directly in `.env.local` and the Vercel project, never in the repository or chat.
+
+1. Configure `SMTP_USER`, `SMTP_PASS`, `OUTREACH_ALLOWED_RECIPIENTS`, and `AI_ASSIST_PASSCODE`.
+2. Load the family, generate FY26 requests, draft outreach and send from the Outbox.
+3. In the family mailbox, reply to that email. This preserves the email thread references.
+4. In Peregrine, open **Inbox → Check inbox**. The server reads the most recent 50 eligible messages from the last 30 days without marking mail read or deleting it.
+5. Review the reply, choose the request, remove quoted history from the proposed answer, and click **Accept reply as answer**. Thread references suggest requests; unmatched mail requires an explicit manual assignment. Acceptance appends to any existing answer and reopens review.
+6. **Open request and AI assist** to triage a current-year change or review the relevant evidence. An email answer is not accepted financial evidence.
+
+Replies and acceptance records survive reload in this browser. Polling deduplicates message IDs; the same reply cannot be accepted twice for the same request. This demo retains up to 200 replies and 1,000 reply acceptance records. Older saved workspaces load with empty Inbox records.
+
+Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-only messages require reading the original mailbox and entering relevant text. Attachment names/types/sizes are listed, but attachment bytes are not fetched: download a CSV from the firm mailbox and use the existing evidence upload, or paste statement text into AI assist for a proposal. No background inbox polling, production authentication, or durable shared mailbox state is implemented.
 
 ## Next milestones
 
-1. **LLM assistance (NVIDIA NIM, Kimi).** Server-only route handler; key in `NVIDIA_NIM_API_KEY` (`.env.local`, Vercel env), never `NEXT_PUBLIC_`. First use: propose follow-up wording and extract fields from pasted statement text, shown as *proposals* the adviser accepts or edits. Every proposal cites its source lines and is logged with the method version.
-2. **Supabase** for authenticated, entity-scoped requests, evidence metadata and review events (RLS per entity). Browser storage becomes a dev adapter.
-3. **Google Drive** with `drive.file` scope for original documents in entity/year folders. Drive stores files, not request state.
-4. **Xero read-only** ledger comparisons once the university account's API permissions are confirmed.
-5. **Inbound replies (family → agent).** Poll the firm mailbox over IMAP (`imapflow`, same App Password) from a gated `/api/inbox` route; match `In-Reply-To`/`References` to the stored message ID on a sent draft; show the reply as a *proposed* client answer and attachments as *proposed* evidence for the adviser to accept (AI `triage`/`extract` already exist for this). Then a durable server-side outbox with retries.
-6. Jason's guidance updates: reviewed, versioned method changes; no invented live ATO feeds.
+1. **Verify live AI proposals.** The hosted email round trip is complete. Exercise all four NIM actions successfully; prior live calls encountered rate limits/timeouts. Automated tests use mocked mail and model providers.
+2. **Rehearse and record** one synthetic client journey, including an evidence gap and explicit adviser review.
+3. **Shared production state:** Supabase authentication/entity access, evidence metadata, review events and durable inbox/outbox with retries.
+4. **Documents and accounting:** Google Drive with selected-file access, then read-only Xero once university account permissions are verified.
+5. **Annual rollover:** immutable accepted FY26 snapshot, then FY27 request generation.
+6. **Jason's guidance updates:** reviewed, versioned method changes; no invented live ATO feeds.
+
+See `docs/competitive-landscape.md` for the current product comparison and proposed positioning.

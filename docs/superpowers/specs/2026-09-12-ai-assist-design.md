@@ -43,3 +43,7 @@ System prompt: synthetic Australian family-group data; FY26 = 1 July 2025 – 30
 ## Out of scope
 
 Streaming, PDF/OCR, rate limiting beyond size caps (Vercel WAF rule is the follow-up), server-side proposal storage, tool calling.
+
+## Compatibility update after live verification
+
+The current resume exposed timeouts/HTTP 429 with `moonshotai/kimi-k3`. Its [NVIDIA model card](https://build.nvidia.com/moonshotai/kimi-k3/modelcard) documents always-on reasoning and low/high/max effort; the [NVIDIA example](https://build.nvidia.com/moonshotai/kimi-k3) demonstrates the reasoning-effort field. The route now sets low effort, temperature 1 and max_tokens 4096 specifically for K3. Other model settings are unchanged. A single 54-second deadline covers both attempts, within a 60-second route budget. This supersedes the earlier 20-second timeout for the route. Live successful output remains unverified; see PICKUP.md for observed failures.

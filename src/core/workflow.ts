@@ -3,7 +3,7 @@ import type { Baseline, CollectionRequest, Decision, EvidenceInput, ReviewChange
 export const METHOD_VERSION = 'demo-method-1';
 
 export function createWorkspace(): Workspace {
-  return { schemaVersion: 1, version: 0, baselines: [], requests: [], outbox: [], audit: [] };
+  return { schemaVersion: 1, version: 0, baselines: [], requests: [], outbox: [], audit: [], inbox: [], inboxReceipts: [] };
 }
 
 export function assertAmount(value: number | null) {

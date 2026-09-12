@@ -75,7 +75,7 @@ test('workbook → outreach → evidence gap → review survives a reload', asyn
   await page.reload();
   await page.getByRole('button', { name: 'Cash dividends', exact: true }).click();
   await expect(page.getByTestId('selected-status')).toContainText('Accepted for demo');
-  await expect(page.getByText('No live integrations')).toBeVisible();
+  await expect(page.getByText('Optional email and AI')).toBeVisible();
 
   // Adviser handoff: export, edit only decision/review_note in Excel, preview, confirm.
   const [exported] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export review workbook' }).click()]);

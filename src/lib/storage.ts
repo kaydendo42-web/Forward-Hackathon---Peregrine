@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createWorkspace } from '../core/workflow';
 import type { Workspace } from '../core/types';
+import { inboxMessageSchema, inboxReceiptSchema } from './inbox';
 
 export const STORAGE_KEY = 'peregrine-synthetic-workspace-v1';
 const text = z.string().max(8000), money = z.number().int().min(-1e12).max(1e12).nullable();
@@ -15,6 +16,7 @@ const request = z.object({ id: text, entityId: text, financialYear: z.literal(20
   evidence: z.array(evidence).max(200), answer: text, review: z.enum(['pending', 'accepted', 'not_applicable', 'follow_up']),
   reviewNote: text, paused: z.boolean(), origin: z.enum(['baseline', 'discovery', 'planning']), methodVersion: text });
 const schema = z.object({ schemaVersion: z.literal(1), version: z.number().int().nonnegative(),
+  inbox: z.array(inboxMessageSchema).max(200).default([]), inboxReceipts: z.array(inboxReceiptSchema).max(1000).default([]),
   baselines: z.array(baseline).max(20), requests: z.array(request).max(1000),
   outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded', 'sent']),
     requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000),

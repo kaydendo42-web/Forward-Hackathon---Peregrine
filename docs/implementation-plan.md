@@ -12,7 +12,7 @@
 
 ## Global constraints
 
-Synthetic data only. No ATO lodgment, actual email, live tax calculations or fabricated integrations. Amounts are stored in cents. Match entity, period, component, currency and basis. No arbitrary formulas or macro execution on import. Show errors without silently replacing them with zero.
+Original first-milestone constraints: synthetic data only; no ATO lodgment, actual email, live tax calculations or fabricated integrations. Later approved extensions added optional email sending/collection and AI proposals; see README. Amounts are stored in cents. Match entity, period, component, currency and basis. No arbitrary formulas or macro execution on import. Show errors without silently replacing them with zero.
 
 ## 1. Workbook fixtures
 
@@ -50,9 +50,9 @@ Files: `src/app/{layout,page}.tsx`, `src/app/globals.css`, `src/components/works
 
 ## 5. Delivery
 
-Status 12 September 2026: 43 unit tests, 2 browser tests, typecheck, production build and `npm audit` (0 vulnerabilities) all pass locally. Nothing has been committed, pushed or deployed yet.
+Historical first-milestone verification: 43 unit tests, 2 browser tests, typecheck, build and audit passed. Publishing was subsequently completed as recorded in PICKUP.md. Current verification is tracked there; this checklist describes the original milestone.
 
 - [x] `npm test`, `npm run typecheck`, `npm run build`.
 - [x] Document the exact demo steps, Google Drive folder plan and outstanding cloud configuration (`README.md`).
-- [ ] Verify Vercel account and deploy a preview if authorised access is available; otherwise provide exact repository import settings. No false deployment claims.
-- [ ] Report tests, workbook outputs, preview URL if successful, and remaining integration work.
+- [x] Verify Vercel account and publish the demo. The handoff records the production alias as https://peregrine-forward-hackathon.vercel.app; previews remain protected.
+- [x] Report tests, workbook outputs, deployed URL and remaining integration work in README and PICKUP.md.

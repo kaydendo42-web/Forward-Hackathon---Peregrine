@@ -10,7 +10,7 @@ Requests include recurring evidence needs and a separate current-year changes qu
 
 The demonstration must work without external credentials. Browser-local persistence is explicitly labelled and accepts synthetic records only. Adviser/client views are a simulation in this mode, not an access-control boundary. No real client information is appropriate here. Supabase is the next shared-data layer; production requires authenticated entity-scoped access, private storage, server-side transitions and an immutable audit trail.
 
-Email output is a draft outbox. Nothing is actually sent. Draft reminders stop after a response, acceptance, not-applicable decision, or explicit pause. Queuing the same reminder twice is idempotent. There is no background scheduler in this milestone.
+Original first-milestone scope: email output was a draft outbox. Later approved extensions added gated SMTP sending and on-demand IMAP reply collection; see README for the current setup. Draft reminders stop after a response, acceptance, not-applicable decision, or explicit pause. Queuing the same reminder twice is idempotent. There is no background scheduler in this milestone.
 
 Evidence intake supports the supplied structured CSV records. Arbitrary PDF/OCR interpretation is not claimed. Export/re-import is a versioned review workbook; only designated review columns can change, stale versions are rejected, and an explicit app action confirms changes. A new evidence event invalidates prior review exports.
 
