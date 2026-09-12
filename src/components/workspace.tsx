@@ -6,6 +6,7 @@ import * as flow from '../core/workflow';
 import { parseMoney, readEvidenceCsv } from '../lib/evidence';
 import { commitWorkspace, keepOriginal, parseSavedWorkspace, readOriginal, sha256, STORAGE_KEY } from '../lib/storage';
 import { RequestPanel } from './request-panel';
+import { AssistPanel } from './assist-panel';
 import { download, money } from '../lib/format';
 import { entities, evidencePath, fy26Path, fy26Samples, workbookPath } from '../lib/samples';
 
@@ -132,8 +133,11 @@ export default function Workspace() {
               {!clientView && <small>FY25 comparative: {money(request.priorAmountCents)}</small>}
             </article>)}
           </div>
-          {selected && <RequestPanel key={`${selected.id}:${state.version}`} request={selected} clientView={clientView} busy={busy} act={act}
-            upload={file => void run(() => uploadEvidence(file, selected.id))} openOriginal={e => void run(async () => download(await readOriginal(e.fileHash), e.filename))} />}
+          {selected && <div className="request-column">
+            <RequestPanel key={`${selected.id}:${state.version}`} request={selected} clientView={clientView} busy={busy} act={act}
+              upload={file => void run(() => uploadEvidence(file, selected.id))} openOriginal={e => void run(async () => download(await readOriginal(e.fileHash), e.filename))} />
+            {!clientView && baseline && <AssistPanel key={selected.id} request={selected} baseline={baseline} busy={busy} act={act} />}
+          </div>}
           </div>}
           {!clientView && requests.length > 0 && <section className="review-tools"><h2>Adviser handoff</h2><p>Export the FY26 review workbook, edit its decision and review_note columns, then re-import. New evidence makes older exports stale.</p>
             <div className="button-row"><button disabled={busy} onClick={() => void run(exportReview, 'Review workbook downloaded.')}>Export review workbook</button><label className="file-button">Preview review import<input type="file" accept=".xlsx" aria-label="Review workbook" disabled={busy} onChange={e => { const f = e.target.files?.[0]; e.target.value = ''; if (f) void run(() => importReview(f)); }} /></label></div>

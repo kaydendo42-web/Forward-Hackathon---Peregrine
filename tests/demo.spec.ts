@@ -21,6 +21,31 @@ test('workbook → outreach → evidence gap → review survives a reload', asyn
   await page.getByLabel('Review note').fill('Both synthetic issuer statements checked against the FY26 comparison.');
   await page.getByRole('button', { name: 'Accept evidence for demo' }).click();
   await expect(page.getByTestId('selected-status')).toContainText('Accepted for demo');
+
+  // AI assist: unconfigured server reports clearly; a mocked proposal is applied only on Accept.
+  await page.route('**/api/assist', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: 'AI assist is not configured on this deployment.' }) }));
+  await page.getByLabel('AI passcode').fill('demo');
+  await page.getByRole('button', { name: 'Propose follow-up wording' }).click();
+  await expect(page.getByTestId('assist-error')).toContainText('AI assist is not configured');
+  await page.unroute('**/api/assist');
+  await page.route('**/api/assist', async route => {
+    const sent = route.request().postDataJSON();
+    expect(sent.task).toBe('follow_up');
+    expect(route.request().headers()['x-assist-passcode']).toBe('demo');
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ proposal: {
+      task: 'follow_up', model: 'mock-model', promptVersion: 'assist-1', createdAt: new Date().toISOString(),
+      items: [{ text: 'Please send the DRP election confirmation for FY26.', basis: ['issuer A cash dividends'] }] } }) });
+  });
+  await page.getByRole('button', { name: 'Propose follow-up wording' }).click();
+  await expect(page.getByTestId('proposal-item')).toContainText('DRP election');
+  await expect(page.getByTestId('selected-status')).toContainText('Accepted for demo'); // not applied yet
+  await page.getByRole('button', { name: 'Accept proposal' }).click();
+  await expect(page.getByTestId('selected-status')).toContainText('Follow-up required');
+  await expect(page.getByLabel('Review note')).toHaveValue('Please send the DRP election confirmation for FY26.');
+  await page.unroute('**/api/assist');
+  await page.getByLabel('Review note').fill('Both synthetic issuer statements checked against the FY26 comparison.');
+  await page.getByRole('button', { name: 'Accept evidence for demo' }).click();
+  await expect(page.getByTestId('selected-status')).toContainText('Accepted for demo');
   await page.reload();
   await page.getByRole('button', { name: 'Cash dividends', exact: true }).click();
   await expect(page.getByTestId('selected-status')).toContainText('Accepted for demo');
