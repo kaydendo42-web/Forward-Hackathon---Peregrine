@@ -1,5 +1,5 @@
-import { timingSafeEqual } from 'node:crypto';
 import { assistRequestSchema, buildMessages, parseReply, PROMPT_VERSION, type Proposal } from '../../../lib/assist';
+import { gate, json } from '../../../lib/gate';
 
 // Thin, gated proxy to NVIDIA NIM. The API key never leaves this handler.
 // Nothing returned here is applied to the workspace; the browser shows it as a proposal.
@@ -8,16 +8,6 @@ export const maxDuration = 30;
 
 const NIM_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 const TIMEOUT_MS = 20_000;
-
-function json(status: number, payload: unknown) {
-  return Response.json(payload, { status, headers: { 'cache-control': 'no-store' } });
-}
-
-function passcodeMatches(presented: string | null, expected: string) {
-  if (!presented) return false;
-  const a = Buffer.from(presented, 'utf8'), b = Buffer.from(expected, 'utf8');
-  return a.length === b.length && timingSafeEqual(a, b);
-}
 
 async function complete(key: string, model: string, messages: { role: 'system' | 'user' | 'assistant'; content: string }[]) {
   const controller = new AbortController();
@@ -39,9 +29,7 @@ async function complete(key: string, model: string, messages: { role: 'system' |
 export async function POST(req: Request) {
   const key = process.env.NVIDIA_NIM_API_KEY, model = process.env.NVIDIA_NIM_MODEL, passcode = process.env.AI_ASSIST_PASSCODE;
   if (!key || !model || !passcode) return json(503, { error: 'AI assist is not configured on this deployment.' });
-  if (!passcodeMatches(req.headers.get('x-assist-passcode'), passcode)) return json(401, { error: 'AI assist passcode is missing or incorrect.' });
-  const site = req.headers.get('sec-fetch-site');
-  if (site !== null && site !== 'same-origin') return json(403, { error: 'AI assist accepts requests from this app only.' });
+  const blocked = gate(req, passcode); if (blocked) return blocked;
 
   let parsed;
   try { parsed = assistRequestSchema.parse(await req.json()); }

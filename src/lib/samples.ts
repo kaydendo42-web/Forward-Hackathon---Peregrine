@@ -5,6 +5,9 @@ export const entities = [
   { id: 'taylor-family-trust', name: 'Taylor Family Trust', type: 'Trust' },
 ] as const;
 
+/** Shared demo inbox for the whole synthetic family group. The server allowlist is what actually permits sending. */
+export const familyInbox = 'taylorfamilyexample@gmail.com';
+
 export function workbookPath(entityId: string) { return `/samples/fy25/${entityId}-FY25.xlsx`; }
 export function evidencePath(entityId: string) { return `/samples/fy25/${entityId}-evidence-FY25.csv`; }
 

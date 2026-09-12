@@ -7,6 +7,7 @@ import { parseMoney, readEvidenceCsv } from '../lib/evidence';
 import { commitWorkspace, keepOriginal, parseSavedWorkspace, readOriginal, sha256, STORAGE_KEY } from '../lib/storage';
 import { RequestPanel } from './request-panel';
 import { AssistPanel } from './assist-panel';
+import { SendDraft } from './send-draft';
 import { download, money } from '../lib/format';
 import { entities, evidencePath, fy26Path, fy26Samples, workbookPath } from '../lib/samples';
 
@@ -145,9 +146,12 @@ export default function Workspace() {
             <details><summary>Add an approved planning request</summary><form onSubmit={e => { e.preventDefault(); const data = new FormData(e.currentTarget); act(s => flow.addPlanningRequest(s, entityId, String(data.get('title')), String(data.get('note'))), 'Planning request added with its reason.'); e.currentTarget.reset(); }}><label>Request title<input name="title" required maxLength={120} placeholder="Investment disposal records" /></label><label>Approved planning note / evidence request<textarea name="note" required maxLength={4000} placeholder="Synthetic adviser note: obtain the FY26 disposal contract and purchase records. Do not assume a proposed sale completed." /></label><button disabled={busy}>Add planning request</button></form></details>
           </section>}
         </>}
-        {tab === 'Outbox' && <section><h2>Draft outbox</h2><p>No emails are sent. A response or changed request supersedes its old draft. Reminders here are generated on demand, not scheduled.</p>
+        {tab === 'Outbox' && <section><h2>Draft outbox</h2><p>Drafts are generated on demand, not scheduled. Sending goes through Gmail SMTP to the verified demo inbox only; a response or changed request supersedes unsent drafts.</p>
           {state.outbox.filter(d => d.entityId === entityId).length === 0 && <p className="empty">No drafts yet. Generate requests, then draft initial outreach.</p>}
-          {state.outbox.filter(d => d.entityId === entityId).toReversed().map(draft => <article className={`draft ${draft.status}`} key={draft.id}><h3>{draft.subject}</h3><p>{draft.status === 'draft' ? 'Draft — not sent' : 'Superseded — do not send'}</p><pre>{draft.body}</pre><button disabled={draft.status !== 'draft'} onClick={() => download(draft.body, `${draft.id}.txt`, 'text/plain')}>Download draft</button></article>)}
+          {state.outbox.filter(d => d.entityId === entityId).toReversed().map(draft => <article className={`draft ${draft.status}`} key={draft.id}><h3>{draft.subject}</h3>
+            <p data-testid="draft-status">{draft.status === 'draft' ? 'Draft — not sent' : draft.status === 'sent' ? `Sent to ${draft.to} · ${new Date(draft.sentAt ?? '').toLocaleString('en-AU')} · ${draft.messageId}` : 'Superseded — do not send'}</p>
+            <pre>{draft.body}</pre>
+            <div className="button-row"><button disabled={draft.status === 'superseded'} onClick={() => download(draft.body, `${draft.id}.txt`, 'text/plain')}>Download draft</button>{!clientView && <SendDraft draft={draft} busy={busy} act={act} />}</div></article>)}
         </section>}
         {tab === 'Files' && <section><h2>Synthetic workbook and evidence files</h2><p>Four separate entity workbooks, three template types. Upload these files to a restricted Google Drive demo folder if useful. The app is not connected to Drive.</p>
           <div className="sample-files">{entities.map(entity => <article key={entity.id}><h3>{entity.name}</h3><a href={workbookPath(entity.id)} download>Download FY25 workbook</a><a href={evidencePath(entity.id)} download>Download FY25 evidence records</a></article>)}</div>

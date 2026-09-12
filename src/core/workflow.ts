@@ -171,7 +171,7 @@ export function queueOutreach(state: Workspace, entityId: string, kind: 'initial
   const year = eligible[0].financialYear;
   const body = `Hello ${entity.entityName},\n\n${kind === 'reminder' ? 'A reminder about the outstanding items' : 'We are collecting information'} for FY${year} (1 July ${year - 1}–30 June ${year}).\n\n` +
     eligible.map((r, i) => `${i + 1}. ${r.question}${r.review === 'follow_up' ? `\n   Adviser clarification: ${r.reviewNote}` : ''}`).join('\n\n') +
-    '\n\nIf an item no longer applies or a document is not yet available, please tell us. Use your authorised document channel for sensitive records.\n\nYour adviser\n\nSYNTHETIC DEMO — draft only; not sent.';
+    '\n\nIf an item no longer applies or a document is not yet available, please tell us. Use your authorised document channel for sensitive records.\n\nYour adviser\n\nSYNTHETIC DEMO — fictional family group, no real client data. Please do not reply with real personal or financial information.';
   return change({ ...state, outbox: [...state.outbox, {
     id: `draft-${state.version + 1}`, entityId, kind, status: 'draft', requestIds: eligible.map(r => r.id),
     subject: `FY${year} information ${kind === 'reminder' ? 'reminder' : 'request'} — ${entity.entityName}`, body, fingerprint,

@@ -9,6 +9,32 @@ test('workbook → outreach → evidence gap → review survives a reload', asyn
   await page.getByRole('button', { name: 'Generate FY26 requests' }).click();
   await page.getByRole('button', { name: 'Draft initial outreach' }).click();
   await expect(page.getByText('Draft created. No email was sent.')).toBeVisible();
+
+  // Outbox: sending is gated server-side; here the route is mocked so no real SMTP is touched.
+  await page.getByRole('button', { name: /^Outbox/ }).click();
+  await expect(page.getByTestId('draft-status')).toContainText('Draft — not sent');
+  await page.getByRole('button', { name: 'Send to family (demo)' }).click();
+  await page.route('**/api/send', route => route.fulfill({ status: 403, contentType: 'application/json', body: JSON.stringify({ error: 'Recipient is not on the verified recipient list for this demo.' }) }));
+  await page.getByLabel('Demo passcode').fill('demo');
+  await page.getByLabel('Recipient').fill('stranger@example.com');
+  await page.getByRole('button', { name: 'Confirm and send' }).click();
+  await expect(page.getByTestId('send-error')).toContainText('not on the verified recipient list');
+  await expect(page.getByTestId('draft-status')).toContainText('Draft — not sent');
+  await page.unroute('**/api/send');
+  await page.route('**/api/send', async route => {
+    const sent = route.request().postDataJSON();
+    expect(sent.to).toBe('taylorfamilyexample@gmail.com');
+    expect(sent.subject).toContain('Alex Taylor');
+    expect(sent.body).toContain('SYNTHETIC DEMO');
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ receipt: { to: sent.to, messageId: '<mock-1@gmail.com>', sentAt: '2026-09-12T08:00:00.000Z' } }) });
+  });
+  await page.getByLabel('Recipient').fill('taylorfamilyexample@gmail.com');
+  await page.getByRole('button', { name: 'Confirm and send' }).click();
+  await expect(page.getByTestId('draft-status')).toContainText('Sent to taylorfamilyexample@gmail.com');
+  await expect(page.getByTestId('draft-status')).toContainText('<mock-1@gmail.com>');
+  await expect(page.getByRole('button', { name: 'Send to family (demo)' })).toHaveCount(0);
+  await page.unroute('**/api/send');
+  await page.getByRole('button', { name: 'Requests', exact: true }).click();
   await page.getByRole('button', { name: 'Cash dividends', exact: true }).click();
   await page.getByLabel('FY26 comparison amount (AUD)').fill('5200');
   await page.getByRole('button', { name: 'Save comparison' }).click();

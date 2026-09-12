@@ -127,3 +127,6 @@ footer>button { float:right; }
 .proposal-item p { margin:0 0 6px; font-size:13px; }
 .proposal-item q { color:var(--muted); font-style:italic; }
 .proposal-item small { display:block; color:var(--muted); margin-bottom:6px; }
+.draft.sent { border-color:#9fc3a8; }
+.send-confirm { margin-top:10px; padding:12px 14px; border:1px solid #ecd99d; background:#fff6de; border-radius:4px; }
+.send-confirm p { margin:0 0 8px; font-size:12px; }
