@@ -155,3 +155,29 @@ describe('request rewording', () => {
     expect(next.audit.at(-1)).toMatchObject({ action: 'ai_proposal_accepted', entityId: 'alex-taylor' });
   });
 });
+
+describe('sending outreach', () => {
+  const receipt = { to: 'taylorfamilyexample@gmail.com', messageId: '<abc@gmail.com>', sentAt: '2026-09-12T08:00:00.000Z' };
+  it('marks a draft sent with recipient, time and message ID, and records the event', () => {
+    const state = workflow.queueOutreach(active(), 'alex-taylor', 'initial');
+    const next = workflow.markSent(state, state.outbox[0].id, receipt);
+    expect(next.outbox[0]).toMatchObject({ status: 'sent', ...receipt });
+    expect(next.audit.at(-1)).toMatchObject({ action: 'outreach_sent' });
+    expect(next.audit.at(-1)?.detail).toMatch(/taylorfamilyexample@gmail.com/);
+  });
+  it('refuses to mark superseded or already-sent drafts, or unknown drafts', () => {
+    const state = workflow.queueOutreach(active(), 'alex-taylor', 'initial');
+    const sent = workflow.markSent(state, state.outbox[0].id, receipt);
+    expect(() => workflow.markSent(sent, sent.outbox[0].id, receipt)).toThrow(/already sent/i);
+    const superseded = workflow.recordAnswer(state, reqId, 'No longer applies');
+    expect(superseded.outbox[0].status).toBe('superseded');
+    expect(() => workflow.markSent(superseded, superseded.outbox[0].id, receipt)).toThrow(/superseded/i);
+    expect(() => workflow.markSent(state, 'draft-999', receipt)).toThrow(/not found/i);
+  });
+  it('keeps a sent draft sent when a later change supersedes open drafts', () => {
+    const state = workflow.queueOutreach(active(), 'alex-taylor', 'initial');
+    const sent = workflow.markSent(state, state.outbox[0].id, receipt);
+    const later = workflow.recordAnswer(sent, reqId, 'Answered after the email went out');
+    expect(later.outbox[0].status).toBe('sent');
+  });
+});

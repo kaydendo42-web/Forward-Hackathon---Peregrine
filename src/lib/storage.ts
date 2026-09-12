@@ -16,8 +16,9 @@ const request = z.object({ id: text, entityId: text, financialYear: z.literal(20
   reviewNote: text, paused: z.boolean(), origin: z.enum(['baseline', 'discovery', 'planning']), methodVersion: text });
 const schema = z.object({ schemaVersion: z.literal(1), version: z.number().int().nonnegative(),
   baselines: z.array(baseline).max(20), requests: z.array(request).max(1000),
-  outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded']),
-    requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000) })).max(1000),
+  outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded', 'sent']),
+    requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000),
+    to: text.optional(), messageId: text.optional(), sentAt: text.optional() })).max(1000),
   audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000) });
 
 export function parseSavedWorkspace(raw: string | null): Workspace {

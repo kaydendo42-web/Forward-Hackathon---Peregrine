@@ -20,9 +20,11 @@ export type CollectionRequest = {
   answer: string; review: 'pending' | Decision; reviewNote: string; paused: boolean;
   origin: 'baseline' | 'discovery' | 'planning'; methodVersion: string;
 };
+export type SendReceipt = { to: string; messageId: string; sentAt: string };
 export type Draft = {
-  id: string; entityId: string; kind: 'initial' | 'reminder'; status: 'draft' | 'superseded';
+  id: string; entityId: string; kind: 'initial' | 'reminder'; status: 'draft' | 'superseded' | 'sent';
   requestIds: string[]; subject: string; body: string; fingerprint: string;
+  to?: string; messageId?: string; sentAt?: string;
 };
 export type AuditEvent = { id: string; at: string; action: string; entityId: string; detail: string };
 export type ReviewChange = { requestId: string; decision: Decision; note: string };

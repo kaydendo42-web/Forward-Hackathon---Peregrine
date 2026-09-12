@@ -1,4 +1,4 @@
-import type { Baseline, CollectionRequest, Decision, EvidenceInput, ReviewChange, Workspace } from './types';
+import type { Baseline, CollectionRequest, Decision, EvidenceInput, ReviewChange, SendReceipt, Workspace } from './types';
 
 export const METHOD_VERSION = 'demo-method-1';
 
@@ -176,6 +176,17 @@ export function queueOutreach(state: Workspace, entityId: string, kind: 'initial
     id: `draft-${state.version + 1}`, entityId, kind, status: 'draft', requestIds: eligible.map(r => r.id),
     subject: `FY${year} information ${kind === 'reminder' ? 'reminder' : 'request'} — ${entity.entityName}`, body, fingerprint,
   }] }, entityId, 'outreach_drafted', `${kind} draft for ${eligible.length} requests. No email was sent.`);
+}
+
+export function markSent(state: Workspace, draftId: string, receipt: SendReceipt): Workspace {
+  const draft = state.outbox.find(d => d.id === draftId);
+  if (!draft) throw new Error('Draft not found in this workspace.');
+  if (draft.status === 'sent') throw new Error('This draft was already sent.');
+  if (draft.status === 'superseded') throw new Error('This draft is superseded; draft a fresh message before sending.');
+  const to = text(receipt.to, 'Recipient', 320); const messageId = text(receipt.messageId, 'Message ID', 998);
+  if (Number.isNaN(Date.parse(receipt.sentAt))) throw new Error('Invalid send time.');
+  return change({ ...state, outbox: state.outbox.map(d => d.id === draftId ? { ...d, status: 'sent' as const, to, messageId, sentAt: receipt.sentAt } : d) },
+    draft.entityId, 'outreach_sent', `${draft.kind} draft ${draft.id} emailed to ${to} (${draft.requestIds.length} requests). Message ID ${messageId}.`);
 }
 
 export function applyReviewChanges(state: Workspace, baseVersion: number, changes: ReviewChange[]) {
