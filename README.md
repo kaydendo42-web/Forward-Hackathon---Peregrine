@@ -10,7 +10,7 @@ Requires Node 22+.
 
 ```sh
 npm ci
-npm test            # 43 unit tests (Vitest)
+npm test            # 59 unit tests (Vitest)
 npm run typecheck   # next typegen && tsc --noEmit
 npm run test:e2e    # 2 Playwright journeys; starts the dev server itself
 npm run build
@@ -69,12 +69,38 @@ Import contract, stable line IDs and evidence columns are documented in `docs/wo
 State this plainly in the pitch.
 
 - Synthetic entities only: Alex Taylor, Sam Taylor, Taylor Services Pty Ltd, Taylor Family Trust. No real TFNs, bank identifiers or signatures. Workbooks are limited prototype workpapers, not tax-return templates or lodged records.
-- Request wording uses deterministic demo rules (`demo-method-1`). No LLM calls exist yet.
+- Request wording uses deterministic demo rules (`demo-method-1`). The optional AI assist only *proposes*; nothing it produces is applied without an adviser clicking Accept, and the demo runs identically with it unconfigured.
 - Evidence intake is structured CSV. No PDF/image OCR.
 - The client-view toggle is a simulation, not a permission boundary. The activity log is local and not tamper-proof.
 - Review import changes only `decision` and `review_note`. There is no accepted-FY26 snapshot rolling into FY27; the annual loop is designed, not built.
 - Cross-tab conflicts are detected optimistically (version check at save) and reported; there is no server arbitration.
 - No measured time-saving claims. Nothing has been tested with real clients.
+
+## AI assist (optional, NVIDIA NIM)
+
+An adviser-only panel under each request asks a NIM-hosted model for **proposals**:
+
+| Button | Model receives | Accept does |
+|---|---|---|
+| Propose follow-up wording | request, evidence summary, current note | records a `follow_up` decision with that note (it then appears in reminder drafts) |
+| Propose reworded question | baseline line, current question | replaces the FY26 question; open drafts are superseded |
+| Extract from pasted text | pasted statement text | links evidence rows through the normal gates; entity/year/component are fixed from the request, never taken from the model |
+| Triage reported changes | client's "What changed?" answer, existing lines | adds an approved planning request per accepted item |
+
+Every acceptance writes an `ai_proposal_accepted` activity event with the model and prompt version (`assist-1`). Dismissed proposals are discarded.
+
+Setup — server-side only, never `NEXT_PUBLIC_`:
+
+```sh
+cp .env.example .env.local   # then fill in:
+NVIDIA_NIM_API_KEY=...       # from build.nvidia.com
+NVIDIA_NIM_MODEL=...         # exact NIM model ID, e.g. the Kimi model you intend to use
+AI_ASSIST_PASSCODE=...       # any shared string; advisers type it once per browser session
+```
+
+Set the same three in the Vercel project (Settings → Environment Variables) and redeploy. Without all three, `/api/assist` returns 503 and the panel says so.
+
+Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-origin, zod-validated body, 20 000-character text cap, 20 s timeout, `temperature 0.1`, one retry when the model's JSON is unusable, no content logging. The passcode limits drive-by credit use; it is not authentication. Add a Vercel WAF rate-limit rule on `/api/assist` before any wider audience.
 
 ## Deploying
 

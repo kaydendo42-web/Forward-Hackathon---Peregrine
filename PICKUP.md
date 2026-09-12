@@ -98,17 +98,30 @@ Requests currently use deterministic demo rules; no LLM calls. Evidence intake s
 
 Review export edits only `decision` and `review_note`, not arbitrary adviser adjustments or a full current-year compliance workbook. An immutable accepted FY26 snapshot rolling into FY27 has not been implemented. Do not claim the full annual loop is complete.
 
+## Published (12 September 2026, evening)
+
+- GitHub: `feat/compliance-demo` pushed (only branch; GitHub default is therefore this branch).
+- Vercel project **`peregrine-forward-hackathon`** (team `kaydendo42-webs-projects`), linked via `.vercel/` (gitignored). Live: **https://peregrine-forward-hackathon.vercel.app**. First CLI deploy landed as the project's production with preset "Other" (404 at root); `vercel.json` pins `framework: nextjs` and the fixed build was promoted. Previews are protected (302 to login), production alias public — Vercel default.
+- Both browser journeys pass against the live URL (`PLAYWRIGHT_BASE_URL=... npm run test:e2e`).
+- Deploy after each push: `vercel deploy --yes --scope kaydendo42-webs-projects` then `vercel promote <url> --yes`; or connect the GitHub repo in the Vercel dashboard for automatic builds (not done).
+
+## AI assist (added after publishing)
+
+Spec `docs/superpowers/specs/2026-09-12-ai-assist-design.md`, plan `docs/superpowers/plans/2026-09-12-ai-assist.md` (all tasks done). Files: `src/lib/assist.ts`, `src/lib/assist-client.ts`, `src/app/api/assist/route.ts`, `src/components/assist-panel.tsx`; workflow gained `rewordRequest` and `logEvent`. README "AI assist" section documents env vars and behaviour.
+
+**User still needs to:** put `NVIDIA_NIM_API_KEY`, `NVIDIA_NIM_MODEL` (exact Kimi ID from build.nvidia.com — user said they would supply it), `AI_ASSIST_PASSCODE` into `.env.local` and the Vercel project, then redeploy. Until then the panel reports "not configured". **No real NIM call has been exercised yet** — only mocked replies in unit and browser tests. First live run should check that the chosen Kimi model returns bare JSON; if it wraps in prose, `parseReply` already extracts the first `{...}` block and the route retries once.
+
 ## Verification at this checkpoint (12 September 2026, after resume)
 
 Node locally `24.15.0` (engines `>=22`); Next `16.3.5`, React `19.3.0`, ExcelJS `4.4.0`, Vitest `5.0.0`.
 
-- `npm test`: **43 passed**, 5 files.
+- `npm test`: **59 passed**, 7 files (incl. assist schemas/acceptance and route handler with mocked fetch).
 - `npm run typecheck` (now `next typegen && tsc --noEmit`, so a fresh clone works without `next-env.d.ts`): **passed**.
 - `npm run test:e2e` (Chrome path variable): **2 passed**. Journey 1 now covers wrong-year rejection, $1,000 gap, closure, accept, reload, export → edit in ExcelJS → preview → confirm, then stale re-import rejection. Journey 2 uploads a real table-less XLSX and asserts the rejection, then checks 390 px layout.
 - `npm run build`: **passed**.
 - `npm audit`: **0 vulnerabilities**.
 - Desktop (1440) and mobile (390) screenshots inspected; layout usable. Tab strip scrolls within itself on mobile. Thomas redesigns later.
-- Git payload after `.gitignore` update: ~600 KB. Still **no commits, no push, no Vercel project**.
+- Git payload ~600 KB. Committed, pushed and deployed (see Published).
 
 ### Fixed this session
 
@@ -146,9 +159,10 @@ Shell networking may require sandbox escalation; use scoped approval for install
 
 ## Next working sequence
 
-1. **User decisions pending:** (a) authorise commit/push to `feat/compliance-demo` and a new, distinctly named Vercel preview project (deployment protection on); (b) LLM integration scope — user has an NVIDIA NIM key and intends Kimi K3. Key goes only in `.env.local` / Vercel env as `NVIDIA_NIM_API_KEY`; calls only from a Next route handler; never paste the key into chat or commit it.
-2. LLM first slice (proposed): server route → NIM OpenAI-compatible chat endpoint → structured proposals (follow-up wording; field extraction from pasted statement text) that the adviser accepts or edits. Proposals carry source citations and method version; deterministic rules stay as the fallback when no key is configured, so the demo never depends on the network.
-3. Then Supabase auth/RLS + evidence metadata, Google Drive `drive.file`, approved persistent outbox. Pick one narrow end-to-end path.
+1. User sets the three AI env vars locally and on Vercel; redeploy; exercise one real proposal per task and note model behaviour in PICKUP.
+2. Record the 3–5 minute demo video against the live URL (README demo script + one AI proposal). Verify submission deadline (pack said noon 14 September, Melbourne).
+3. Optional hardening before wider exposure: Vercel WAF rate limit on `/api/assist`; connect GitHub → Vercel for auto-deploys.
+4. Then Supabase auth/RLS + evidence metadata, Google Drive `drive.file`, approved persistent outbox. Pick one narrow end-to-end path.
 
 ### Intended demo script
 
