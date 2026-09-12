@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import * as workflow from '../src/core/workflow';
-import { applyProposalItem, buildContext, buildMessages, parseReply, PROMPT_VERSION, type Proposal } from '../src/lib/assist';
+import { applyProposalItem, assistRequestSchema, buildContext, buildMessages, parseReply, PROMPT_VERSION, type Proposal } from '../src/lib/assist';
 import { baseline, evidence } from './fixtures';
 
 function active() {
@@ -25,6 +25,19 @@ describe('reply parsing', () => {
 });
 
 describe('context and prompts', () => {
+  it.each([
+    { comparison: 520000, difference: '1000.00' },
+    { comparison: 420000, difference: '0.00' },
+    { comparison: null, difference: null },
+  ])('passes the workflow reconciliation to the model with comparison $comparison', ({ comparison, difference }) => {
+    const initial = active();
+    const state = workflow.setComparison(initial, initial.requests[0].id, comparison);
+    const context = buildContext(state.requests[0], baseline);
+    const parsed = assistRequestSchema.parse({ task: 'follow_up', context });
+    const messages = buildMessages('follow_up', parsed.context);
+    const payload = JSON.parse(messages[1].content.split('Context (JSON):\n')[1].split('\n\nReturn')[0]);
+    expect(payload.request.reconciliation).toEqual({ evidenceTotalAud: '4200.00', differenceAud: difference });
+  });
   it('summarises the request in AUD and bounds pasted text', () => {
     const state = active();
     const ctx = buildContext(state.requests[0], baseline, ' Statement text ');

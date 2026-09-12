@@ -46,7 +46,7 @@ describe('POST /api/assist', () => {
     const res = await call(good);
     expect(res.status).toBe(200);
     const { proposal } = await res.json();
-    expect(proposal).toMatchObject({ task: 'follow_up', model: 'vendor/kimi-test', promptVersion: 'assist-1', items: [{ text: 'Please send the July statement.' }] });
+    expect(proposal).toMatchObject({ task: 'follow_up', model: 'vendor/kimi-test', promptVersion: 'assist-2', items: [{ text: 'Please send the July statement.' }] });
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe('https://integrate.api.nvidia.com/v1/chat/completions');
     expect(init.headers.authorization).toBe('Bearer nvapi-test');
@@ -67,6 +67,18 @@ describe('POST /api/assist', () => {
     expect(sent).toMatchObject({
       model: 'moonshotai/kimi-k3', temperature: 1, max_tokens: 4096,
       reasoning_effort: 'low', stream: false,
+    });
+  });
+  it('disables Lightning thinking to reserve the response budget for a validated proposal', async () => {
+    vi.stubEnv('NVIDIA_NIM_MODEL', 'nvidia/nemotron-3.5-lightning-30b-a3b');
+    const fetchMock = vi.fn().mockResolvedValue(nimReply('{"items":[{"text":"Please provide support for the remaining $1,000.","basis":["differenceAud 1000.00"]}]}'));
+    vi.stubGlobal('fetch', fetchMock);
+    const res = await call(good);
+    expect(res.status).toBe(200);
+    expect((await res.json()).proposal.items[0].text).toContain('$1,000');
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({
+      model: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 0.1, max_tokens: 1500,
+      chat_template_kwargs: { enable_thinking: false }, stream: false,
     });
   });
   it('502 after one retry when the model keeps returning unusable output', async () => {

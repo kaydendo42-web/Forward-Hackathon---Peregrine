@@ -10,13 +10,13 @@ Live demo: [Peregrine](https://peregrine-forward-hackathon.vercel.app). Reposito
 |---|---|---|
 | Jason | [Guidance and checklists](jason/README.md) | One traceable proposed checklist change, with source, scope, review decision and version history |
 | Thomas | [Visual design and usability](thomas/README.md) | A polished Requests → Outbox → Inbox → adviser review journey, checked on desktop and mobile |
-| Kayden + Codex | [Application and integration](kayden/README.md) | Verify all four live AI actions, then integrate teammate changes and rehearse the demo |
+| Kayden + Codex | [Application and integration](kayden/README.md) | Live AI cases verified; next integrate teammate changes and rehearse the demo |
 
 ## What works today
 
 - Four synthetic FY25 workbooks import and generate FY26 requests. Evidence checks, amount gaps, duplicates, adviser review and versioned workbook export/import work.
 - Real hosted email round trip verified: outbound request, family reply, correct thread matching and explicit acceptance into Alex's Current-year changes request. A repeated poll produced no duplicate. The answer remains pending adviser review.
-- AI proposal actions are implemented, but real Kimi K3 calls have encountered timeouts/rate limits. Successful live model output remains unverified.
+- All four AI actions plus a no-changes case passed live hosted checks on 13 September using NVIDIA Nemotron Lightning with thinking disabled. See [the verification record](../ai-verification.md). Kimi K3 timed out and is no longer the configured demo model.
 - Workspace data is saved in each browser. Opening the live URL on your laptop does **not** load Kayden's demo session. Use **Load synthetic family** in your own browser to start.
 - Supabase, Drive, Xero, background reminders, PDF/OCR and annual snapshot rollover are future work.
 

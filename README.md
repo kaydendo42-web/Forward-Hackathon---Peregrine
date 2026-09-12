@@ -89,14 +89,14 @@ An adviser-only panel under each request asks a NIM-hosted model for **proposals
 | Extract from pasted text | pasted statement text | links evidence rows through the normal gates; entity/year/component are fixed from the request, never taken from the model |
 | Triage reported changes | client's "What changed?" answer, existing lines | adds an approved planning request per accepted item |
 
-Every acceptance writes an `ai_proposal_accepted` activity event with the model and prompt version (`assist-1`). Dismissed proposals are discarded.
+Every acceptance writes an `ai_proposal_accepted` activity event with the model and prompt version (`assist-2`). Dismissed proposals are discarded. Follow-up context includes the workflow's calculated current-year evidence total and difference; prior-year amounts remain comparative only.
 
 Setup — server-side only, never `NEXT_PUBLIC_`:
 
 ```sh
 cp .env.example .env.local   # then fill in:
 NVIDIA_NIM_API_KEY=...       # from build.nvidia.com
-NVIDIA_NIM_MODEL=...         # exact NIM model ID, e.g. the Kimi model you intend to use
+NVIDIA_NIM_MODEL=...         # current demo: nvidia/nemotron-3.5-lightning-30b-a3b
 AI_ASSIST_PASSCODE=...       # any shared string; advisers type it once per browser session
 ```
 
@@ -104,7 +104,9 @@ Set the same three in the Vercel project (Settings → Environment Variables) an
 
 Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-origin, zod-validated body, 20 000-character text cap, one shared 54-second model-call deadline, one retry when the model's JSON is unusable, no content logging. The passcode limits drive-by credit use; it is not authentication. Add a Vercel WAF rate-limit rule on `/api/assist` before any wider audience.
 
-Kimi K3 uses low reasoning effort, a 4,096-token output allowance and temperature 1, following its documented reasoning interface. Other models retain the existing 1,500-token/temperature-0.1 settings. Live K3 checks encountered upstream rate limiting and timeouts; successful end-to-end model output is still unverified. These settings are a bounded compatibility adjustment, not a claim that provider availability is resolved.
+The configured demo model is `nvidia/nemotron-3.5-lightning-30b-a3b`, with thinking disabled via `chat_template_kwargs.enable_thinking: false`, a 1,500-token output allowance and temperature 0.1. All four actions plus a no-changes case passed live hosted checks on 13 September 2026 in 2.8–7.0 seconds per case. See [the verification record](docs/ai-verification.md) for inputs, acceptance checks and limits. The non-thinking setting follows [NVIDIA's deployment guide](https://docs.nvidia.com/nim/large-language-models/2.0.10/get-started/advanced/get-started-nemotron-3.5-lightning.html).
+
+Kimi K3 remains supported with low reasoning effort, 4,096 output tokens and temperature 1, but it timed out in the live checks. Other models retain the generic 1,500-token/temperature-0.1 settings. There is no automatic model fallback. Switching models requires an explicit server setting and fresh verification.
 
 ## Email sending (optional, Gmail SMTP)
 
@@ -150,8 +152,8 @@ Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-o
 
 ## Next milestones
 
-1. **Verify live AI proposals.** The hosted email round trip is complete. Exercise all four NIM actions successfully; prior live calls encountered rate limits/timeouts. Automated tests use mocked mail and model providers.
-2. **Rehearse and record** one synthetic client journey, including an evidence gap and explicit adviser review.
+1. **Integrate teammate work.** Jason prepares a reviewed guidance-change proposal; Thomas polishes the working demo journey. Live email and the five representative AI cases are verified.
+2. **Rehearse and record** one synthetic client journey, including an evidence gap, AI proposals and explicit adviser review. Repeat the live AI smoke check before recording; provider latency can change.
 3. **Shared production state:** Supabase authentication/entity access, evidence metadata, review events and durable inbox/outbox with retries.
 4. **Documents and accounting:** Google Drive with selected-file access, then read-only Xero once university account permissions are verified.
 5. **Annual rollover:** immutable accepted FY26 snapshot, then FY27 request generation.

@@ -1,10 +1,10 @@
 # Peregrine — resume here (handoff to Astra 6)
 
-Updated 12 September 2026 (late evening), Melbourne. Handing off to Astra 6. **Do not restart research or regenerate the completed workbooks.** `README.md` now holds the quick start, demo script and limits; this file holds session state.
+Updated 13 September 2026, Melbourne. **Do not restart research or regenerate the completed workbooks.** `README.md` holds the quick start, demo script and limits; this file holds session state.
 
 ## Current checkpoint — read before the historical notes
 
-The hosted email round trip is complete: delivery, family reply, matching, explicit answer acceptance and a duplicate-free second poll were verified. Live AI output remains unverified after provider timeouts/rate limits. Next: verify the four AI actions, integrate teammate contributions, then rehearse the demo.
+The hosted email round trip is complete. On 13 September, all four live AI actions plus a no-changes case passed with the user-approved faster model, `nvidia/nemotron-3.5-lightning-30b-a3b`. See [AI verification](docs/ai-verification.md) for the cases, measured latency and limits. Next: integrate teammate contributions and rehearse the demo. Earlier K3 failures below are historical.
 
 The user requested publication of all current application changes to the existing GitHub repository and handoff directions for Jason and Thomas. [The team directory](docs/team/README.md) now contains separate guidance/checklist, visual-design and application/integration tracks. Jason's first deliverable is one traceable proposal; Thomas's is a polished working demo journey. Their work is assigned for pickup, not reported as started or completed. See the GitHub handoff checkpoint at the end for the package and verification scope; repository history identifies its commit.
 
@@ -251,3 +251,11 @@ This public record contains the verification outcome only. Mailbox-specific iden
 This package brings the deployed Inbox, shared send lock, AI deadline/model compatibility adjustment, regression tests and current documentation together on `feat/compliance-demo`, the verified default branch of `kaydendo42-web/Forward-Hackathon---Peregrine`. The team handoffs are in `docs/team/{jason,thomas,kayden}/README.md`, with a shared index and Jason's unapproved proposal template. Suggested teammate branches are instructions for their own pickup, not branches created in this session.
 
 Fresh pre-publication checks on 12 September: 89 tests across 10 files passed; all four isolated browser journeys passed; type checking and the production build passed; `git diff --check` passed. All five new team documents have valid local links. The publication file set was checked against the three configured secret values with no matches, and `.env.local` / `.vercel` remain ignored. The app deployment remains the already verified hosted version; this step also adds repository-only handoff documentation.
+
+## AI completion checkpoint — 13 September
+
+The user approved using a verified faster NVIDIA-hosted model after K3 kept timing out. The configured model is now `nvidia/nemotron-3.5-lightning-30b-a3b` in local, production and preview settings. Its thinking mode is disabled; the prompt is `assist-2` and includes the workflow's calculated evidence total/difference. `docs/ai-verification.md` records the diagnosis, live cases and limitations. All four actions plus no-change triage passed through the promoted production endpoint in 2.8–7.0 seconds per representative case.
+
+93 unit/route tests, four isolated browser journeys, type checking and the production build passed. The existing hackathon deployment was rebuilt, checked and promoted. Browser acceptance of extraction, follow-up and rewording passed, and the changes survived reload. The existing production browser is left on Alex's Cash dividends request with $4,200 of evidence against a $5,200 comparison and a follow-up decision for the remaining $1,000. The prior email journey remains intact; no new email was sent. Current workspace version is 17. For the next rehearsal, account for the already-linked extracted statement instead of uploading the same source under a conflicting description.
+
+Next: integrate Jason's guidance proposal and Thomas's visual work as they arrive, then rehearse the evidence-gap closure and workbook handoff for recording. Shared server state, document storage, Xero and annual rollover remain future milestones. Keep provider-quality claims limited to the actual cases tested.

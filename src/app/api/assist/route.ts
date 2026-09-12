@@ -12,7 +12,9 @@ const TOTAL_TIMEOUT_MS = 54_000;
 async function complete(key: string, model: string, messages: { role: 'system' | 'user' | 'assistant'; content: string }[], signal: AbortSignal) {
   const modelOptions = model === 'moonshotai/kimi-k3'
     ? { temperature: 1, max_tokens: 4096, reasoning_effort: 'low' as const }
-    : { temperature: 0.1, max_tokens: 1500 };
+    : model === 'nvidia/nemotron-3.5-lightning-30b-a3b'
+      ? { temperature: 0.1, max_tokens: 1500, chat_template_kwargs: { enable_thinking: false } }
+      : { temperature: 0.1, max_tokens: 1500 };
   const res = await fetch(NIM_URL, {
     method: 'POST', signal,
     headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json', accept: 'application/json' },

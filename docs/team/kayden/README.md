@@ -1,11 +1,11 @@
 # Kayden + Codex — application and integration
 
-The email round trip is verified. Continue with **live AI verification**, then bring the three tracks together for the hackathon demonstration.
+The email round trip and five representative live AI cases are verified. Next bring the three tracks together for the hackathon demonstration. See [AI verification](../../ai-verification.md) for measured results and limits.
 
 ## Immediate sequence
 
-1. Exercise all four configured AI actions with synthetic input: follow-up wording, question rewording, pasted-text extraction and changes triage. Record each result, model, latency, any error, and whether the proposal can be reviewed and applied through the existing gates. Current Kimi K3 calls have timed out or returned upstream rate limits; do not count mocked tests as live success.
-2. Diagnose provider failures before changing models or increasing scope. Keep the bounded deadline, visible failures and explicit proposal acceptance. If an action cannot be verified, retain a working manual path and state the limitation in the demo script.
+1. Rehearse the verified AI path with the configured `nvidia/nemotron-3.5-lightning-30b-a3b` model. Follow-up, rewording, extraction, positive triage and no-changes triage passed hosted checks with explicit acceptance into isolated synthetic state where applicable. Repeat a live smoke check before recording.
+2. Keep the bounded deadline, visible failures and explicit proposal acceptance. Follow-up prompts now include the workflow's calculated evidence total and difference (`assist-2`). K3 timeouts and the initial Lightning output/wording failures are recorded in the verification note; do not revert to earlier settings without retesting.
 3. Review Jason's first proposed guidance change and agree its scope/versioning contract. A documentation proposal does not by itself change active requests or implement a guidance publisher.
 4. Integrate Thomas's UI PR, resolve shared-component conflicts, and run the workflow and Inbox journeys before deploying to the existing hackathon project.
 5. Rehearse and record the synthetic journey: baseline → requests → email reply → accepted client answer → evidence mismatch/gap → adviser review → workbook handoff. Include AI only to the extent verified. Check the current submission instructions before relying on the earlier pack's deadline.
