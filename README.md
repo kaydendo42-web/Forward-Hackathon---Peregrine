@@ -25,6 +25,12 @@ PLAYWRIGHT_CHROMIUM_EXECUTABLE='/Applications/Google Chrome.app/Contents/MacOS/G
 
 Browser tests run in an isolated headless profile, not your own Chrome.
 
+To run the same journeys against a deployed URL instead of the local dev server:
+
+```sh
+PLAYWRIGHT_BASE_URL=https://peregrine-forward-hackathon.vercel.app npm run test:e2e
+```
+
 ## Demo script (about three minutes)
 
 1. **Load synthetic family.** Four FY25 workbooks (1 July 2024 – 30 June 2025) import from `public/samples/fy25/`. Prior-year amounts stay in a comparative column; nothing is carried into FY26.
@@ -72,7 +78,9 @@ State this plainly in the pitch.
 
 ## Deploying
 
-The app is Next.js 16 with only static routes, no environment variables and no server storage.
+Live: **https://peregrine-forward-hackathon.vercel.app** (Vercel project `peregrine-forward-hackathon`, branch `feat/compliance-demo`). Both browser journeys pass against it.
+
+The app is Next.js 16 with only static routes, no environment variables and no server storage. `vercel.json` pins the framework preset; without it a CLI-created project defaults to static hosting of `public/` and the app root 404s.
 
 Vercel import settings: framework **Next.js**, root directory `/`, build `npm run build`, install `npm ci`, Node 22. Create a **new** project with a hackathon-specific name; do not attach it to the existing `peregrine-partners` / `peregrinepartners` projects. Keep deployment protection on for previews.
 
