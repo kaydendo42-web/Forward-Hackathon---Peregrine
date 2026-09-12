@@ -111,11 +111,15 @@ Spec `docs/superpowers/specs/2026-09-12-ai-assist-design.md`, plan `docs/superpo
 
 **User still needs to:** put `NVIDIA_NIM_API_KEY`, `NVIDIA_NIM_MODEL` (exact Kimi ID from build.nvidia.com — user said they would supply it), `AI_ASSIST_PASSCODE` into `.env.local` and the Vercel project, then redeploy. Until then the panel reports "not configured". **No real NIM call has been exercised yet** — only mocked replies in unit and browser tests. First live run should check that the chosen Kimi model returns bare JSON; if it wraps in prose, `parseReply` already extracts the first `{...}` block and the route retries once.
 
+## Email sending (added 12 September, evening)
+
+`src/app/api/send/route.ts` + `src/lib/send-client.ts` + `src/components/send-draft.tsx`; `markSent` in workflow; `src/lib/gate.ts` shared with assist. Gmail SMTP via nodemailer 10 (audit-clean). Env: `SMTP_USER`, `SMTP_PASS` (App Password), `OUTREACH_ALLOWED_RECIPIENTS`. Demo inbox `taylorfamilyexample@gmail.com` (user-created). **No real email has been sent yet** — route tested with mocked transport and mocked fetch only. User must create the App Password and set env locally + Vercel, then send one draft from the Outbox.
+
 ## Verification at this checkpoint (12 September 2026, after resume)
 
 Node locally `24.15.0` (engines `>=22`); Next `16.3.5`, React `19.3.0`, ExcelJS `4.4.0`, Vitest `5.0.0`.
 
-- `npm test`: **59 passed**, 7 files (incl. assist schemas/acceptance and route handler with mocked fetch).
+- `npm test`: **68 passed**, 8 files (assist + send routes with mocked upstreams).
 - `npm run typecheck` (now `next typegen && tsc --noEmit`, so a fresh clone works without `next-env.d.ts`): **passed**.
 - `npm run test:e2e` (Chrome path variable): **2 passed**. Journey 1 now covers wrong-year rejection, $1,000 gap, closure, accept, reload, export → edit in ExcelJS → preview → confirm, then stale re-import rejection. Journey 2 uploads a real table-less XLSX and asserts the rejection, then checks 390 px layout.
 - `npm run build`: **passed**.

@@ -2,7 +2,7 @@
 
 Forward hackathon entry. An adviser-reviewed prior-year workbook supplies the recurring information needs for an Australian family group (individuals, a company and a trust). The app turns that baseline into targeted next-year requests, collects structured evidence, tracks amount gaps and duplicates, drafts outreach, and hands a versioned review workbook back to the adviser. Advisers keep every tax decision.
 
-**This is a browser-local demonstration on synthetic data.** No Supabase, Google Drive, Xero, email, scheduler, AI extraction or ATO lodgment is connected. The interface says so on every screen. See [Limits](#limits) before describing it to anyone.
+**This is a browser-local demonstration on synthetic data.** No Supabase, Google Drive, Xero, scheduler or ATO lodgment is connected. AI proposals and email sending are optional, server-gated add-ons. The interface says so on every screen. See [Limits](#limits) before describing it to anyone.
 
 ## Quick start
 
@@ -10,7 +10,7 @@ Requires Node 22+.
 
 ```sh
 npm ci
-npm test            # 59 unit tests (Vitest)
+npm test            # 68 unit tests (Vitest)
 npm run typecheck   # next typegen && tsc --noEmit
 npm run test:e2e    # 2 Playwright journeys; starts the dev server itself
 npm run build
@@ -35,7 +35,7 @@ PLAYWRIGHT_BASE_URL=https://peregrine-forward-hackathon.vercel.app npm run test:
 
 1. **Load synthetic family.** Four FY25 workbooks (1 July 2024 – 30 June 2025) import from `public/samples/fy25/`. Prior-year amounts stay in a comparative column; nothing is carried into FY26.
 2. Select **Alex Taylor** → **Generate FY26 requests.** Five recurring requests come from the reviewed FY25 lines plus an independent "What changed?" question.
-3. **Draft initial outreach.** Open the **Outbox** tab: a draft, never sent.
+3. **Draft initial outreach.** Open the **Outbox** tab. With SMTP configured, **Send to family (demo)** emails it to the verified inbox and the draft is marked sent with its message ID; otherwise download it.
 4. Select **Cash dividends** → enter FY26 comparison `5200` → **Save comparison.**
 5. Upload `alex-wrong-year.csv` (Files tab). Rejected: `Evidence financialYear mismatch: expected 2026, received 2025`.
 6. Upload `alex-dividend-a.csv` ($4,200). Difference shows **$1,000.00**.
@@ -102,6 +102,18 @@ Set the same three in the Vercel project (Settings → Environment Variables) an
 
 Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-origin, zod-validated body, 20 000-character text cap, 20 s timeout, `temperature 0.1`, one retry when the model's JSON is unusable, no content logging. The passcode limits drive-by credit use; it is not authentication. Add a Vercel WAF rate-limit rule on `/api/assist` before any wider audience.
 
+## Email sending (optional, Gmail SMTP)
+
+Outbox drafts can be emailed to the synthetic family's shared inbox, `taylorfamilyexample@gmail.com`. The server only sends to addresses on `OUTREACH_ALLOWED_RECIPIENTS`; the browser cannot widen that. Sent drafts record recipient, time and SMTP message ID and are never superseded afterwards.
+
+```sh
+SMTP_USER=taylorfamilyexample@gmail.com
+SMTP_PASS=xxxx xxxx xxxx xxxx          # Google App Password (needs 2-Step Verification on the account)
+OUTREACH_ALLOWED_RECIPIENTS=taylorfamilyexample@gmail.com
+```
+
+Uses the same `AI_ASSIST_PASSCODE` gate. Replies are not read back; check the inbox manually. No scheduler: reminders are still drafted by hand.
+
 ## Deploying
 
 Live: **https://peregrine-forward-hackathon.vercel.app** (Vercel project `peregrine-forward-hackathon`, branch `feat/compliance-demo`). Both browser journeys pass against it.
@@ -116,5 +128,5 @@ Vercel import settings: framework **Next.js**, root directory `/`, build `npm ru
 2. **Supabase** for authenticated, entity-scoped requests, evidence metadata and review events (RLS per entity). Browser storage becomes a dev adapter.
 3. **Google Drive** with `drive.file` scope for original documents in entity/year folders. Drive stores files, not request state.
 4. **Xero read-only** ledger comparisons once the university account's API permissions are confirmed.
-5. **Durable outbox** with verified recipients before any email is sent.
+5. **Durable outbox** — sending exists but is per-click from the browser; a server-side queue with retries and reply capture is next.
 6. Jason's guidance updates: reviewed, versioned method changes; no invented live ATO feeds.
