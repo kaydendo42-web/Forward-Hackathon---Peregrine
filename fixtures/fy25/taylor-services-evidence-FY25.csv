@@ -1,0 +1,6 @@
+"document_id","line_id","entity_id","financial_year","component","currency","basis","amount","description"
+"FY25-CO-BANK","CO-BANK","taylor-services","2025","closing_balance","AUD","closing_balance","38000","Synthetic reconciliation: statement balance 40000 plus deposit 1000 less outstanding payments 3000 equals book balance 38000."
+"FY25-CO-AR","CO-AR","taylor-services","2025","closing_balance","AUD","closing_balance","24000","Synthetic aged-receivables control: three fictional open invoices of 9000, 8000 and 7000. Total 24000."
+"FY25-CO-AP","CO-AP","taylor-services","2025","closing_balance","AUD","closing_balance","12000","Synthetic aged-payables control: three fictional unpaid bills of 5000, 4000 and 3000. Total 12000."
+"FY25-CO-ASSET","CO-ASSET","taylor-services","2025","closing_balance","AUD","closing_balance","30000","Synthetic equipment register: cost 43000 less accumulated book depreciation 13000 equals carrying amount 30000. No tax depreciation."
+"FY25-CO-LOAN","CO-LOAN","taylor-services","2025","closing_balance","AUD","closing_balance","20000","Synthetic loan ledger: opening payable 15000 plus advances 8000 less repayments 3000 equals closing payable 20000. Terms unassessed."

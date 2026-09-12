@@ -1,0 +1,2 @@
+document_id,line_id,entity_id,financial_year,component,currency,basis,amount,description
+FY26-CO-BANK,CO-BANK,taylor-services,2026,closing_balance,AUD,closing_balance,41500.00,SYNTHETIC 30 June 2026 bank statement closing balance

@@ -1,0 +1,2 @@
+document_id,line_id,entity_id,financial_year,component,currency,basis,amount,description
+FY26-DIV-CREDIT,ALE-DIV-CREDIT,alex-taylor,2026,franking_credit,AUD,gross,1800.00,SYNTHETIC franking credit kept separate from cash dividends

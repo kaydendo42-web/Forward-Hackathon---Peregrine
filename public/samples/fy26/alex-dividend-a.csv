@@ -1,0 +1,2 @@
+document_id,line_id,entity_id,financial_year,component,currency,basis,amount,description
+FY26-DIV-A,ALE-DIV-CASH,alex-taylor,2026,cash,AUD,cash,4200.00,SYNTHETIC issuer A cash dividends for FY26

@@ -1,0 +1,6 @@
+"document_id","line_id","entity_id","financial_year","component","currency","basis","amount","description"
+"FY25-TR-BANK","TR-BANK","taylor-family-trust","2025","closing_balance","AUD","closing_balance","16000","Synthetic reconciliation: statement balance 15000 plus deposit 2000 less outstanding payment 1000 equals book balance 16000."
+"FY25-TR-INVEST","TR-INVEST","taylor-family-trust","2025","closing_balance","AUD","closing_balance","150000","Synthetic investment register: illustrative cost carrying amounts 100000 and 50000. No current market valuation or tax cost-base conclusion."
+"FY25-TR-DIST","TR-DIST-ALE","taylor-family-trust","2025","ordinary_income","AUD","gross","18000","Synthetic adviser allocation record: Alex ordinary-income allocation 18000. No executed resolution or approval represented."
+"FY25-TR-DIST","TR-DIST-SAM","taylor-family-trust","2025","ordinary_income","AUD","gross","12000","Synthetic adviser allocation record: Sam ordinary-income allocation 12000. No executed resolution or approval represented."
+"FY25-TR-DOC","TR-DOC","taylor-family-trust","2025","document","AUD","document",,"Synthetic document checklist record only. Executed trust deed and signed distribution resolution are not supplied. Amount intentionally blank."

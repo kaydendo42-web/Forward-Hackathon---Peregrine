@@ -1,0 +1,4 @@
+"document_id","line_id","entity_id","financial_year","component","currency","basis","amount","description"
+"FY25-SAM-EMP","SAM-EMP","sam-taylor","2025","gross","AUD","gross","76000","Synthetic annual income-statement fixture. Fictional employer: Southern Learning Pty Ltd. Gross salary only; withholding not supplied."
+"FY25-SAM-INT","SAM-INT","sam-taylor","2025","gross","AUD","gross","420","Synthetic annual interest-summary fixture. Sam sole ownership. No bank account identifier or withholding amount supplied."
+"FY25-SAM-TRUST","SAM-TRUST","sam-taylor","2025","ordinary_income","AUD","gross","12000","Synthetic beneficiary-summary fixture from Taylor Family Trust. Ordinary-income component only, matching TR-DIST-SAM."

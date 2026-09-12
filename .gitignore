@@ -1,0 +1,16 @@
+node_modules/
+.next/
+next-env.d.ts
+.vercel/
+.env*
+!.env.example
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+# Workbook builder: regenerable previews and inspection dumps (keep the four .xlsx outputs)
+tools/workbooks/previews/
+tools/workbooks/node_modules
+outputs/fy25-baseline/verification/
+outputs/**/*.inspect.ndjson
+.DS_Store

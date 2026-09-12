@@ -1,0 +1,6 @@
+"document_id","line_id","entity_id","financial_year","component","currency","basis","amount","description"
+"FY25-ALE-EMP","ALE-EMP","alex-taylor","2025","gross","AUD","gross","112000","Synthetic annual income-statement fixture. Fictional employer: Wattle Studio Pty Ltd. Gross salary only; withholding not supplied."
+"FY25-ALE-INT","ALE-INT","alex-taylor","2025","gross","AUD","gross","850","Synthetic annual interest-summary fixture. Alex sole ownership. No bank account identifier or withholding amount supplied."
+"FY25-ALE-DIV","ALE-DIV-CASH","alex-taylor","2025","cash","AUD","cash","4800","Synthetic dividend-summary fixture: cash dividends 4800. Same document supports the separate 1600 franking-credit line."
+"FY25-ALE-DIV","ALE-DIV-CREDIT","alex-taylor","2025","franking_credit","AUD","gross","1600","Synthetic dividend-summary fixture: franking credits 1600. Credit is separate from cash paid."
+"FY25-ALE-TRUST","ALE-TRUST","alex-taylor","2025","ordinary_income","AUD","gross","18000","Synthetic beneficiary-summary fixture from Taylor Family Trust. Ordinary-income component only, matching TR-DIST-ALE."

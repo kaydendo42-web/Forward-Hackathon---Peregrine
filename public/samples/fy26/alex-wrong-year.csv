@@ -1,0 +1,2 @@
+document_id,line_id,entity_id,financial_year,component,currency,basis,amount,description
+FY25-DIV-WRONG,ALE-DIV-CASH,alex-taylor,2025,cash,AUD,cash,4800.00,SYNTHETIC wrong-year document must not satisfy FY26
