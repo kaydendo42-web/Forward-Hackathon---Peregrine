@@ -104,15 +104,22 @@ Route safety: passcode compared in constant time, `Sec-Fetch-Site` must be same-
 
 ## Email sending (optional, Gmail SMTP)
 
-Outbox drafts can be emailed to the synthetic family's shared inbox, `taylorfamilyexample@gmail.com`. The server only sends to addresses on `OUTREACH_ALLOWED_RECIPIENTS`; the browser cannot widen that. Sent drafts record recipient, time and SMTP message ID and are never superseded afterwards.
+Two mailboxes play two roles:
+
+| Role | Address | Owns |
+|---|---|---|
+| Firm / agent (sender) | `SMTP_USER` — a Gmail you control for the demo, e.g. `peregrine.adviser.demo@gmail.com` | App Password lives here; replies land here |
+| Family group (external client, recipient) | `taylorfamilyexample@gmail.com` | Receives requests, replies like a real client |
+
+Outbox drafts are emailed **from** the firm mailbox **to** the family inbox. The server only sends to addresses on `OUTREACH_ALLOWED_RECIPIENTS`; the browser cannot widen that. Sent drafts record recipient, time and SMTP message ID (also stamped in `X-Peregrine-Draft` / `X-Peregrine-Entity` headers) and are never superseded afterwards.
 
 ```sh
-SMTP_USER=taylorfamilyexample@gmail.com
-SMTP_PASS=xxxx xxxx xxxx xxxx          # Google App Password (needs 2-Step Verification on the account)
+SMTP_USER=peregrine.adviser.demo@gmail.com   # firm mailbox
+SMTP_PASS=xxxx xxxx xxxx xxxx                # its Google App Password (needs 2-Step Verification)
 OUTREACH_ALLOWED_RECIPIENTS=taylorfamilyexample@gmail.com
 ```
 
-Uses the same `AI_ASSIST_PASSCODE` gate. Replies are not read back; check the inbox manually. No scheduler: reminders are still drafted by hand.
+Uses the same `AI_ASSIST_PASSCODE` gate. **Inbound is not built yet**: family replies arrive in the firm mailbox but are not read back into the app. See Next milestones.
 
 ## Deploying
 
@@ -128,5 +135,5 @@ Vercel import settings: framework **Next.js**, root directory `/`, build `npm ru
 2. **Supabase** for authenticated, entity-scoped requests, evidence metadata and review events (RLS per entity). Browser storage becomes a dev adapter.
 3. **Google Drive** with `drive.file` scope for original documents in entity/year folders. Drive stores files, not request state.
 4. **Xero read-only** ledger comparisons once the university account's API permissions are confirmed.
-5. **Durable outbox** — sending exists but is per-click from the browser; a server-side queue with retries and reply capture is next.
+5. **Inbound replies (family → agent).** Poll the firm mailbox over IMAP (`imapflow`, same App Password) from a gated `/api/inbox` route; match `In-Reply-To`/`References` to the stored message ID on a sent draft; show the reply as a *proposed* client answer and attachments as *proposed* evidence for the adviser to accept (AI `triage`/`extract` already exist for this). Then a durable server-side outbox with retries.
 6. Jason's guidance updates: reviewed, versioned method changes; no invented live ATO feeds.

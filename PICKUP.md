@@ -1,6 +1,6 @@
-# Peregrine — resume here
+# Peregrine — resume here (handoff to Astra 6)
 
-Updated 12 September 2026 (evening), Melbourne, after resuming. **Do not restart research or regenerate the completed workbooks.** `README.md` now holds the quick start, demo script and limits; this file holds session state.
+Updated 12 September 2026 (late evening), Melbourne. Handing off to Astra 6. **Do not restart research or regenerate the completed workbooks.** `README.md` now holds the quick start, demo script and limits; this file holds session state.
 
 ## User request and intended product
 
@@ -111,9 +111,24 @@ Spec `docs/superpowers/specs/2026-09-12-ai-assist-design.md`, plan `docs/superpo
 
 **User still needs to:** put `NVIDIA_NIM_API_KEY`, `NVIDIA_NIM_MODEL` (exact Kimi ID from build.nvidia.com — user said they would supply it), `AI_ASSIST_PASSCODE` into `.env.local` and the Vercel project, then redeploy. Until then the panel reports "not configured". **No real NIM call has been exercised yet** — only mocked replies in unit and browser tests. First live run should check that the chosen Kimi model returns bare JSON; if it wraps in prose, `parseReply` already extracts the first `{...}` block and the route retries once.
 
-## Email sending (added 12 September, evening)
+## Email — corrected model (12 September, late)
 
-`src/app/api/send/route.ts` + `src/lib/send-client.ts` + `src/components/send-draft.tsx`; `markSent` in workflow; `src/lib/gate.ts` shared with assist. Gmail SMTP via nodemailer 10 (audit-clean). Env: `SMTP_USER`, `SMTP_PASS` (App Password), `OUTREACH_ALLOWED_RECIPIENTS`. Demo inbox `taylorfamilyexample@gmail.com` (user-created). **No real email has been sent yet** — route tested with mocked transport and mocked fetch only. User must create the App Password and set env locally + Vercel, then send one draft from the Outbox.
+Two roles, two mailboxes. **Firm/agent** mailbox sends (`SMTP_USER`, holds the App Password, receives replies). **Family group** `taylorfamilyexample@gmail.com` is the external client: receives requests, replies. Earlier guidance wrongly told the user to use the family address as `SMTP_USER`; code was always sender/recipient-correct, only docs/env example were fixed.
+
+Built: `src/app/api/send/route.ts`, `src/lib/send-client.ts`, `src/components/send-draft.tsx`, `markSent` in workflow, `src/lib/gate.ts` shared with assist. nodemailer 10, audit clean. Env: `SMTP_USER`, `SMTP_PASS`, `OUTREACH_ALLOWED_RECIPIENTS`. **No real email sent yet** — mocked transport in tests only.
+
+**User still needs a firm demo Gmail** (suggest creating `peregrine.adviser.demo@gmail.com` or similar; not the family address), 2-Step Verification on, App Password, then env locally and on Vercel.
+
+### Inbound trajectory (not started) — the "external collaboration" the user wants to show
+
+Goal: the family replies to a request email; the agent sees the reply and its attachments as proposals against the right requests.
+
+1. Firm Gmail: enable IMAP. Same App Password works for IMAP.
+2. `npm i imapflow`. New gated route `POST /api/inbox` (passcode + same-origin, like the others): connect IMAP, search recent messages `FROM` any allowlisted family address, read `In-Reply-To` / `References`, return `{ messageId, inReplyTo, from, date, text, attachments:[{filename, size, contentType}] }` — bounded (last 30 days, ≤ 50 messages, text ≤ 20 000 chars, no attachment bytes in the first cut).
+3. Browser: **Inbox** tab, "Check inbox" button. Match `inReplyTo` to `draft.messageId` of a sent draft → that draft's `requestIds`. Show each reply as a proposal card.
+4. Accept paths (all existing): reply text → `recordAnswer` on the request the adviser picks (default: the `CHANGES` request, then run AI `triage`); CSV attachment → existing evidence upload gate; PDF/statement text → AI `extract` proposal. Every accept → audit.
+5. Tests: route with a fake IMAP client (mock `imapflow`); matching logic pure and unit-tested; e2e with mocked `/api/inbox`.
+6. Hold: Supabase is still the right home for durable inbox/outbox state; browser-local is fine for the demo.
 
 ## Verification at this checkpoint (12 September 2026, after resume)
 
@@ -161,12 +176,20 @@ npm run dev
 
 Shell networking may require sandbox escalation; use scoped approval for installs, remote Git/Vercel operations or network checks.
 
+## Handoff summary for Astra 6
+
+Read `README.md` for how the app works, this file for state, `docs/superpowers/specs/` + `plans/` for the AI assist design. Repo is clean and pushed; live URL matches `main` of `feat/compliance-demo`. Local dev server may have been stopped — start with `npm run dev`.
+
+What is real: workflow, workbook import/export, evidence CSV gates, AI proposals (Kimi K3 via NIM, env set on Vercel), send route (code complete, needs firm mailbox creds). What is not: any real email sent, any reply read, Supabase/Drive/Xero, scheduler.
+
 ## Next working sequence
 
-1. User sets the three AI env vars locally and on Vercel; redeploy; exercise one real proposal per task and note model behaviour in PICKUP.
-2. Record the 3–5 minute demo video against the live URL (README demo script + one AI proposal). Verify submission deadline (pack said noon 14 September, Melbourne).
-3. Optional hardening before wider exposure: Vercel WAF rate limit on `/api/assist`; connect GitHub → Vercel for auto-deploys.
-4. Then Supabase auth/RLS + evidence metadata, Google Drive `drive.file`, approved persistent outbox. Pick one narrow end-to-end path.
+1. User creates the firm demo Gmail, App Password, sets `SMTP_*` + `OUTREACH_ALLOWED_RECIPIENTS` locally and on Vercel (`vercel env add NAME production`, one env per command). Redeploy (`vercel deploy --yes` then `vercel promote <url> --yes`). Send one real draft from the Outbox; confirm it lands in `taylorfamilyexample@gmail.com`.
+2. AI env is already on Vercel (`moonshotai/kimi-k3`); user has not yet exercised a real proposal — do one per task and note model behaviour here.
+3. Build the inbound trajectory above so the family's reply shows up in the agent. This is the demo's "external collaboration" story.
+4. Record the 3–5 minute video against the live URL. Verify the submission deadline (pack said noon 14 September, Melbourne).
+5. Hardening before wider exposure: Vercel WAF rate limit on `/api/assist` and `/api/send`; connect GitHub → Vercel for auto-deploys.
+6. Then Supabase auth/RLS + evidence metadata, Google Drive `drive.file`, durable outbox/inbox. One narrow end-to-end path at a time.
 
 ### Intended demo script
 
