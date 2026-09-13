@@ -9,6 +9,7 @@ import { RequestPanel } from './request-panel';
 import { AssistPanel } from './assist-panel';
 import { SendDraft } from './send-draft';
 import { InboxPanel } from './inbox-panel';
+import { GuidancePanel } from './guidance-panel';
 import { checkInbox, importReplies } from '../lib/inbox';
 import { sendDraft } from '../lib/send-client';
 import { download, money } from '../lib/format';
@@ -151,9 +152,10 @@ export default function Workspace() {
           <ul>{candidate.lines.map(line => <li key={line.id}>{line.id}: {line.label} — {money(line.amountCents)}</li>)}</ul>
           <button disabled={busy} onClick={() => { const pack = candidate; act(s => flow.importBaseline(s, pack), 'Synthetic baseline confirmed.'); setEntityId(pack.entityId); setCandidate(null); }}>Confirm synthetic baseline</button><button onClick={() => setCandidate(null)}>Cancel import</button>
         </section>}
-        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
+        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox', 'Guidance'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
         {tab === 'Inbox' && !clientView && <InboxPanel state={state} entityId={entityId} busy={busy} act={act} check={passcode => void run(() => fetchReplies(passcode))}
           openRequest={id => { setSelectedId(id); setTab('Requests'); }} />}
+        {tab === 'Guidance' && !clientView && <GuidancePanel state={state} entityId={entityId} busy={busy} act={act} />}
         {tab === 'Requests' && <>
           <div className="section-heading"><div><h2>{requests.length ? `${accepted} of ${requests.length} requests reviewed` : 'Prepare the collection season'}</h2><p>{requests.length ? 'Evidence receipt and adviser acceptance are tracked separately.' : 'Download the workbooks below, or load the sample family. Then generate FY26 requests.'}</p></div>
             {!clientView && requests.length > 0 && <div className="button-row"><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'initial'), 'Draft created. No email was sent.')}>Draft initial outreach</button><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'reminder'), 'Reminder draft created. No email was sent.')}>Draft reminder</button></div>}
