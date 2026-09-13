@@ -34,7 +34,31 @@ export type InboxMessage = {
   attachments: { filename: string; size: number; contentType: string }[];
 };
 export type InboxReceipt = { messageId: string; requestId: string; acceptedAt: string; answer: string };
+export type IntakeFlags = {
+  nameMatch: 'match' | 'partial' | 'mismatch';   // entityNameSeen vs the proposed entity's name
+  periodInYear: boolean;                         // both dates inside the request's financial year, or dates unreadable
+  syntheticMarker: boolean;                      // a synthetic/fictional marker was seen on the page
+  targetValid: boolean;                          // proposed request exists, belongs to proposed entity, review still pending
+};
+/** One document the model saw in one attachment. `flags` is filled by code, never by the model. */
+export type IntakeDocument = {
+  docType: string; entityNameSeen: string; periodStart: string; periodEnd: string;
+  amounts: { label: string; amountCents: number | null }[];
+  proposedEntityId: string; proposedRequestId: string;
+  confidence: 'high' | 'medium' | 'low'; reason: string;
+  flags: IntakeFlags;
+};
+/** A read attachment awaiting adviser review. Bytes live in IndexedDB under `fileHash`. */
+export type IntakeProposal = {
+  id: string; messageId: string; attachmentIndex: number; filename: string; contentType: string;
+  size: number; fileHash: string; model: string; promptVersion: string; createdAt: string;
+  source: 'image' | 'pdf_text';
+  documents: IntakeDocument[];
+  review: { status: 'pending' | 'accepted' | 'rejected'; decidedAt: string; note: string };
+};
 export type Workspace = {
   schemaVersion: 1; version: number; baselines: Baseline[]; requests: CollectionRequest[];
   outbox: Draft[]; audit: AuditEvent[]; inbox: InboxMessage[]; inboxReceipts: InboxReceipt[];
+  // Absent in workspaces saved before attachment intake existed.
+  intake?: IntakeProposal[];
 };
