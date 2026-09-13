@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { readFile as readFileAsync } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
+import ExcelJS from 'exceljs';
 
 const STATEMENT = readFileSync('tests/fixtures/intake/statement.jpg');
 const SHA = createHash('sha256').update(STATEMENT).digest('hex');
@@ -47,6 +49,13 @@ test('reply attachment → read → mismatch blocks accept → adviser override 
   await page.getByTestId('intake-linked').getByRole('button', { name: 'Open request' }).click();
   await expect(page.getByText(`intake-${SHA.slice(0, 16)}-0`)).toBeVisible();
   await expect(page.getByText('$108,125.00').first()).toBeVisible();
+
+  // The accepted photo lands in the exported FY26 workbook: Evidence row + embedded image.
+  const [exported] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export review workbook' }).click()]);
+  const book = new ExcelJS.Workbook(); await book.xlsx.load(await readFileAsync(await exported.path() as string));
+  const evidenceRows = book.getWorksheet('Evidence')!.getSheetValues().slice(2).map(r => (r as unknown[]).slice(1));
+  expect(evidenceRows.some(r => r[1] === 'TR-BANK' && r[3] === 'statement.jpg' && String(r[4]).startsWith('Reply attachment'))).toBe(true);
+  expect(book.getWorksheet('Attachments')!.getImages()).toHaveLength(1);
 
   await page.reload();
   await page.getByRole('button', { name: /^Taylor Family Trust/ }).click();

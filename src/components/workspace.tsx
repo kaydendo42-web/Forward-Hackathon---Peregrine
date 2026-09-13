@@ -89,7 +89,10 @@ export default function Workspace() {
   }
   async function exportReview() {
     const { exportReview } = await import('../lib/workbooks');
-    const bytes = await exportReview(stateRef.current, entityId);
+    const { shrinkForWorkbook } = await import('../lib/image-client');
+    const bytes = await exportReview(stateRef.current, entityId, async hash => {
+      try { return await shrinkForWorkbook(await readOriginal(hash)); } catch { return null; }
+    });
     download(bytes, `${entityId}-FY26-review-v${stateRef.current.version}.xlsx`, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   }
   async function importReview(file: File) {

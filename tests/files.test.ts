@@ -92,3 +92,36 @@ describe('versioned review round trip', () => {
     await expect(files.previewReview(await files.exportReview(state, 'alex-taylor'), state, 'sam-taylor')).rejects.toThrow(/entity/i);
   });
 });
+
+describe('exportReview attachments', () => {
+  const HASH = 'e'.repeat(64);
+  async function withIntakeEvidence() {
+    let state = workflow.startSeason(workflow.importBaseline(workflow.createWorkspace(), baseline), 'alex-taylor');
+    state = workflow.receiveEvidence(state, 'alex-taylor:2026:ALE-DIV-CASH', { ...evidence, documentId: `intake-${HASH.slice(0, 16)}-0`, filename: 'statement.jpg', fileHash: HASH, description: 'Dividend statement — Alex Taylor' });
+    state = workflow.receiveEvidence(state, 'alex-taylor:2026:ALE-DIV-CASH', { ...evidence, documentId: 'FY26-DIV-B', amountCents: 100000, filename: 'dividend-b.csv', fileHash: 'f'.repeat(64) });
+    return state;
+  }
+  it('lists source and adviser decision per evidence row and embeds photos on an Attachments sheet', async () => {
+    const jpeg = await readFile('tests/fixtures/intake/statement.jpg');
+    const loads: string[] = [];
+    const bytes = await files.exportReview(await withIntakeEvidence(), 'alex-taylor', async hash => { loads.push(hash); return hash === HASH ? new Uint8Array(jpeg).buffer : null; });
+    const book = new ExcelJS.Workbook(); await book.xlsx.load(bytes);
+    const rows = book.getWorksheet('Evidence')!.getSheetValues().slice(1).map(r => (r as unknown[]).slice(1));
+    expect(rows[0]).toEqual(['Request ID', 'Line', 'Document ID', 'File', 'Source', 'Component', 'Amount AUD', 'SHA-256', 'Description', 'Adviser decision']);
+    expect(rows[1]).toMatchObject({ 1: 'ALE-DIV-CASH', 3: 'statement.jpg', 4: 'Reply attachment (model-read, adviser-accepted)', 9: 'pending' });
+    expect(rows[2]).toMatchObject({ 3: 'dividend-b.csv', 4: 'CSV upload' });
+    expect(loads).toEqual([HASH, 'f'.repeat(64)]);
+    const attachments = book.getWorksheet('Attachments')!;
+    expect(attachments.getCell('A1').value).toMatch(/Attachments/);
+    expect(attachments.getImages()).toHaveLength(1);
+    expect(String(attachments.getCell('A3').value)).toContain('ALE-DIV-CASH');
+    expect(String(attachments.getCell('A3').value)).toContain('statement.jpg');
+    expect(book.model.media?.[0]?.extension).toBe('jpeg');
+  });
+  it('still exports without a loader, noting that originals stay in the browser', async () => {
+    const book = new ExcelJS.Workbook(); await book.xlsx.load(await files.exportReview(await withIntakeEvidence(), 'alex-taylor'));
+    const attachments = book.getWorksheet('Attachments')!;
+    expect(attachments.getImages()).toHaveLength(0);
+    expect(String(attachments.getCell('A3').value)).toMatch(/not embedded|browser/i);
+  });
+});

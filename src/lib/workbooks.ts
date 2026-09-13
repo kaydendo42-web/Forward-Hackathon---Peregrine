@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import { strFromU8, strToU8, unzipSync, zipSync } from 'fflate';
-import type { Baseline, CollectionRequest, EntityType, ReviewChange, Workspace } from '../core/types';
+import type { Baseline, CollectionRequest, EntityType, EvidenceInput, ReviewChange, Workspace } from '../core/types';
 import { reconcile } from '../core/workflow';
 import { parseMoney } from './evidence';
 
@@ -11,11 +11,11 @@ type Scalar = string | number | boolean | null;
 
 async function load(bytes: Bytes) {
   const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-  if (data.byteLength > 2_000_000) throw new Error('Workbook exceeds the 2 MB demo limit.');
+  if (data.byteLength > 25_000_000) throw new Error('Workbook exceeds the 25 MB demo limit.');
   let total = 0; let count = 0;
   const archive = unzipSync(data, { filter(file) {
     total += file.originalSize; count++;
-    if (total > 12_000_000 || count > 250) throw new Error('Workbook expands beyond the demo safety limit.');
+    if (total > 60_000_000 || count > 400) throw new Error('Workbook expands beyond the demo safety limit.');
     if (/vbaProject|externalLinks|embeddings/i.test(file.name)) throw new Error('Macros, embedded objects and external links are not supported.');
     return true;
   } });
@@ -118,7 +118,26 @@ function sourceColumns(req: CollectionRequest): Scalar[] {
     evidenceCents === null ? null : evidenceCents / 100, differenceCents === null ? null : differenceCents / 100];
 }
 
-export async function exportReview(state: Workspace, entityId: string): Promise<ArrayBuffer> {
+/** Loads original file bytes by SHA-256 (the browser reads IndexedDB); null when unavailable. */
+export type OriginalLoader = (fileHash: string) => Promise<ArrayBuffer | null>;
+
+function evidenceSource(e: EvidenceInput) {
+  if (e.documentId.startsWith('intake-')) return 'Reply attachment (model-read, adviser-accepted)';
+  if (e.filename === 'pasted-text') return 'Pasted text (AI extract, adviser-accepted)';
+  return 'CSV upload';
+}
+function imageExtension(bytes: Uint8Array): 'jpeg' | 'png' | null {
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'jpeg';
+  if (bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) return 'png';
+  return null;
+}
+
+/**
+ * FY26 review workbook: Review table for adviser decisions (the only sheet re-imported),
+ * an Evidence sheet listing every linked document with its source, and an Attachments
+ * sheet that embeds accepted photos when the caller can supply the original bytes.
+ */
+export async function exportReview(state: Workspace, entityId: string, loadOriginal?: OriginalLoader): Promise<ArrayBuffer> {
   const requests = state.requests.filter(r => r.entityId === entityId);
   if (!requests.length) throw new Error('Start the collection season before exporting review.');
   const book = new ExcelJS.Workbook(); book.creator = 'Peregrine synthetic demonstration';
@@ -146,9 +165,37 @@ export async function exportReview(state: Workspace, entityId: string): Promise<
   }
   sheet.views = [{ state: 'frozen', ySplit: 5, xSplit: 2 }];
   const sources = book.addWorksheet('Evidence');
-  sources.addRow(['Request ID', 'Document ID', 'File', 'Component', 'Amount AUD', 'SHA-256', 'Description']);
-  requests.forEach(r => r.evidence.forEach(e => sources.addRow([r.id, e.documentId, e.filename, e.component, e.amountCents === null ? null : e.amountCents / 100, e.fileHash, e.description])));
+  sources.addRow(['Request ID', 'Line', 'Document ID', 'File', 'Source', 'Component', 'Amount AUD', 'SHA-256', 'Description', 'Adviser decision']);
+  sources.getRow(1).font = { bold: true };
+  requests.forEach(r => r.evidence.forEach(e => sources.addRow([r.id, r.lineId, e.documentId, e.filename, evidenceSource(e), e.component, e.amountCents === null ? null : e.amountCents / 100, e.fileHash, e.description, r.review])));
   sources.columns.forEach(c => { c.width = 30; });
+  sources.views = [{ state: 'frozen', ySplit: 1 }];
+
+  const attachments = book.addWorksheet('Attachments');
+  attachments.getColumn(1).width = 110;
+  attachments.getCell('A1').value = `Attachments — accepted documents for ${entityId}, FY2026`;
+  attachments.getCell('A1').font = { bold: true, size: 13 };
+  attachments.getCell('A2').value = 'Each photo below was linked to its request line by an adviser. Figures were checked against the image before acceptance. Originals stay hashed in the adviser\'s browser; PDFs and CSVs are listed, not embedded.';
+  let row = 3;
+  const ROWS_PER_IMAGE = 28;
+  for (const r of requests) {
+    for (const e of r.evidence) {
+      const bytes = loadOriginal ? await loadOriginal(e.fileHash) : null;
+      const data = bytes ? new Uint8Array(bytes) : null;
+      const extension = data ? imageExtension(data) : null;
+      const caption = `${r.lineId} · ${r.label} · ${e.documentId} · ${e.filename} · ${e.amountCents === null ? 'no amount' : `AUD ${(e.amountCents / 100).toFixed(2)}`} · sha256 ${e.fileHash.slice(0, 16)}… · decision: ${r.review}`;
+      attachments.getCell(row, 1).value = extension ? caption : `${caption} · ${bytes ? 'not an image — listed only' : 'not embedded (original stays in the browser)'}`;
+      attachments.getCell(row, 1).font = { bold: true };
+      attachments.getCell(row, 1).alignment = { wrapText: true };
+      if (extension && data) {
+        const imageId = book.addImage({ buffer: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer, extension });
+        attachments.addImage(imageId, { tl: { col: 0, row }, ext: { width: 720, height: 520 }, editAs: 'oneCell' });
+        row += ROWS_PER_IMAGE;
+      } else {
+        row += 2;
+      }
+    }
+  }
   const buffer = await book.xlsx.writeBuffer();
   return new Uint8Array(buffer).buffer as ArrayBuffer;
 }
