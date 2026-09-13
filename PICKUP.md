@@ -269,3 +269,18 @@ What it does: Inbox → **Read N attachments** → each JPEG/PNG/PDF is download
 Live check (local dev server, real firm mailbox, real NIM): the family reply from 13 September carries six JPEG photos of 2.5–2.8 MB. IMAP download ≈10–11 s each (1 MB chunks; 40 s reader cap). Model: the first prompt made the 11b model describe the photo in markdown for ~36–45 s before any JSON, then retry → 504. Rewritten as a terse "JSON extraction service" system prompt with the image placed **before** the text and only ids/names/labels in the lists: 10–22 s, parseable every time. End-to-end via `/api/intake`: 200 in 21 s (Oakwood bank statement → name mismatch flagged, closing balance $108,125.00 read correctly, no target proposed) and 200 in 29 s (Alex allocation record → Taylor Family Trust matched, $34,928.57 read correctly, no target proposed). Run-to-run variance is real: the same photo once came back with the entity name hallucinated as "Taylor Family Trust" and once with a wrong period year; the adviser gate and flags exist for exactly this. `response_format` and `nvext.guided_json` are ignored by this endpoint for the llama-vision models.
 
 Verification: 144 unit/route tests, 6 Playwright journeys (2 new), typecheck, build, `npm audit` 0. Deployment needs `vercel env add NVIDIA_NIM_VISION_MODEL production` then the usual deploy + promote. Jason's `feat/jason-guidance-agent` (fork `jye230606-bot`, fetched as remote `jason`, checked out locally) is additive and unmerged; merge after this lands.
+
+## Overnight build — 14 September (family email, tree, Excel write-back)
+
+All on `feat/compliance-demo`, pushed. Specs: `docs/superpowers/specs/2026-09-14-family-group-email-design.md` (the tree and Excel steps were built to the decisions recorded there and in the README; no separate spec files).
+
+- **Merged** Jason's `feat/jason-guidance-agent` (Guidance tab, `guidance/` corpus). Both additive workspace fields (`intake`, `guidance`) kept.
+- **Family group + liaison**: `src/core/family.ts` (Taylor family → Alan Taylor), `queueGroupOutreach` in workflow, `Draft.groupId`, Outbox/Inbox/Activity show group drafts beside member entities. Season greeting by month (Australian seasons).
+- **Family tree sidebar**: `src/core/tree.ts` rollups, `src/components/family-tree.tsx`. Entity button names and `aria-pressed` unchanged; lines have `aria-current`.
+- **Excel write-back**: `exportReview(state, entityId, loadOriginal?)` adds Evidence columns (line, source, adviser decision) and an Attachments sheet with embedded, browser-shrunk photos. Import caps raised to 25 MB / 60 MB expanded so the export→edit→re-import journey still works with photos.
+- **Intake on Vercel**: fixed a module-load crash (`DOMMatrix is not defined` from pdf.js) by importing `pdf-parse` lazily behind a stub and externalising `sharp`/`pdf-parse`/`pdfjs-dist` in `next.config.ts`. Production `/api/intake` returned 200 in 14 s on the real Alex allocation photo with the right target.
+- GitHub → Vercel integration is now active: pushes to `feat/compliance-demo` build production automatically; CLI deploy + promote still used for the verified builds.
+
+Verification at this checkpoint: 188 unit/route tests, 8 browser journeys, typecheck, build, audit 0. Existing production browser workspace: untouched (schema additive).
+
+Not done: ElevenLabs/voice, Supabase, Drive, Xero; editing the liaison in the UI; multiple family groups; a recorded demo video.

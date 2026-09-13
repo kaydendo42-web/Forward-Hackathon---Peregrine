@@ -48,6 +48,13 @@ PLAYWRIGHT_BASE_URL=https://peregrine-forward-hackathon.vercel.app npm run test:
 
 One matched dividend schedule does not complete the engagement; the other requests are reviewed separately.
 
+### Family-group path (added 14 September)
+
+1. The sidebar is the **family tree**: Taylor family → four entities → request lines. Each entity shows what it is still missing ("2 awaiting client · 1 for adviser"); each line shows its status and how many documents are attached. Click a line to open its workpapers.
+2. Generate FY26 requests for several entities, then **Draft family email**. One email to the liaison, Alan Taylor, greets him by name with a season-aware line, then lists the outstanding items grouped by entity, and asks him to reply with documents attached. **Family reminder** is the gentler follow-up. Both appear in the Outbox from any member entity.
+3. When the family replies with photos, **Read N attachments** in the Inbox (see "Attachment intake"). Accept each checked proposal onto its line.
+4. **Export review workbook.** The Evidence sheet lists every document with its source and the adviser's decision, and the Attachments sheet embeds each accepted photo under a caption naming the line, document ID, amount and hash.
+
 ## What is in the repository
 
 | Path | Purpose |
@@ -150,6 +157,14 @@ Replies and acceptance records survive reload in this browser. Polling deduplica
 
 Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-only messages require reading the original mailbox and entering relevant text. Attachment names/types/sizes are listed; bytes are fetched only when the adviser presses **Read attachments** (see below). CSVs still go through the existing evidence upload. No background inbox polling, production authentication, or durable shared mailbox state is implemented.
 
+## Family group and liaison
+
+`src/core/family.ts` names the family group, its liaison (Alan Taylor, trustee — synthetic) and member entities. `queueGroupOutreach` builds one combined email with an Australian-season greeting (spring in September) and per-entity sections; the existing per-entity drafts remain for one-off use. A group draft carries `groupId` and is shown, matched and audited beside any member entity. Replies to the family email offer every included request (labelled by entity) when assigning an answer.
+
+## Family tree sidebar
+
+`src/core/tree.ts` rolls each entity's requests into counts (awaiting client, for adviser, follow-up, done, paused, documents) using the same status wording as the request list; `src/components/family-tree.tsx` renders group → entities → lines. Entities missing details are marked in text as well as colour.
+
 ## Attachment intake (optional, NVIDIA NIM vision)
 
 In the Inbox, a reply with JPEG, PNG or PDF attachments shows **Read N attachments**. Each file is downloaded from the firm mailbox once (read-only, 8 MB cap, one file per call). Photos are auto-oriented, shrunk to fit NIM's inline limit and sent to `NVIDIA_NIM_VISION_MODEL`; PDFs with a text layer have their text sent to `NVIDIA_NIM_MODEL`. The model's answer is shown as a proposal per document it saw: type, entity name seen, period, figures read, and a proposed entity and request line. Code adds flags the model cannot set — name mismatch, partial match, period outside FY2026, synthetic marker, invalid target. A mismatch or invalid target disables **Accept** until the adviser picks the target explicitly; that override is recorded in the activity record with the model, prompt version and file hash.
@@ -157,6 +172,8 @@ In the Inbox, a reply with JPEG, PNG or PDF attachments shows **Read N attachmen
 Accepting links the file as evidence on the chosen request through the existing evidence rules (one closing-balance figure per bank request, no conflicting content under one document ID). Adviser review of the request stays a separate step. Rejecting keeps the file in the browser and logs the decision.
 
 Setup: `NVIDIA_NIM_VISION_MODEL` plus the AI assist and email settings above. The route answers 503 until all are present. Tested on 14 September 2026 with `meta/llama-3.2-11b-vision-instruct` (about 9 s per photo); `llama-3.2-90b-vision-instruct` queued past the 60 s route budget on the same key.
+
+Accepted photos also land in the exported FY26 workbook: the Evidence sheet records line, source ("Reply attachment (model-read, adviser-accepted)"), amount, hash and adviser decision, and the Attachments sheet embeds each photo (shrunk in the browser to about 1000 px) under its caption. PDFs and CSVs are listed, not embedded.
 
 Limits: figures are model reads and can be wrong — check them against the preview before accepting. Scanned PDFs without a text layer are refused with a clear message. Photos holding several documents read worse than one document per photo. Original bytes stay in the adviser's browser (IndexedDB); the server keeps nothing and logs nothing. Not OCR-grade, not a tax calculation.
 
