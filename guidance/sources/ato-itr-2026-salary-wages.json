@@ -1,0 +1,19 @@
+{
+  "id": "ato-itr-2026-salary-wages",
+  "title": "1 Salary or wages 2026",
+  "url": "https://www.ato.gov.au/forms-and-instructions/individual-tax-return-2026-instructions/income-questions-1-12-individual-tax-return-2026/1-salary-or-wages-2026",
+  "retrievedAt": "2026-09-13T07:40:01.944Z",
+  "sha256": "fa9116db33621ebc307d648d509216cb325515388d9a71a927bcb8d3790b6422",
+  "publishedDate": "2026-05-30T01:05:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-EMP",
+    "SAM-EMP"
+  ],
+  "httpStatus": 200,
+  "characters": 5127
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ato-trust-income-schedule-2026",
+  "title": "Instructions to complete the trust income schedule 2026",
+  "url": "https://www.ato.gov.au/forms-and-instructions/trust-income-schedule-2026-instructions/instructions-to-complete-the-trust-income-schedule-2026",
+  "retrievedAt": "2026-09-13T07:40:02.526Z",
+  "sha256": "ce134dd74cebd816d74aeb8536a4dfe405c30af8f9e1816a4d0f2a108ac38fd7",
+  "publishedDate": "2026-05-30T05:15:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-TRUST",
+    "SAM-TRUST"
+  ],
+  "httpStatus": 200,
+  "characters": 2929
+}

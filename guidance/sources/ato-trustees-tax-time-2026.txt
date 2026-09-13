@@ -1,0 +1,79 @@
+What trustees need to know for Tax Time 2026
+The Modernisation of Tax Administration Systems program will deliver significant milestones this tax time for lodging 2026 trust tax returns.
+Published 15 May 2026
+
+Print or Download
+
+Pre-fill of trust distribution data
+
+As you lodge 2026 trust tax returns for your trust, the statement of distribution data will become available to pre-fill returns for individual beneficiaries. This will help those beneficiaries who:
+
+- use a different tax agent to the trust
+
+- self-prepare their return using myTax.
+
+When we've successfully matched the lodged data to beneficiaries, the trust distribution pre-fill data will be available in the beneficiary's tax return.
+
+We encourage you to lodge your 2026 trust tax return as early as possible after 1 July 2026. This will maximise the available pre-fill for beneficiaries who may need it.
+
+Changes to statement of distribution
+
+To support this initiative, we've added 3 additional labels to the trust tax return for 2025-26, in the statement of distribution section:
+
+- B1 Non-primary production managed investment scheme amount
+
+- U2 Franked distribution related to investments amount
+
+- H1 Other assessable foreign source income from a financial investment amount.
+
+These new labels will support the calculation of the beneficiary's Net financial investment loss at IT5 in their tax return. Previously, you would have needed to supply this information to the beneficiary separately.
+
+Processing improvements
+
+We've also streamlined some of our processes and worked with software providers to validate information provided in the trust tax return for consistency and quality. These changes aim to reduce errors, manual intervention, and delays when we process trust tax returns.
+
+We'll check assessment codes against other details in the statement of distribution to ensure that:
+
+- individual beneficiaries have a date of birth provided
+
+- non-individual beneficiaries don't have a date of birth provided
+
+- the beneficiary date of birth aligns correctly to under-18 and over-18 assessment codes
+
+- a valid date of death is included that aligns to no-beneficiary presently entitled assessment codes 15 or 16.
+
+We're also reducing the number of scenarios that ask for additional information to be included in, or attached to, the return. We'll provide details in the Trust tax return instructions 2026 that we'll be publishing in late June. We'll let you know when they're available.
+
+TFN reporting for closely held trusts
+
+Prior to making distribution resolutions before 30 June 2026, ensure beneficiaries of closely held trusts have provided their tax file number (TFN) to you before they receive a payment or entitlement to trust income.
+
+Where a TFN hasn't been provided, you may be required to withhold at the top tax rate.
+
+You also need to send us your TFN report for June quarter distributions by 31 July 2026.
+
+You can find out more about these obligations by reading TFN withholding for closely held trusts .
+
+Proposed changes from 1 July 2026
+
+The government has introduced legislation into Parliament to amend how beneficiary TFNs are reported by closely held trusts, when beneficiaries become entitled to trust income.
+
+If enacted, these changes will remove the requirement to lodge a TFN report for distributions made from 1 July 2026. We'll update our website once the law is enacted.
+
+We'll continue delivering improvements beyond Tax Time 2026 and into Tax Time 2027. As our modernisation program progresses, you can stay up to date via our Modernising Tax Administration Systems information.
+
+Keep up to date
+
+We have tailored communication channels for medium, large and multinational businesses, to keep you up to date with updates and changes you need to know.
+
+Read more articles in our online Business bulletins newsroom .
+
+Subscribe to our free:
+
+- fortnightly Business bulletins email newsletter External Link
+
+- email notifications about new and updated information on our website - you can choose to receive updates relevant to your situation. Choose the 'Business and organisations' category to ensure your subscription includes notifications for more Business bulletins newsroom articles like this one.
+
+QC 107318
+
+Print or Download

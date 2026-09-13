@@ -1,0 +1,27 @@
+SYNTHETIC TEST FIXTURE - authored for the Peregrine demo on 13 September 2026. This is NOT ATO material, NOT official guidance, and states NO real rule. It exists only so the guidance agent has one source that demonstrably changes one checklist line. Do not cite it to a client, an adviser or a reviewer as authority for anything.
+
+Peregrine demo guidance note (synthetic): dividend evidence for the 2025-26 income year
+
+Scope of this synthetic note
+
+This synthetic test fixture describes evidence expectations for individual taxpayers who hold shares directly and receive dividends from Australian companies during the 2025-26 income year (1 July 2025 to 30 June 2026). It applies to individuals only. It does not apply to companies or to trusts, which evidence their investment income through their own return labels and workpapers. Nothing in this note changes how any amount is taxed; it addresses only what supporting evidence a firm collects before an adviser reviews the position.
+
+Why the demo fixture proposes a change
+
+Under the existing demo checklist wording, an individual is asked for dividend statements that show the cash dividend components. In the synthetic scenario this note describes, that single request has proved insufficient in two recurring situations, so this fixture proposes that the request be made more specific.
+
+Separate evidence of cash and franking components
+
+Collect dividend evidence that states the cash dividend amount and the franking credit amount as separate figures for each holding, rather than a single combined total. Where a statement shows only a combined amount, obtain the issuer's or registry's breakdown for that distribution before the evidence is treated as complete. A combined figure cannot be reconciled against the separate cash and franking credit lines the firm tracks, and an adviser cannot confirm from it which portion is which.
+
+Dividend reinvestment plans
+
+Confirm whether the taxpayer participated in a dividend reinvestment plan during the income year, and if so obtain the reinvestment advice for each affected distribution. Amounts applied under a dividend reinvestment plan are frequently absent from a taxpayer's bank records because no cash is received, so a request framed only around cash received will miss them. The reinvestment advice also records the number and price of the shares issued, which the firm needs for later capital gains workpapers.
+
+Timing and holdings
+
+Evidence should cover every holding held at any point during the income year, including holdings sold partway through, not only holdings still held at 30 June 2026.
+
+What this synthetic note does not do
+
+This synthetic test fixture does not state any legal requirement, does not reflect any announced or enacted change, and carries no authority. It is a fabricated input used to exercise the Peregrine guidance agent end to end: retrieval, proposal, quote verification and adviser review. Any proposal derived from this note must be labelled as coming from a synthetic test fixture wherever it is displayed, and must be reviewed by an adviser before it changes any request wording.

@@ -1,0 +1,24 @@
+{
+  "id": "ato-records-business",
+  "title": "Overview of record-keeping rules for business",
+  "url": "https://www.ato.gov.au/businesses-and-organisations/preparing-lodging-and-paying/record-keeping-for-business/overview-of-record-keeping-rules-for-business",
+  "retrievedAt": "2026-09-13T07:40:03.334Z",
+  "sha256": "1803e9596c87951d00647afe251843aaa37645c561516e84f3c117d3076dfee1",
+  "publishedDate": "2026-06-17T14:00:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "CO-BANK",
+    "CO-AR",
+    "CO-AP",
+    "CO-ASSET",
+    "CO-LOAN",
+    "TR-BANK",
+    "TR-INVEST"
+  ],
+  "httpStatus": 200,
+  "characters": 6902
+}

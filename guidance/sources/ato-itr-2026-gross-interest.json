@@ -1,0 +1,19 @@
+{
+  "id": "ato-itr-2026-gross-interest",
+  "title": "10 Gross interest 2026",
+  "url": "https://www.ato.gov.au/forms-and-instructions/individual-tax-return-2026-instructions/income-questions-1-12-individual-tax-return-2026/10-gross-interest-2026",
+  "retrievedAt": "2026-09-13T07:40:02.100Z",
+  "sha256": "56d981c263035ce89c0682464fbb7298444889915fe5fe7d351385f1002735a2",
+  "publishedDate": "2026-05-30T01:31:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-INT",
+    "SAM-INT"
+  ],
+  "httpStatus": 200,
+  "characters": 3160
+}

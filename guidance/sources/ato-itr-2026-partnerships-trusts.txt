@@ -1,0 +1,867 @@
+13 Partnerships and trusts 2026
+Complete question 13 in the supplementary tax return to declare income from partnerships and trusts.
+Last updated 30 May 2026
+
+Print or Download
+
+Things you need to know
+
+You need to report at this question income from partnerships and trusts. You'll need to lodge a Business and professional items schedule 2026 , if you conducted a business activity as a partner in a partnership that resulted in either:
+
+- a loss
+
+- a loss after deducting your expenses.
+
+You should lodge your tax return using myTax or a registered tax agent . If you're unable to use myTax or a registered tax agent, contact us and we will send you a paper tax return that includes the Business and professional items schedule 2026 .
+
+If the partnership in which you were a partner paid you a salary, wages or allowances, you must show that income at this question.
+
+If you received or are entitled to an amount of income from a partnership or trust which includes a dividend with Australian franking credits from a New Zealand franking company, you may be eligible to claim the Australian franking credits. For information on how to claim Australian franking credits from a New Zealand franking company, see question 20 Foreign source income and foreign assets or property 2026 . You can't claim New Zealand imputation credits.
+
+If you have deferred non-commercial business losses from a prior income year, you may be able to claim them in 2025-26, if you operated the same or a similar business activity.
+
+The deferred non-commercial business loss deduction you can claim in 2025-26 may be reduced if you earned net exempt income in 2025-26. For more information, see How to offset your losses .
+
+If you became bankrupt (or received a relief from debt), the deferred losses will no longer be available. You can't deduct the loss in 2025-26 or any future income year.
+
+For more information on how exempt income and bankruptcy affect deferred non-commercial business losses, see paragraphs 117 and 118 of Taxation Ruling TR 2001/14 Income tax: Division 35 - non-commercial business losses .
+
+Don't show at this question any distribution from a partnership or trust in relation to foreign resident capital gains withholding credit. Show them at question 18 .
+
+If you're entitled to an amount of trust income on 30 June 2026, you need to include your share of the net income of the trust in your tax return for 2025-26 even if you didn't receive an amount from the trust until after 30 June 2026. If you don't have advice about all of your trust entitlements, contact your trustee.
+
+If the trust income that you received or are entitled to includes an amount described as tax-free, tax deferred, tax exempted or as a capital gains tax (CGT) concession, then read the information on non-assessable payments in Guide to capital gains tax 2026 .
+
+While you may not need to include such amounts at this question, they may be relevant in determining the amount of a net capital gain you show at question 18 or may affect the cost base of your unit or trust interest.
+
+Don't show all categories of income from a partnership or trust at this question. If your partnership distribution or your trust statement of distribution or advice includes amounts in the following categories, show them at other questions in your tax return, as follows:
+
+- show capital gains from trusts at question 18 , unless the instructions tell you otherwise
+
+- show attributed foreign income at question 19
+
+- show other foreign source income at question 20 .
+
+If you're the principal beneficiary of a special disability trust, you're considered to be entitled to all the income of the trust.
+
+Don't show at this question your entitlement to an early-stage venture capital limited partnership (ESVCLP) tax offset as determined by a partnership or trustee of a trust. Show it at question T7 .
+
+Don't show at this question your entitlement to an early-stage investor tax offset as a beneficiary of a trust or a partner in a partnership. Show it question T8 .
+
+You shouldn't receive a distribution of a net capital gain or a net capital loss from a partnership. For information on how a partner shows their share of a capital gain or capital loss, see Guide to capital gains tax 2026 .
+
+Do you need to complete question 13?
+
+If you answer yes to either of the following 2 questions, you'll need to complete question 13 in the supplementary tax return:
+
+- Did you receive or are you entitled to one of the following
+
+- income or a loss from a partnership
+
+- income from a trust (including a managed fund)
+
+- a credit for amounts of tax paid on, or amounts withheld from, partnership or trust income
+
+- a share of the 'national rental affordability scheme' tax offset?
+
+- Did you have an interest in a trust that made a loss from primary production activities?
+
+If you received, or are entitled to, a share of the income of a trust (including a managed fund), you must show your share of the trust's net income (for tax purposes) at this question. Don't show these amounts at questions 10 or 24 .
+
+The amount of your share of the trust's net income (for tax purposes) may be different from the actual distribution that you received or are entitled to receive from the trust. Your trustee should provide you with details of your share of the trust's net income in your trust statement of distribution or advice. If you haven't been advised about your share of the trust's net income, contact your trustee.
+
+You must show at this question your share of the net income from a managed fund, including:
+
+- exchange traded funds (ETFs)
+
+- cash management trust
+
+- money market trust
+
+- mortgage trust
+
+- unit trust
+
+- property trust
+
+- share trust
+
+- equity trust
+
+- growth trust
+
+- imputation trust
+
+- balanced trust.
+
+If you're unsure whether you have invested in such a trust, check with your advisor or the entity you invested in.
+
+If you're entitled to one or more distributions from trusts, you must complete a Trust income schedule 2026 and attach it to your tax return.
+
+If you don't have income to declare at question 13, go to question 14 Personal services income 2026 .
+
+Don't include at this question
+
+Don't show the following income at this question or you may be taxed incorrectly:
+
+- Attributed foreign income and any other foreign source income from a partnership or trust (unless we instruct otherwise), see questions 19 and 20.
+
+- A capital gain from a trust (unless instructed otherwise), see question 18.
+
+- A capital gain or a capital loss in respect of your interest in a partnership or a partnership asset, see question 18.
+
+- Income from a corporate limited partnership , see question 11.
+
+- Income from a public trading trust or a corporate unit trust , see question 11.
+
+- Interest you received, or were credited with, from a joint account, where you quote your individual tax file number (TFN) to the financial institution, see question 10.
+
+- That part of a distribution that relates to an amount of trust income on which family trust distribution tax has been paid, and shown at question A5, or on which trustee beneficiary non-disclosure tax has been paid.
+
+- Rent you derived jointly (or in common) with another person from a jointly held property where you weren't a member of a partnership carrying on a business of renting out properties, see question 21 .
+
+What you need to answer this question
+
+You'll need:
+
+- a statement of distribution or advice from the partnership or trustee showing the following details in relation to your share of partnership distribution or share of trust net income for tax purposes, including
+
+- the amount of any primary production income or loss and the amount of any non-primary production income or loss
+
+- the amount of net small business income from a small business entity trust or partnership
+
+- the amount of any franked distribution from a trust
+
+- the amount of attributed foreign income and other foreign source income
+
+- the amount of any income on which family trust distribution tax or trustee beneficiary non-disclosure tax has been paid
+
+- details that you're a chosen beneficiary if you're the beneficiary of a discretionary primary production trust that has made a loss
+
+- your entitlement to any of the following credits or tax offsets
+
+- credit for amounts of tax withheld because the partnership or trust fails to quote its Australian business number (ABN)
+
+- credit for amounts of tax withheld by the trustee of a closely held trust because you didn't provide your TFN
+
+- credit for amounts of tax withheld due to the imposition of non-resident withholding tax or managed investment trust withholding tax from partnership or trust income you received when you were a resident
+
+- share of the 'national rental affordability scheme' tax offset
+
+- allowable franking credits from franked dividends
+
+- credit for TFN amounts withheld
+
+- credit for tax paid by the trustee
+
+- details of any deductions you can claim against your partnership income or your share of the trust's net income that the partnership or trust didn't already claim.
+
+If you were a partner in a partnership that makes a loss, in addition to question 13, you must complete in the Business and professional items schedule 2026 :
+
+- P3 Number of business activities
+
+- P9 Business loss activity details .
+
+If you think that any details are wrong or are missing from your statement of distribution or advice, contact the managing partner or trustee.
+
+If you're a foreign resident who received a fund payment from a managed investment trust on which an amount was withheld, see Withholding tax arrangements for managed investment trust fund payments .
+
+Completing your supplementary tax return
+
+To complete this question, answer the following questions and parts:
+
+Residency and capacity questions
+
+Before you start, answer the following 3 questions.
+
+Were you an Australian resident in receipt of, or entitled to receive, Australian source income from a non-resident trust?
+
+If you were an Australian resident, you may be able to claim a credit for Australian withholding tax you have borne on any Australian source:
+
+- dividend
+
+- interest
+
+- royalty
+
+- payment from an Australian managed investment trust included in the income of a non-resident trust to which you're entitled - a non-resident trust is a trust which, for all of 2025-26, has both
+
+- non-resident trustees only
+
+- its central management and control outside Australia.
+
+Were you under a legal disability?
+
+If you were under a legal disability, you may be able to claim a credit for the tax that the trustee has paid on your share of the trust's net income. You're considered to be under a legal disability if you:
+
+- were under 18 years old on 30 June 2026
+
+- were a person who is bankrupt
+
+- had been declared legally incapable because of a mental condition.
+
+Were you a foreign resident?
+
+If you weren't an Australian resident, you may be able to claim a credit for the tax that the trustee pays on your share of income from a resident trust.
+
+Outcome of questions
+
+If you answer No to all 3 questions, go to Part A .
+
+If you answer Yes to any of the 3 questions, you need to provide additional information:
+
+- write on a separate sheet of paper:
+
+- the heading Schedule of additional information - Question 13
+
+- your name, address and TFN
+
+- the name of the trust, your share of income from the trust and any credit you're entitled to claim for that income
+
+- explain your situation
+
+- print X in the Yes box at Taxpayer's declaration in your tax return
+
+- attach your schedule to your tax return.
+
+Read on.
+
+Part A
+
+Were you a partner in a partnership that derived income or made a loss?
+
+- No - Go to Part B .
+
+- Yes - Read on.
+
+If the partnership made a loss, you should lodge your tax return using myTax or a registered tax agent. If you're unable to use myTax or a registered tax agent, contact us and we will send you a paper tax return that includes the Business and professional items schedule 2026 .
+
+Step 1
+
+Write the total of your share of primary production partnership income or loss at question 13 - label N Distribution from partnerships . Don't show cents.
+
+If you have a loss, print L in the box at the right of label N .
+
+Step 2
+
+Write the total of your share of non-primary production partnership income or loss (excluding any attributed foreign income or other foreign source income) at question 13 - label O . Ensure you include at label O your share of any franked distributions (this may be on your distribution statement from the partnership). The amount you include at label O should include the amount of any attached franking credits. Don't show cents.
+
+If you have a loss, print L in the box at the right of label O .
+
+Step 3
+
+If the amount at labels N or O includes a loss from a business activity operated by one or more of your partnerships, complete in the Business and professional items schedule 2026 :
+
+- P3 Number of business activities
+
+- P9 Business loss activity details.
+
+Part B
+
+Did you receive, or are you entitled to, income from a trust, or do you have an interest in a trust that made a loss from primary production activities?
+
+- No - Go to Part C .
+
+- Yes - Read on.
+
+If you were the principal beneficiary of a special disability trust, you're considered to be entitled to all of the income of the trust.
+
+Your statement of distribution or advice from the trust should show separately your share of primary production and non-primary production income (excluding net capital gains, foreign income and franked distributions) included in the calculation of the trust's net income (for tax purposes). It also shows whether the trust made a loss in relation to either or both of these income categories. This information is needed for averaging purposes.
+
+Write your share of any primary production trust income or loss included in the calculation of the trust's net income at question 13 - label L in your supplementary tax return. Write your share of other trust income or loss included in the calculation of the trust's net income at the relevant question, either:
+
+- question 13 - label U , question 13 - label C
+
+- questions 18 , 19 or 20 .
+
+If the trust made an overall loss for tax law purposes in 2025-26, the loss is retained in the trust. You'll have no share of the net income of the trust.
+
+Step 1
+
+Write the total of your share of primary production trust net income or loss at question 13 - label L in your supplementary tax return. Ensure that you include at label L your share of any primary production, Non-concessional MIT income and Excluded from Non-concessional MIT income . Don't show cents.
+
+If you have a loss, print L in the box at the right of label L .
+
+Step 2
+
+Write the total of your share of non-primary production trust net income or loss at question 13 - label U in your supplementary tax return. Ensure that you include at label U your share of any non-primary production, Non-concessional managed investment trust (MIT) income and Excluded from non-concessional MIT income . Don't show cents.
+
+If you have a loss, print L in the box at the right of label U .
+
+If your statement of distribution or advice shows these amounts separately, exclude:
+
+- capital gains
+
+- attributed foreign income
+
+- other foreign source income
+
+- franked distributions from trusts.
+
+Include any share of credits to be shown for share of credits from income covered in Part F .
+
+If you have a loss, print L in the box at the right of label U .
+
+Your statement of distribution or advice may show that your share of the trust's net capital gain is more than the overall amount of your share of the trust's net income (for tax purposes) included at question 13 . For example, because it shows a share of primary production or non-primary production loss. In this situation, there may be a limit to the amount of the net capital gain component that you exclude from label U and show at question 18 .
+
+If your statement of distribution or advice shows your share of franked distributions from trusts separately, write this amount at label C , together with any share of franking credits referrable to those franked distributions. Also show the franking credits at label Q under Share of credits from income and tax offsets in Part F .
+
+Where you're a partner in a partnership, record the franked distributions on your statement of distribution from the partnership at label O , not label C .
+
+For more information, see Guide to capital gains tax 2026 .
+
+Exception for primary producers
+
+You may still be eligible for income averaging even where the trust reports a loss. While beneficiaries of fixed trusts that report a loss continue to be eligible for income averaging, beneficiaries of discretionary trusts are required to meet some additional requirements.
+
+Completing your claim for income averaging
+
+If you're an eligible beneficiary and you show nothing at label L so far, write 0 (zero) at label L .
+
+Part C
+
+Can you claim any deduction in relation to either:
+
+- a distribution from a partnership
+
+- a share of net income from a trust?
+
+If you answer No , go to Part D . Otherwise, read on.
+
+Remember, you can't claim a deduction for:
+
+- amounts already claimed by the partnership or trust
+
+- expenses you incurred in deriving exempt income or non-assessable non-exempt income (for example, expenses incurred in deriving distributions on which family trust distribution tax or trustee beneficiary non-disclosure tax is paid).
+
+If you were the beneficiary of a discretionary trust you can't claim a deduction for expenses you incurred in relation to your share of any net income of the trust under the general deduction provisions. This is because when you incurred the expense, you weren't entitled to any income of the trust.
+
+If you made a prepayment of $1,000 or more for something to be done (in whole or in part) in a future income year, the rules relating to prepayments may affect the amount you can deduct at labels X and Y .
+
+For more information on prepayments, see Deductions for prepaid expenses 2026 .
+
+If you incurred debt deductions, the thin capitalisation rules may affect the amount you can deduct at labels X and Y . For example, debt deductions such as interest and borrowing costs, in deriving assessable income from a trust or partnership, of more than $2,000,000 (alone or combined with those of your associate entities) for 2025-26. For more information, see Thin capitalisation .
+
+Primary production deductions
+
+Follow the steps if you're claiming deductions for primary production.
+
+Step 1
+
+If you were a partner in a partnership that incurred eligible expenditure on landcare operations, water facilities, fencing assets or fodder storage assets, the partnership can't claim the expenditure. You allocate costs the partnership incurred to each partner who can then claim the deduction.
+
+Write your share of the total of any such expenditure that relates to primary production income or loss from partnerships that you can deduct this year at question 13 - label I in your supplementary tax return.
+
+If a trustee incurred eligible expenditure on landcare operations, water facilities, fencing assets or fodder storage assets, only the trustee, not a beneficiary of the trust, can claim deductions for that expenditure.
+
+For more information on deductions for expenditure on landcare operations, water facilities, fencing assets and fodder storage assets, see Depreciating assets guide 2026 .
+
+Step 2
+
+Write at question 13 - label X the total of any other deductions (including non-commercial business losses deferred from a prior income year) you can claim in relation to your share of either:
+
+- primary production income or loss from a partnership
+
+- primary production income of a trust.
+
+If you were a partner in a partnership and you can claim a deduction for your share of eligible expenditure the partnership incurred on:
+
+- horticultural plants
+
+- grapevines
+
+- electricity connections
+
+- phone lines.
+
+Include any such deduction that relates to primary production income or loss from a partnership at label X .
+
+For information on deductions for expenditure on horticultural plants, grapevines, electricity connections and phone lines, see Guide to depreciating assets 2026 .
+
+Include a non-commercial business loss deferred from a prior year business activity only if it relates to one of your current year partnership business activities which is the same as, or similar to, the prior year business activity which generated the loss. See, Example .
+
+The deferred non-commercial business loss deduction you can claim in 2025-26 may be reduced if you earn net exempt income in 2025-26. For more information, see How to offset your losses .
+
+If you became bankrupt (or received a relief from debt) the deferred losses will no longer be available. The loss can't be deducted in 2025-26 or a future income year.
+
+For more information on how exempt income and bankruptcy affect deferred non-commercial business losses, contact us .
+
+Step 3
+
+From the list below, print the code in the Type box at label X that describes business losses from a prior income year that you're claiming.
+
+- Print D if the entire amount at label X is a deferred non-commercial business loss from a prior income year.
+
+- Print P if only part of the amount at label X is a deferred non-commercial business loss from a prior income year.
+
+Leave the Type box blank if the amount at label X doesn't include any deferred non-commercial business losses from a prior income year.
+
+Non-primary production deductions
+
+Follow the steps to complete the non-primary production deductions.
+
+Step 1
+
+If a partnership incurred eligible expenditure on landcare operations, the partnership can't claim the expenditure. Costs the partnership incurred are allocated to each partner who can then claim the deduction. Write your share of the total of any such expenditure that relates to non-primary production income or loss from partnerships that you can deduct in 2025-26 at question 13 - label J in your supplementary tax return.
+
+If a trustee incurred eligible expenditure on landcare operations, only the trustee, not a beneficiary of the trust, can claim deductions for that expenditure. For more information on deductions for expenditure on landcare operations, see Guide to depreciating assets 2026 .
+
+Step 2
+
+Write at question 13 - label Y the total of other deductions (including non-commercial business losses deferred from a prior income year) you can claim in relation to your share of both:
+
+- non-primary production income or loss from a partnership
+
+- non-primary production income of a trust, including deductions relating to franked distributions from trusts.
+
+If you were a partner in a partnership and you can claim a deduction for your share of eligible expenditure the partnership incurred on electricity connections. Include any such deduction that relates to non-primary production income or loss from partnerships at question 13 - label Y . For information on deductions for expenditure on electricity connections, see Guide to depreciating assets 2026 .
+
+Include non-commercial business losses deferred from a prior income year only if they relate to a partnership activity which is the same as, or similar to, your 2025-26 partnership activity. See, Example .
+
+The deferred non-commercial business loss deduction you can claim in 2025-26 may be reduced if you earned net exempt income in 2025-26. For more information, see How to offset your losses .
+
+If you became bankrupt (or received a relief from debt) the deferred losses will no longer be available. The loss can't be deducted in 2025-26 or a future income year.
+
+For more information on how exempt income and bankruptcy affect deferred non-commercial business losses, contact us .
+
+Step 3
+
+From the list below, print the code in the TYPE box at label Y that describes business losses from a prior income year that you're claiming at label Y .
+
+- Print D if the entire amount at label Y is a deferred non-commercial business loss from a prior income year.
+
+- Print P if only part of the amount at label Y is a deferred non-commercial business loss from a prior income year.
+
+Leave the Type box blank, if the amount at label Y doesn't include any deferred non-commercial business losses from a prior income year.
+
+Example: non-commercial business losses
+
+In 2024-25, Lisa deferred total non-commercial business losses of $6,000 from her share of partnership business activities made up of both:
+
+- $5,000 from a furniture restoration business
+
+- $1,000 from a computer consultancy business.
+
+The partnership didn't carry on the computer consultancy business in 2025-26. Lisa can't include her $1,000 loss from the computer consultancy business at label Y . This amount doesn't relate to a business activity which is the same as, or similar to, her current income year partnership business activity.
+
+In 2025-26, Lisa's partnership distribution from the furniture restoration business was $2,000. Lisa includes the $2,000 at label O , $5,000 as a deferred loss relating to the furniture restoration business at label Y and prints D in the TYPE box. Therefore, her net distribution from this partnership business activity is a loss of $3,000.
+
+Lisa must also show her $5,000 loss from the furniture restoration business against Deferred non-commercial business loss from a prior income year at P9 in the Business and professional items schedule . She must also show the net distribution of the $3,000 loss from the furniture restoration business against Net loss at P9 .
+
+Lisa should keep a record of her $1,000 deferred loss from the computer consultancy business, as she may be able to claim it in a later year if that business starts again or she starts a similar business.
+
+End of example
+
+Part D
+
+Complete the following steps to work out your net amount from primary production and non-primary production.
+
+Step 1: Net primary production amount
+
+Add the income amounts or loss amounts at labels N and L, and subtract the amounts at labels I and X . Write the answer at question 13 Net primary production amount in your supplementary tax return. Don't show cents.
+
+If your answer is a loss, print L in the Loss box at Net primary production amount .
+
+If you have a total net loss from a partnership business activity, complete P3 and P9 in the Business and professional items schedule 2026 , in addition to question 13 in your supplementary tax return.
+
+Step 2: Net non-primary production amount
+
+Add the income amounts or loss amounts at labels O and U . Then add any amount at label C and subtract the amounts at labels J and Y . Write the answer at question 13 Net non-primary production amount .
+
+If your answer is a loss, print L in the Loss box at Net non-primary production amount .
+
+If you have a total net loss from a partnership business activity, complete P3 and P9 in the Business and professional items schedule 2026, in addition to question 13 in your supplementary tax return.
+
+Professional income
+
+If the partnership or trust income you received, or were entitled to, includes income from activities as a special professional (for example an author or sportsperson), you must also write the amount of this taxable professional income at question 24 - label Z . You won't pay tax twice on this income. For more information, see question 24 Other income 2026.
+
+Part E
+
+Did either of the following apply:
+
+- your distribution or share of net income included a share of net small business income
+
+- you had a farm management repayment or other amount you received as a partner or beneficiary in a small business entity?
+
+If you answered No , go to Part F . Otherwise, read on.
+
+You may be entitled to the small business income tax offset .
+
+Complete this question to work out:
+
+- your partnership share of net small business income less deductions attributable to that share
+
+- your trust share of net small business income less deductions attributable to that share.
+
+Don't include amounts you show at this question in your income. We only use the amounts for the purpose of working out your small business income tax offset.
+
+Your statement of distribution or advice from the partnership or trustee should include details of your 'Share of net small business income' from each partnership or trust that is a small business entity.
+
+If a partnership made an overall loss, you're not entitled to a tax offset in relation to that share of net small business income. You're entitled to the tax offset only in respect of your share of net small business income from either:
+
+- a small business entity partnership in which you're a partner, where the business income was derived by that partnership from carrying on its own business activities
+
+- a small business entity trust in which you were a beneficiary, where the business income was derived by that trust from carrying on its own business activities.
+
+You must reduce your share of net small business income and other partner or beneficiary income amounts by any deductions you're entitled to, to the extent they are attributable to that share of income or other income amounts.
+
+We explain the deductions you can claim against your share of net small business income at Part C . Include any deductions for farm management deposits you made as a partner or beneficiary.
+
+Your deductions from Part C , plus your deductible farm management deposits from question 17 - label D can't be greater than your share of net small business income from that partnership or trust.
+
+At this question also include any:
+
+- farm management repayments you included in your income in 2025-26 as a partner or beneficiary
+
+- other business income that you included in your 2025-26 income only because you were a partner or beneficiary, for example, a recoupment or reimbursement of a deduction that you previously claimed as a partner or beneficiary.
+
+Don't include interest on your farm management deposits at this question.
+
+Any deductions that are attributable to a farm management repayment, or other business income, can't be greater than the amount to which the deduction relates.
+
+Don't reduce your share of net small business income or other income amounts by any of the following deductions:
+
+- tax-related expenses
+
+- gifts or contributions
+
+- personal super contributions.
+
+Completing this question
+
+To work out your partnership or trust share of net small business income less deductions attributable to that share, use either:
+
+- Worksheet 1 we provide as step-by-step instructions
+
+- Small business income tax offset calculator
+
+Partnership share of net small business income less deductions attributable to that share
+
+If you were a partner in a partnership the statement of distribution or advice should also include details of any business loss activities.
+
+- If the partnership made an overall loss, treat your share of net small business income from that partnership as zero.
+
+- If the partnership carried on more than one business activity and one or more activities made a loss, the non-commercial business loss rules apply to that loss activity.
+
+- If overall the partnership made a profit but your share of the partnership's net small business income is reduced (but not to zero or below) by a loss, you may be required to adjust your share of the partnership's net small business income.
+
+For more information on the non-commercial loss rules, see Business and professional items schedule instructions 2026 for P9 Business loss activity details .
+
+Complete Worksheet 1 .
+
+Step 1 Add up all your 'share of net small business income' amounts that relate to partnership distributions you show at question 13 and at question 20 and write this at worksheet 1 - row a .
+
+Step 2 If both of the following apply, write your share of that loss at row b :
+
+- your distribution from a partnership included a share of a business loss that isn't deductible in 2025-26 due to the non-commercial loss rules
+
+- your share of that loss reduced a ' share of net small business income ' amount you included at row a (but not to zero or below).
+
+Step 3 Add up rows a and b and write the result at row c .
+
+Step 4 Write any farm management repayments from question 17 - labels N or R that relate to your partnership share at row d .
+
+Step 5 Write any other business income amounts included in your income because you were a partner at row e .
+
+Step 6 Add up rows c , d and e and write the result at row f .
+
+Step 7 Write any deductible farm management deposits from question 17 - label D that are attributable to your partnership share of net small business income at row g .
+
+Step 8 Write any deductions claimed at question 13 - labels I or J that are attributable to your partnership share at row h .
+
+Step 9 Write any deductions claimed at question 13 - labels X or Y that are attributable to your partnership share at row i .
+
+Step 10 Write any deductions that relate to your farm management repayments or other partner business amounts at row j .
+
+Step 11 Add together rows g , h , i and j then write the total at row k .
+
+Step 12 Subtract row k from row f and write the answer at row l . If the answer is a loss, write zero.
+
+Write the amount at row l at question 13 Partnership share of net small business income less deductions attributable to that share - label D .
+
+Worksheet 1
+
+Row
+
+Calculation
+
+Amount
+
+a
+
+Partnership share of net small business income
+
+$
+
+b
+
+Your share of a non-commercial business loss that reduced your share of net small business income (but not below zero)
+
+$
+
+c
+
+Add up rows a and b .
+
+$
+
+d
+
+Farm management repayments shown at question 17 - labels N or R
+
+$
+
+e
+
+Other business income because you were a partner
+
+$
+
+f
+
+Add up rows c , d and e
+
+$
+
+g
+
+Farm management deposits at question 17 - label D
+
+$
+
+h
+
+Deductions you claimed at question 13 - labels I or J
+
+$
+
+i
+
+Deductions you claimed at question 13 - labels X or Y
+
+$
+
+j
+
+Deductions that relate to your farm management repayment or other partner business income
+
+$
+
+k
+
+Add up rows g , h , i and j
+
+$
+
+l
+
+Subtract row k from row f
+
+If the result is a loss, write zero
+
+This is your partnership share of net small business income less deductions attributable to that share
+
+$
+
+Trust share of net small business income less deductions attributable to that share
+
+If the trust made an overall loss, treat your share of net small business income from that trust as zero.
+
+If you were a beneficiary who is a minor (under 18 years old) and you're not an excepted person , you're not entitled to this offset. Write 0 (zero) at question 13 Trust share of net small business income less deductions attributable to that share - label E .
+
+If you were the beneficiary of a discretionary trust you wouldn't normally be able to claim a deduction for expenses you incurred in relation to your share of any net income of the trust under the general deduction provisions. This is because at the time you incurred the expense, you wouldn't be entitled to any income of the trust.
+
+Complete Worksheet 2 .
+
+Step 1 Add up all your 'share of net small business income' amounts that relate to trust distributions you have shown at question 13 and at question 20 and write this at worksheet 2 - row a .
+
+Step 2 Write any farm management repayments from question 17 - labels N or R that relate to your trust share at row b .
+
+Step 3 Write any other business income amounts included in your income because you were a beneficiary at row c .
+
+Step 4 Add together rows a , b and c and write the result at row d .
+
+Step 5 Write any deductible farm management deposits you have shown at question 17 -label D that are attributable to your trust share of net small business income at row e .
+
+Step 6 Write any deductions you claimed at question 13 - labels X or Y that are attributable to your trust share at row f .
+
+Step 7 Write any deductions that relate to your farm management repayments or other beneficiary business amounts at row g .
+
+Step 8 Add together rows e , f and g and write the result at row h .
+
+Step 9 Subtract row h from row d and write the result at row i . If the result is a loss, write zero.
+
+Write the amount at row i at question 13 Trust share of net small business income less deductions attributable to that share - label E .
+
+Worksheet 2
+
+Row
+
+Calculation
+
+Amount
+
+a
+
+Trust share of net small business income from trusts
+
+$
+
+b
+
+Farm management repayments at question 17 - labels N or R
+
+$
+
+c
+
+Other business income because you were a beneficiary
+
+$
+
+d
+
+Add rows a , b and c
+
+$
+
+e
+
+Farm management deposits at question 17 - label D
+
+$
+
+f
+
+Deductions you claimed at question 13 - labels X or Y
+
+$
+
+g
+
+Deductions that relate to your farm management repayment or other beneficiary business income
+
+$
+
+h
+
+Add up rows e , f and g
+
+$
+
+i
+
+Subtract row h from row d
+
+If the result is a loss write zero
+
+This is your trust share of net small business income less deductions attributable to that share
+
+$
+
+Part F
+
+Follow the guide to complete Part F.
+
+Share of credits from income and tax offsets
+
+If the partnership or trust income you have shown at question 13 - labels N , L , O , U or C includes or is attributable to:
+
+- income from which an amount of tax is withheld because an ABN wasn't quoted, then write your share of the credit at question 13 - label P (show cents)
+
+- interest, dividends and unit trust distributions from which TFN amounts have been withheld, then write the total of your share of credits for TFN amounts withheld at question 13 - label R (show cents)
+
+- payments from a closely held trust from which TFN amounts have been withheld, then write the total of your credits for those amounts withheld at question 13 - label M (show cents)
+
+- national rental affordability scheme (NRAS) rent, then write your share of the NRAS tax offset at question 13 - label B (show cents)
+
+- other credits for tax paid by a trustee on trust income, then write the total of your share of credits for tax paid by a trustee at question 13 - label S (show cents). However, if you were the principal beneficiary of a special disability trust, don't include your share of credits for tax paid by the trustee here. Include your share of credits for tax paid by the trustee at question T9
+
+- income that you either
+
+- received when you were an Australian resident from which an amount of tax was withheld because of the imposition of non-resident withholding tax or managed investment trust withholding tax
+
+- derived as a foreign resident from which an amount of tax was withheld because of the operation of the foreign resident withholding rules, then write the total amount of these credits for amounts withheld at question 13 - label A (show cents).
+
+If you had tax withheld from both types of income then add the credits for amounts withheld together and write the total amount at question 13 - label A .
+
+Franking credits
+
+Write the amount of your share of any allowable franking credits which you were entitled to claim as a franking tax offset through a partnership or trust at question 13 - label Q . Show cents.
+
+You can only claim a share of a franking credit that relates to the share of a franked dividend paid to a partnership or trust which you indirectly include in any of:
+
+- the amount of partnership income or loss you show at question 13 - label O
+
+- the amount of trust income you show at question 13 - label U
+
+- the franked distribution you show at question 13 - label C .
+
+Therefore, you can't claim a franking credit for a dividend paid to the partnership or trust which was exempt income or non-assessable non-exempt income (for example, a distribution on which family trust distribution tax or trustee beneficiary non-disclosure tax was paid).
+
+You can't claim a share of a franking credit through a trust in any of the following circumstances:
+
+- the trust has an overall loss for tax purposes for 2025-26
+
+- you didn't show an amount of franked distributions from trusts at question 13 - label C
+
+- the amount of income from the trust you have shown at question 13 - label U isn't attributable to the franked dividend which has generated the franking credit.
+
+In addition, to claim a franking credit in respect of a particular dividend both you and the partnership or trustee must be qualified persons in relation to that dividend, see Qualified person .
+
+Qualified person
+
+There are franking credit trading rules, to prevent the use of franking credits by persons who only briefly own their shares or who don't effectively own their shares. Under these rules, the 'holding period rule' and the 'related payments rule', you must satisfy certain criteria before you're considered to be a qualified person.
+
+If you derive dividends indirectly through a partnership or trust (except a widely held trust) you need to determine both of the following:
+
+- what component of the trust net income or partnership distribution is attributable to a particular dividend
+
+- then whether you satisfy the holding period rule and the related payments rule in relation to that dividend.
+
+The trustee or the partnership itself must also have satisfied these rules.
+
+The holding period rule applies to shares bought on or after 1 July 1997. It applies to you if you (or the partnership or trust) sold shares within 45 days of buying them. It also applies to you if you (or the partnership or trust) entered into a risk reduction arrangement, such as a derivative transaction, within that time. The holding period is 90 days for certain preference shares.
+
+The related payments rule applies to arrangements entered into after 7:30 pm (Australian Eastern Standard Time) on 13 May 1997. It applies to you (or the partnership or trust) if you're under an obligation to make a related payment for a dividend and you didn't hold your shares 'at risk' during a specified qualifying period.
+
+Special rules apply if you were the beneficiary of a trust and the trustee made a family trust election.
+
+If you were a beneficiary in a widely held trust, you're treated as holding an interest in all the shares or interests held by the trust. You're only required to satisfy the 45-day rule in relation to your interest in the trust as a whole, rather than in relation to each share in which you have an interest under the trust. The trustee should be able to advise if a particular trust qualifies as a widely held trust.
+
+If you failed to satisfy the holding period rule, and the related payments rule don't apply to you, you may still be entitled to a franking tax offset if you qualify for the small shareholder exemption. The small shareholder exemption applies where you don't exceed the franking tax offset ceiling of $5,000 on all your franking tax offset entitlements in a given income year, whether you receive it directly or indirectly through a partnership or trust.
+
+If any of these measures are likely to affect you, see You and your shares 2026 .
+
+Checks before moving to the next question
+
+Check that you:
+
+- complete Parts A , B , C , D , E and F , as necessary
+
+- attach your Schedule of additional information - question 13 to your supplementary tax return, if you need to send us one
+
+- have a record of each partnership distribution or share of net income from a trust with your other records - you need the following information
+
+- name and TFN of the partnership or trust
+
+- amount and source of each partnership distribution or share of net income from a trust
+
+- amount of any taxable professional income
+
+- amount and type of deductions claimed
+
+- amount and type of any share of credits.
+
+Where to go next
+
+- Go to question 14 Personal services income 2026 .
+
+- Return to main menu Individual supplementary tax return instructions 2026 .
+
+- Go back to Income in your supplementary tax return 2026 .
+
+QC 106836
+
+Print or Download

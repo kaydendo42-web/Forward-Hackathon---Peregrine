@@ -1,0 +1,71 @@
+Instructions to complete the trust income schedule 2026
+Instructions to help you complete the trust income schedule.
+Published 30 May 2026
+
+Print or Download
+
+Entity details
+
+Provide your:
+
+- tax file number (TFN) - print the TFN in the boxes
+
+- name for
+
+- individuals - title, family name, given name and any other given names
+
+- non-individuals - name of the company, trust, partnership, fund, or SMSF
+
+- address
+
+- individuals - residential address
+
+- non-individuals - business address.
+
+These details must match your tax return.
+
+Distribution details
+
+If you're required to complete this section, you must complete it for each trust distribution you were entitled to. If there is more than one trust distribution in an income year, repeat this step for each distribution up to the applicable distribution reporting limits .
+
+For each distribution from a trust, use the statement of distribution or advice from the trustee or the tax statement from your managed fund to complete the following:
+
+- name of distributing trust
+
+- for non-managed fund trust distributions this will be the name of the trust as provided by the trustee
+
+- for managed fund trust distributions this will be the name of the managed fund or, for consolidated tax statements, the name of the statement issuer
+
+- trust identifier
+
+- for non-managed funds provide either the ABN (if applicable) of the distributing trust or provide the ACN of the corporate trustee (if applicable) of the distributing trust
+
+- for managed funds provide the investor number of the distributing trust which should be located on your tax statement from your managed fund
+
+- distribution values
+
+- if you receive a copy of the trust's statement of distribution section from the trust tax return as it relates to your distribution, you can directly transpose the information into the trust income schedule
+
+- if you don't receive a copy of the statement of distribution section from the trust tax return, however you receive advice from your trustee about your trust distribution, this advice should contain enough detail to help you to complete the trust income schedule. If you need more information, ask the trustee
+
+- if you receive income from a managed fund, you'll generally receive a tax statement. For where these amounts are reported in the trust income schedule, see Managed fund tax statement .
+
+Declarations
+
+How to complete the declarations on the trust income schedule.
+
+Taxpayer's declaration
+
+If you are lodging a paper tax return, the completed trust income schedule must be signed and attached to your tax return.
+
+Before making this declaration, make sure all information required is true and correct in every detail.
+
+Tax agent's declaration
+
+If you are preparing this schedule on behalf of your client, you must sign and date the declaration.
+
+Continue to: Using the trust information to complete your trust income schedule
+
+QC 106675
+
+Print or Download

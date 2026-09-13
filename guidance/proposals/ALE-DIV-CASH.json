@@ -1,0 +1,27 @@
+[
+  {
+    "lineId": "ALE-DIV-CASH",
+    "currentText": "Provide current-year dividend statements showing the cash dividend components.",
+    "proposedText": "Provide dividend statements showing the cash dividend amount and the franking credit amount as separate figures for each holding, and confirm whether any dividends were reinvested under a dividend reinvestment plan.",
+    "sourceId": "SYNTHETIC-dividend-evidence-fixture",
+    "quote": "Collect dividend evidence that states the cash dividend amount and the franking credit amount as separate figures for each holding, rather than a single combined total.",
+    "appliesToEntityTypes": [
+      "individual"
+    ],
+    "appliesToYears": [
+      2026
+    ],
+    "sourceStatus": "synthetic_fixture",
+    "rationale": "The current wording asks only for statements showing cash dividend components. The passage states that a single combined total is insufficient and the request must be made more specific to obtain separate cash and franking figures, and to confirm dividend reinvestment plan participation.",
+    "retrievedAt": "2026-09-13T07:40:55.249Z",
+    "sourceHash": "8ec68eba388981949ef5a1b175040055a9737b23af44c79f98b2263369605848",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "promptVersion": "guidance-1",
+    "createdAt": "2026-09-13T08:33:09.688Z",
+    "review": {
+      "status": "pending",
+      "reviewer": "",
+      "decidedAt": ""
+    }
+  }
+]

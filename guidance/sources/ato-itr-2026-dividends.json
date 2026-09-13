@@ -1,0 +1,19 @@
+{
+  "id": "ato-itr-2026-dividends",
+  "title": "11 Dividends 2026",
+  "url": "https://www.ato.gov.au/forms-and-instructions/individual-tax-return-2026-instructions/income-questions-1-12-individual-tax-return-2026/11-dividends-2026",
+  "retrievedAt": "2026-09-13T07:40:02.181Z",
+  "sha256": "756645e2f318238040bb63a4f34fcb1e55089859dfcb7059ab02d39f71280bc8",
+  "publishedDate": "2026-05-30T01:32:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-DIV-CASH",
+    "ALE-DIV-CREDIT"
+  ],
+  "httpStatus": 200,
+  "characters": 6313
+}

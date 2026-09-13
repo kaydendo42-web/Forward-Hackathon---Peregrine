@@ -1,0 +1,27 @@
+[
+  {
+    "lineId": "TR-DIST-ALE",
+    "currentText": "Provide the current-year beneficiary allocation record for Alex with separate components.",
+    "proposedText": "Provide the current-year beneficiary allocation record for Alex with separate components, including TFN, full name, residential address, date of birth, and entity code.",
+    "sourceId": "ato-trust-return-2026",
+    "quote": "For individual beneficiaries, show: - tax file number (TFN) - full name, including title, family name, and given names - residential address (street address, not a PO Box) - date of birth - entity type code .",
+    "appliesToEntityTypes": [
+      "trust"
+    ],
+    "appliesToYears": [
+      2026
+    ],
+    "sourceStatus": "final_guidance",
+    "rationale": "Current wording asks for allocation record but omits required beneficiary details such as TFN, full name, residential address, date of birth, and entity code that the guidance specifies for individual beneficiaries.",
+    "retrievedAt": "2026-09-13T07:40:02.750Z",
+    "sourceHash": "5e814dd6b9c708050b9df1b6e2371f0ce0aeb98434f9c25449929b1b0199e633",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "promptVersion": "guidance-1",
+    "createdAt": "2026-09-13T08:33:21.830Z",
+    "review": {
+      "status": "pending",
+      "reviewer": "",
+      "decidedAt": ""
+    }
+  }
+]
