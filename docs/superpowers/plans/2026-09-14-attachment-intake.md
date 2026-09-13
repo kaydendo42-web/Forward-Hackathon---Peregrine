@@ -938,7 +938,8 @@ const STATEMENT = readFileSync('tests/fixtures/intake/statement.jpg');
 /** A minimal single-page PDF with the given text. pdf.js tolerates the approximate xref. */
 function tinyPdf(text: string) {
   const escaped = text.replace(/[\\()]/g, m => `\\${m}`);
-  const stream = `BT /F1 12 Tf 40 700 Td (${escaped}) Tj ET`;
+  const lines = escaped.match(/.{1,60}/g) ?? [''];
+  const stream = `BT /F1 12 Tf 14 TL 40 780 Td ${lines.map(l => `(${l}) Tj T*`).join(' ')} ET`;
   const objects = [
     '<< /Type /Catalog /Pages 2 0 R >>',
     '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
@@ -1162,7 +1163,8 @@ function nim(content: string, status = 200) {
 /** Same minimal PDF builder as tests/intake-server.test.ts (duplicated so each file reads on its own). */
 function tinyPdf(text: string) {
   const escaped = text.replace(/[\\()]/g, m => `\\${m}`);
-  const stream = `BT /F1 12 Tf 40 700 Td (${escaped}) Tj ET`;
+  const lines = escaped.match(/.{1,60}/g) ?? [''];
+  const stream = `BT /F1 12 Tf 14 TL 40 780 Td ${lines.map(l => `(${l}) Tj T*`).join(' ')} ET`;
   const objects = [
     '<< /Type /Catalog /Pages 2 0 R >>',
     '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
