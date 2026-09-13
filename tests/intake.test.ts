@@ -122,6 +122,8 @@ describe('verifyIntake', () => {
   });
   it('flags periods outside FY2026 and treats unreadable dates as in-year', () => {
     expect(verifyIntake([raw({ periodStart: '1 July 2024', periodEnd: '30 June 2025' })], ctx)[0].flags.periodInYear).toBe(false);
+    expect(verifyIntake([raw({ periodStart: '1 July 2025', periodEnd: '30 June 2026' })], ctx)[0].flags.periodInYear).toBe(true);
+    expect(verifyIntake([raw({ periodStart: '2025-07-01', periodEnd: '2026-06-30' })], ctx)[0].flags.periodInYear).toBe(true);
     expect(verifyIntake([raw({ periodStart: '30/06/2026', periodEnd: '30/06/2026' })], ctx)[0].flags.periodInYear).toBe(true);
     expect(verifyIntake([raw({ periodStart: 'June', periodEnd: '' })], ctx)[0].flags.periodInYear).toBe(true);
   });

@@ -128,7 +128,9 @@ function parseDateLoose(value: string): number | null {
   if (dmy) return Date.UTC(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
   if (!/\d{4}/.test(s) || !/\d{1,2}/.test(s.replace(/\d{4}/, ''))) return null;   // needs a day and a year
   const parsed = Date.parse(s);
-  return Number.isFinite(parsed) ? parsed : null;
+  if (!Number.isFinite(parsed)) return null;
+  const local = new Date(parsed);   // Date.parse reads a bare date in the server's zone; compare calendar days, not instants
+  return Date.UTC(local.getFullYear(), local.getMonth(), local.getDate());
 }
 function inFinancialYear(start: string, end: string, year: number) {
   const from = Date.UTC(year - 1, 6, 1), to = Date.UTC(year, 5, 30, 23, 59, 59);
