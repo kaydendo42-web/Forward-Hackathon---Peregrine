@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { buildIntakeContext, buildIntakeMessages, parseIntakeAmount, parseIntakeReply, verifyIntake, type RawIntakeDocument } from '../src/lib/intake';
+import { applyIntakeDocument, buildIntakeContext, buildIntakeMessages, intakeDocumentId, linkedRequestFor, parseIntakeAmount, parseIntakeReply, recordIntakeProposal, rejectIntakeProposal, verifyIntake, type RawIntakeDocument } from '../src/lib/intake';
 import * as workflow from '../src/core/workflow';
-import type { Baseline } from '../src/core/types';
+import type { Baseline, IntakeProposal } from '../src/core/types';
 import { baseline } from './fixtures';
 
 const trust: Baseline = {
@@ -128,5 +128,81 @@ describe('verifyIntake', () => {
   it('sets the synthetic flag from the model or from the text it read', () => {
     expect(verifyIntake([raw({ syntheticMarker: true })], ctx)[0].flags.syntheticMarker).toBe(true);
     expect(verifyIntake([raw({ docType: 'SYNTHETIC DEMO statement' })], ctx)[0].flags.syntheticMarker).toBe(true);
+  });
+});
+
+const HASH = 'a'.repeat(64);
+function proposal(over: Partial<IntakeProposal> = {}): IntakeProposal {
+  const ctx = buildIntakeContext(family());
+  return {
+    id: 'intake-1', messageId: '<reply-1@example.com>', attachmentIndex: 0, filename: 'statement.jpg', contentType: 'image/jpeg', size: 1234,
+    fileHash: HASH, model: 'meta/llama-3.2-11b-vision-instruct', promptVersion: 'intake-1', createdAt: '2026-09-14T00:00:00.000Z', source: 'image',
+    documents: verifyIntake([{ docType: 'Bank statement', entityNameSeen: 'Taylor Family Trust', periodStart: '1 June 2026', periodEnd: '30 June 2026',
+      amounts: [{ label: 'Closing Balance', amountCents: 10812500 }], proposedEntityId: 'taylor-family-trust', proposedRequestId: TR_BANK,
+      confidence: 'high', reason: 'Trust bank statement', syntheticMarker: true }], ctx),
+    review: { status: 'pending', decidedAt: '', note: '' }, ...over,
+  };
+}
+
+describe('recordIntakeProposal', () => {
+  it('stores a validated proposal and logs a read event without applying anything', () => {
+    const base = family();
+    const next = recordIntakeProposal(base, proposal());
+    expect(next.intake).toHaveLength(1);
+    expect(next.version).toBe(base.version + 1);
+    expect(next.audit.at(-1)).toMatchObject({ action: 'intake_read', entityId: 'taylor-family-trust' });
+    expect(next.requests.find(r => r.id === TR_BANK)!.evidence).toEqual([]);
+  });
+  it('replaces an earlier pending proposal for the same attachment', () => {
+    let s = recordIntakeProposal(family(), proposal({ id: 'intake-1' }));
+    s = recordIntakeProposal(s, proposal({ id: 'intake-2' }));
+    expect(s.intake!.map(p => p.id)).toEqual(['intake-2']);
+  });
+  it('rejects an invalid proposal', () => {
+    expect(() => recordIntakeProposal(family(), proposal({ fileHash: 'nope' }))).toThrow();
+  });
+});
+
+describe('applyIntakeDocument', () => {
+  it("links evidence on the chosen request using that request's own fields and logs the acceptance", () => {
+    const s = recordIntakeProposal(family(), proposal());
+    const next = applyIntakeDocument(s, 'intake-1', 0, { requestId: TR_BANK, amountCents: 10812500, description: 'Bank statement — Taylor Family Trust — June 2026' });
+    const req = next.requests.find(r => r.id === TR_BANK)!;
+    expect(req.evidence).toHaveLength(1);
+    expect(req.evidence[0]).toMatchObject({ documentId: intakeDocumentId(HASH, 0), lineId: 'TR-BANK', entityId: 'taylor-family-trust', financialYear: 2026,
+      component: 'closing_balance', basis: 'closing_balance', currency: 'AUD', amountCents: 10812500, filename: 'statement.jpg', fileHash: HASH });
+    expect(next.intake![0].review.status).toBe('accepted');
+    expect(next.audit.at(-1)).toMatchObject({ action: 'intake_accepted' });
+    expect(next.audit.at(-1)!.detail).toMatch(/meta\/llama-3.2-11b-vision-instruct/);
+    expect(next.audit.at(-1)!.detail).toMatch(/intake-1/);
+    expect(linkedRequestFor(next, next.intake![0], 0)?.id).toBe(TR_BANK);
+  });
+  it("records an adviser override when the target differs from the model's proposal", () => {
+    const s = recordIntakeProposal(family(), proposal());
+    const next = applyIntakeDocument(s, 'intake-1', 0, { requestId: ALE_DIV, amountCents: null, description: 'Moved by adviser' });
+    expect(next.audit.at(-1)!.detail).toMatch(/override/i);
+    expect(next.requests.find(r => r.id === ALE_DIV)!.evidence[0].amountCents).toBeNull();
+  });
+  it('surfaces workflow errors unchanged (closing balance conflict)', () => {
+    let s = recordIntakeProposal(family(), proposal());
+    s = applyIntakeDocument(s, 'intake-1', 0, { requestId: TR_BANK, amountCents: 10812500, description: 'first' });
+    const second = recordIntakeProposal(s, proposal({ id: 'intake-2', attachmentIndex: 1, fileHash: 'b'.repeat(64) }));
+    expect(() => applyIntakeDocument(second, 'intake-2', 0, { requestId: TR_BANK, amountCents: 100, description: 'second' })).toThrow(/closing balance/i);
+  });
+  it('refuses a rejected proposal, an unknown document or an empty description', () => {
+    const s = rejectIntakeProposal(recordIntakeProposal(family(), proposal()), 'intake-1', 'wrong family');
+    expect(() => applyIntakeDocument(s, 'intake-1', 0, { requestId: TR_BANK, amountCents: null, description: 'x' })).toThrow(/rejected/i);
+    const open = recordIntakeProposal(family(), proposal());
+    expect(() => applyIntakeDocument(open, 'intake-1', 3, { requestId: TR_BANK, amountCents: null, description: 'x' })).toThrow(/document/i);
+    expect(() => applyIntakeDocument(open, 'intake-1', 0, { requestId: TR_BANK, amountCents: null, description: '  ' })).toThrow();
+  });
+});
+
+describe('rejectIntakeProposal', () => {
+  it('marks the proposal rejected with the note and logs it', () => {
+    const next = rejectIntakeProposal(recordIntakeProposal(family(), proposal()), 'intake-1', 'Belongs to another client');
+    expect(next.intake![0].review).toMatchObject({ status: 'rejected', note: 'Belongs to another client' });
+    expect(next.intake![0].review.decidedAt).not.toBe('');
+    expect(next.audit.at(-1)).toMatchObject({ action: 'intake_rejected' });
   });
 });

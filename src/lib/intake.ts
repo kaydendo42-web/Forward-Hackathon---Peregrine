@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import type { IntakeDocument, IntakeFlags, IntakeProposal, Workspace } from '../core/types';
+import type { CollectionRequest, EvidenceInput, IntakeDocument, IntakeFlags, IntakeProposal, Workspace } from '../core/types';
+import { logEvent, receiveEvidence } from '../core/workflow';
 
 // Pure core for attachment intake: what the model is asked, how its reply is read, how
 // code checks a proposal and how an adviser's acceptance maps onto existing transitions.
@@ -156,4 +157,69 @@ export function verifyIntake(documents: RawIntakeDocument[], context: IntakeCont
     };
     return { ...doc, flags };
   });
+}
+
+export function intakeDocumentId(fileHash: string, docIndex: number) {
+  return `intake-${fileHash.slice(0, 16)}-${docIndex}`;
+}
+
+function auditEntity(proposal: IntakeProposal) {
+  return proposal.documents.find(d => d.flags.targetValid)?.proposedEntityId || proposal.documents[0]?.proposedEntityId || 'unassigned';
+}
+
+/** Saves a read attachment as a pending proposal. Replaces an earlier pending one for the same attachment. */
+export function recordIntakeProposal(state: Workspace, proposal: IntakeProposal): Workspace {
+  const clean = intakeProposalSchema.parse(proposal);
+  const kept = (state.intake ?? []).filter(p => !(p.messageId === clean.messageId && p.attachmentIndex === clean.attachmentIndex && p.review.status === 'pending'));
+  if (kept.length >= 500) throw new Error('Too many intake proposals are saved in this browser. Reject or accept some first.');
+  const next = { ...state, intake: [...kept, clean] };
+  return logEvent(next, auditEntity(clean), 'intake_read',
+    `${clean.filename} read by ${clean.model} (prompt ${clean.promptVersion}, sha256 ${clean.fileHash.slice(0, 16)}): ${clean.documents.length} document(s) proposed. Nothing applied.`);
+}
+
+function getProposal(state: Workspace, proposalId: string) {
+  const proposal = (state.intake ?? []).find(p => p.id === proposalId);
+  if (!proposal) throw new Error('Intake proposal not found in this workspace.');
+  return proposal;
+}
+
+/** The request already holding this document, if the adviser accepted it earlier. */
+export function linkedRequestFor(state: Workspace, proposal: IntakeProposal, docIndex: number): CollectionRequest | undefined {
+  const id = intakeDocumentId(proposal.fileHash, docIndex);
+  return state.requests.find(r => r.evidence.some(e => e.documentId === id));
+}
+
+/**
+ * Adviser accepts one document onto one request. Request-owned fields are copied from the
+ * chosen request so `receiveEvidence`'s equality checks hold; the adviser's figure and
+ * description win over the model's.
+ */
+export function applyIntakeDocument(state: Workspace, proposalId: string, docIndex: number,
+  choice: { requestId: string; amountCents: number | null; description: string }): Workspace {
+  const proposal = getProposal(state, proposalId);
+  if (proposal.review.status === 'rejected') throw new Error('This proposal was rejected; read the attachment again to reconsider it.');
+  const doc = proposal.documents[docIndex];
+  if (!doc) throw new Error('Proposed document not found.');
+  const request = state.requests.find(r => r.id === choice.requestId);
+  if (!request) throw new Error('Request not found in this workspace.');
+  const description = choice.description.trim();
+  if (!description) throw new Error('Evidence description is required.');
+  const input: EvidenceInput = {
+    documentId: intakeDocumentId(proposal.fileHash, docIndex), lineId: request.lineId, entityId: request.entityId, financialYear: request.financialYear,
+    component: request.component, currency: request.currency, basis: request.basis, amountCents: choice.amountCents,
+    description, filename: proposal.filename, fileHash: proposal.fileHash,
+  };
+  const linked = receiveEvidence(state, request.id, input);
+  const override = request.id !== doc.proposedRequestId;
+  const decided = { ...proposal, review: { status: 'accepted' as const, decidedAt: new Date().toISOString(), note: proposal.review.note } };
+  const next = { ...linked, intake: (linked.intake ?? []).map(p => p.id === proposalId ? decided : p) };
+  return logEvent(next, request.entityId, 'intake_accepted',
+    `${proposal.filename} document ${docIndex + 1} (${doc.docType || 'document'}) accepted by adviser onto ${request.lineId}${override ? ` — adviser override; model proposed ${doc.proposedRequestId || 'no target'}` : ''}. Model ${proposal.model}, prompt ${proposal.promptVersion}, sha256 ${proposal.fileHash.slice(0, 16)}, proposal ${proposal.id}.`);
+}
+
+export function rejectIntakeProposal(state: Workspace, proposalId: string, note: string): Workspace {
+  const proposal = getProposal(state, proposalId);
+  const decided = { ...proposal, review: { status: 'rejected' as const, decidedAt: new Date().toISOString(), note: note.trim().slice(0, 1000) } };
+  const next = { ...state, intake: (state.intake ?? []).map(p => p.id === proposalId ? decided : p) };
+  return logEvent(next, auditEntity(proposal), 'intake_rejected', `${proposal.filename} rejected by adviser${decided.review.note ? `: ${decided.review.note}` : '.'}`);
 }
