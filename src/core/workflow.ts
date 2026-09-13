@@ -69,6 +69,13 @@ export function startSeason(state: Workspace, entityId: string): Workspace {
   return change({ ...state, requests: [...state.requests, ...requests] }, entityId, 'season_started', `Created ${requests.length} FY${year} requests from ${pack.workbookId}; current amounts remain blank.`);
 }
 
+/** startSeason for every imported entity in the group that has no FY26 requests yet. */
+export function startFamilySeason(state: Workspace, entityIds: string[]): Workspace {
+  const pending = entityIds.filter(id => state.baselines.some(b => b.entityId === id) && !state.requests.some(r => r.entityId === id));
+  if (!pending.length) throw new Error('Every imported entity already has FY26 requests.');
+  return pending.reduce((next, id) => startSeason(next, id), state);
+}
+
 export function addPlanningRequest(state: Workspace, entityId: string, label: string, note: string) {
   const current = state.requests.find(r => r.entityId === entityId);
   if (!current) throw new Error('Start the collection season first.');

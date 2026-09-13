@@ -71,3 +71,16 @@ describe('queueGroupOutreach', () => {
     expect(draft.subject).toContain('(1 entity)');
   });
 });
+
+describe('startFamilySeason', () => {
+  it('starts the season for every imported entity without requests, and only those', () => {
+    let s = workflow.importBaseline(workflow.createWorkspace(), baseline);
+    s = workflow.importBaseline(s, trust);
+    s = workflow.startSeason(s, 'alex-taylor');
+    const before = s.requests.length;
+    const next = workflow.startFamilySeason(s, taylor.entityIds);
+    expect(next.requests.filter(r => r.entityId === 'taylor-family-trust').length).toBe(2);
+    expect(next.requests.filter(r => r.entityId === 'alex-taylor').length).toBe(before);
+    expect(() => workflow.startFamilySeason(next, taylor.entityIds)).toThrow(/already/);
+  });
+});

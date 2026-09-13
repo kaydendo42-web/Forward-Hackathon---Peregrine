@@ -170,6 +170,8 @@ export default function Workspace() {
           <button disabled={!ready || busy} onClick={() => void run(loadFamily, '4 baselines imported')}>Load synthetic family</button>
           <label className="file-button">Import FY25 workbook<input aria-label="FY25 workbook" disabled={!ready || busy} type="file" accept=".xlsx" onChange={e => { const f = e.target.files?.[0]; e.target.value = ''; if (f) void run(() => uploadBaseline(f)); }} /></label>
           <button disabled={!baseline || busy || !!requests.length} onClick={() => act(s => flow.startSeason(s, entityId), 'FY26 requests generated. Current-year amounts are blank.')}>Generate FY26 requests</button>
+          {group && !clientView && <button disabled={busy || !group.entityIds.some(id => state.baselines.some(b => b.entityId === id) && !state.requests.some(r => r.entityId === id))}
+            onClick={() => act(s => flow.startFamilySeason(s, group.entityIds), 'FY26 requests generated for every imported entity in the family.')}>Generate FY26 for whole family</button>}
           <span className="version">Workspace v{state.version}</span>
         </section>}
         {candidate && <section className="import-preview"><h2>Review baseline import</h2><p>{candidate.entityName} · FY{candidate.financialYear} · {candidate.lines.length} workpaper lines. Values stay in the prior-year column.</p>
