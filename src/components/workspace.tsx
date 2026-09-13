@@ -10,6 +10,7 @@ import { RequestPanel } from './request-panel';
 import { AssistPanel } from './assist-panel';
 import { SendDraft } from './send-draft';
 import { InboxPanel } from './inbox-panel';
+import { FamilyTree } from './family-tree';
 import { GuidancePanel } from './guidance-panel';
 import { checkInbox, importReplies } from '../lib/inbox';
 import { buildIntakeContext, recordIntakeProposal } from '../lib/intake';
@@ -151,10 +152,8 @@ export default function Workspace() {
     <div className="demo-warning">Synthetic data only. Saved in this browser, not a shared client portal. Email and AI require configuration. No tax advice or lodgment.</div>
     <div className="workspace-layout">
       <aside className="sidebar" aria-label="Family entities">
-        <p className="eyebrow">Taylor family group</p>
-        {allEntities.map(entity => <button key={entity.id} className={`entity-button ${entity.id === entityId ? 'active' : ''}`} onClick={() => selectEntity(entity.id)} aria-pressed={entity.id === entityId}>
-          <strong>{entity.name}</strong><span>{entity.type} · {state.baselines.some(b => b.entityId === entity.id) ? 'FY25 imported' : 'No baseline'}</span>
-        </button>)}
+        <FamilyTree state={state} group={group} entities={allEntities} entityId={entityId} selectedId={selectedId} clientView={clientView}
+          selectEntity={selectEntity} openRequest={(id, requestId) => { if (id !== entityId) selectEntity(id); setSelectedId(requestId); setTab('Requests'); }} />
         <div className="sidebar-bottom"><strong>Optional email and AI</strong><p>Drive and Xero are not connected.</p><button className="text-button" onClick={() => setTab('Connections')}>Setup plan</button></div>
       </aside>
       <main>

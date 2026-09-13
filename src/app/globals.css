@@ -148,3 +148,22 @@ footer>button { float:right; }
 .intake-amounts th, .intake-amounts td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--line); }
 .intake-flag { margin: 0.25rem 0; }
 @media (max-width: 480px) { .intake-facts { grid-template-columns: 1fr; } }
+
+/* Family tree (sidebar) */
+.tree-root { padding: 0 10px 10px; }
+.tree-liaison { font-size: 12px; margin: 4px 0; }
+.tree-liaison small { color: var(--muted); }
+.tree-totals { font-size: 11px; color: var(--muted); margin: 4px 0 8px; }
+.tree-entities, .tree-lines { list-style: none; margin: 0; padding: 0; }
+.tree-entity.missing > .entity-button span { color: var(--alert); }
+.tree-lines { margin: -4px 0 10px 14px; border-left: 1px solid var(--line); padding-left: 8px; }
+.tree-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; width: 100%; text-align: left; border: 1px solid transparent; background: none; padding: 5px 6px; font-size: 12px; font-weight: 400; border-radius: 4px; }
+.tree-line.active { background: var(--tint); border-color: #bacddd; }
+.tree-line .tree-label { flex: 1 1 auto; }
+.tree-line small { flex-basis: 100%; padding-left: 14px; color: var(--muted); font-size: 11px; }
+.tree-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: 0 0 auto; }
+.tree-line.status-awaiting .tree-dot { background: var(--alert); }
+.tree-line.status-followUp .tree-dot { background: #b26a00; }
+.tree-line.status-review .tree-dot, .tree-line.status-difference .tree-dot { background: var(--blue); }
+.tree-line.status-done .tree-dot { background: #2e7d32; }
+.tree-line.status-paused .tree-dot { background: var(--line); }
