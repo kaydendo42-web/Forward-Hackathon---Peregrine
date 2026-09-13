@@ -2,11 +2,13 @@ import { z } from 'zod';
 import { createWorkspace } from '../core/workflow';
 import type { Workspace } from '../core/types';
 import { inboxMessageSchema, inboxReceiptSchema } from './inbox';
+import { guidanceProposalSchema } from './guidance';
 
 export const STORAGE_KEY = 'peregrine-synthetic-workspace-v1';
 const text = z.string().max(8000), money = z.number().int().min(-1e12).max(1e12).nullable();
 const line = z.object({ id: text, category: text, label: text, component: text, amountCents: money,
-  currency: text, basis: text, sourceRef: text, recurrence: z.literal('annual'), requestText: text });
+  currency: text, basis: text, sourceRef: text, recurrence: z.literal('annual'), requestText: text,
+  methodVersion: text.optional() });
 const baseline = z.object({ workbookId: text, entityId: text, entityName: text, entityType: z.enum(['individual', 'company', 'trust']),
   financialYear: z.literal(2025), baselineVersion: z.number().int().positive(), synthetic: z.literal(true), lines: z.array(line).max(200) });
 const evidence = z.object({ documentId: text, lineId: text, entityId: text, financialYear: z.number().int(),
@@ -21,7 +23,10 @@ const schema = z.object({ schemaVersion: z.literal(1), version: z.number().int()
   outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded', 'sent']),
     requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000),
     to: text.optional(), messageId: text.optional(), sentAt: text.optional() })).max(1000),
-  audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000) });
+  audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000),
+  // Optional, not defaulted: workspaces saved before the guidance track still load, and
+  // one without proposals round-trips unchanged rather than gaining an empty array.
+  guidance: z.array(guidanceProposalSchema).max(500).optional() });
 
 export function parseSavedWorkspace(raw: string | null): Workspace {
   if (raw === null) return createWorkspace();

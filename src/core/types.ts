@@ -3,6 +3,8 @@ export type Decision = 'accepted' | 'not_applicable' | 'follow_up';
 export type BaselineLine = {
   id: string; category: string; label: string; component: string; amountCents: number | null;
   currency: string; basis: string; sourceRef: string; recurrence: 'annual'; requestText: string;
+  // Set only once an adviser accepts a guidance proposal for this line; absent means demo-method-1.
+  methodVersion?: string;
 };
 export type Baseline = {
   workbookId: string; entityId: string; entityName: string; entityType: EntityType;
@@ -34,7 +36,21 @@ export type InboxMessage = {
   attachments: { filename: string; size: number; contentType: string }[];
 };
 export type InboxReceipt = { messageId: string; requestId: string; acceptedAt: string; answer: string };
+export type SourceStatus = 'final_guidance' | 'draft' | 'announcement' | 'synthetic_fixture';
+/**
+ * A proposed change to one baseline line's request wording, traced to the passage it
+ * came from. Only `proposedText`, `sourceId`, `quote`, `appliesToEntityTypes`,
+ * `appliesToYears` and `rationale` come from the model; the rest is filled in by code.
+ */
+export type GuidanceProposal = {
+  lineId: string; currentText: string; proposedText: string; sourceId: string; quote: string;
+  appliesToEntityTypes: EntityType[]; appliesToYears: number[]; sourceStatus: SourceStatus;
+  rationale: string; retrievedAt: string; sourceHash: string; model: string; promptVersion: string;
+  createdAt: string; review: { status: 'pending' | 'accepted' | 'rejected'; reviewer: string; decidedAt: string };
+};
 export type Workspace = {
   schemaVersion: 1; version: number; baselines: Baseline[]; requests: CollectionRequest[];
   outbox: Draft[]; audit: AuditEvent[]; inbox: InboxMessage[]; inboxReceipts: InboxReceipt[];
+  // Absent in workspaces saved before the guidance track existed.
+  guidance?: GuidanceProposal[];
 };

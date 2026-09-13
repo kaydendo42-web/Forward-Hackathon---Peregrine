@@ -1,0 +1,27 @@
+[
+  {
+    "lineId": "ALE-DIV-CREDIT",
+    "currentText": "Provide the franking credit component on the current-year dividend statements.",
+    "proposedText": "Provide the franking credit component from your current-year dividend statements, including any TFN amounts withheld from unfranked dividends.",
+    "sourceId": "ato-itr-2026-dividends",
+    "quote": "amounts of franking credits - TFN amounts withheld from unfranked dividends. Franking credits are amounts of tax paid by the company that are allocated to your dividend or distribution.",
+    "appliesToEntityTypes": [
+      "individual"
+    ],
+    "appliesToYears": [
+      2026
+    ],
+    "sourceStatus": "final_guidance",
+    "rationale": "Current wording only asks for franking credits. The guidance also requires TFN amounts withheld from unfranked dividends to be included in the unfranked dividend amount, which the current text omits.",
+    "retrievedAt": "2026-09-13T07:40:02.181Z",
+    "sourceHash": "756645e2f318238040bb63a4f34fcb1e55089859dfcb7059ab02d39f71280bc8",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "promptVersion": "guidance-1",
+    "createdAt": "2026-09-13T08:20:34.900Z",
+    "review": {
+      "status": "pending",
+      "reviewer": "",
+      "decidedAt": ""
+    }
+  }
+]

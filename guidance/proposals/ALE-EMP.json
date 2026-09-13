@@ -1,0 +1,27 @@
+[
+  {
+    "lineId": "ALE-EMP",
+    "currentText": "Provide your current-year income statement and confirm any change of employer.",
+    "proposedText": "Provide your current-year income statement and confirm any change of employer. Include allowances, bonuses, commissions and any other payment type indicator amounts at question 2 if shown on your income statement.",
+    "sourceId": "ato-itr-2026-salary-wages",
+    "quote": "Declare at this question income from salary or wages where tax was withheld, this includes: - salary and wages - commissions - bonuses - money from part-time or casual work - parental leave pay - amounts for lost salary or wages paid under - an income protection policy - a sickness or accident insurance policy - a workers compensation scheme - foreign employment",
+    "appliesToEntityTypes": [
+      "individual"
+    ],
+    "appliesToYears": [
+      2026
+    ],
+    "sourceStatus": "final_guidance",
+    "rationale": "Current wording only asks for income statement and employer change. Passage requires declaration of all salary or wages components including allowances, bonuses, commissions and other payment types at question 1 or 2, which the current text omits.",
+    "retrievedAt": "2026-09-13T07:40:01.944Z",
+    "sourceHash": "fa9116db33621ebc307d648d509216cb325515388d9a71a927bcb8d3790b6422",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "promptVersion": "guidance-1",
+    "createdAt": "2026-09-13T08:29:59.351Z",
+    "review": {
+      "status": "pending",
+      "reviewer": "",
+      "decidedAt": ""
+    }
+  }
+]

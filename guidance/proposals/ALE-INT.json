@@ -1,0 +1,27 @@
+[
+  {
+    "lineId": "ALE-INT",
+    "currentText": "Provide the current-year annual interest summary and confirm account ownership.",
+    "proposedText": "Provide the current-year annual interest summary and confirm account ownership. Include TFN withholding amounts shown on the statement.",
+    "sourceId": "ato-itr-2026-gross-interest",
+    "quote": "You must show these amounts as gross interest in your tax return.",
+    "appliesToEntityTypes": [
+      "individual"
+    ],
+    "appliesToYears": [
+      2026
+    ],
+    "sourceStatus": "final_guidance",
+    "rationale": "The passage requires TFN withholding amounts to be shown as gross interest, but the current wording only asks to confirm account ownership, potentially missing TFN evidence.",
+    "retrievedAt": "2026-09-13T07:40:02.100Z",
+    "sourceHash": "56d981c263035ce89c0682464fbb7298444889915fe5fe7d351385f1002735a2",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "promptVersion": "guidance-1",
+    "createdAt": "2026-09-13T08:33:05.094Z",
+    "review": {
+      "status": "pending",
+      "reviewer": "",
+      "decidedAt": ""
+    }
+  }
+]
