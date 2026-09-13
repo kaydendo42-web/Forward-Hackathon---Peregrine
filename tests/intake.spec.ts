@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { readFile as readFileAsync } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 import ExcelJS from 'exceljs';
 
@@ -52,7 +51,7 @@ test('reply attachment → read → mismatch blocks accept → adviser override 
 
   // The accepted photo lands in the exported FY26 workbook: Evidence row + embedded image.
   const [exported] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export review workbook' }).click()]);
-  const book = new ExcelJS.Workbook(); await book.xlsx.load(await readFileAsync(await exported.path() as string));
+  const book = new ExcelJS.Workbook(); await book.xlsx.readFile((await exported.path())!);
   const evidenceRows = book.getWorksheet('Evidence')!.getSheetValues().slice(2).map(r => (r as unknown[]).slice(1));
   expect(evidenceRows.some(r => r[1] === 'TR-BANK' && r[3] === 'statement.jpg' && String(r[4]).startsWith('Reply attachment'))).toBe(true);
   expect(book.getWorksheet('Attachments')!.getImages()).toHaveLength(1);
