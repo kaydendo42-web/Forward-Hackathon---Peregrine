@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { PDFParse } from 'pdf-parse';
 import type { ChatMessage } from './intake';
 
 // Server-only helpers for attachment intake: identify bytes, shrink an image to what NIM
@@ -43,6 +42,12 @@ export async function prepareImage(bytes: Buffer): Promise<{ kind: 'image'; jpeg
 /** Text layer of the first 20 pages. A scanned PDF has none and is refused here rather than guessed at. */
 export async function preparePdf(bytes: Buffer): Promise<{ kind: 'text'; text: string }> {
   let text = '';
+  // pdf.js references DOMMatrix at module load and the serverless Node runtime has none; a
+  // stub is enough because text extraction never draws. Loaded lazily so a photo-only
+  // deployment never evaluates pdf.js at all.
+  const globals = globalThis as { DOMMatrix?: unknown };
+  globals.DOMMatrix ??= class DOMMatrix {};
+  const { PDFParse } = await import('pdf-parse');
   const parser = new PDFParse({ data: new Uint8Array(bytes) });
   try { text = (await parser.getText({ first: 20 })).text ?? ''; }
   catch { throw new IntakePrepareError('The attachment could not be read as a PDF.'); }
