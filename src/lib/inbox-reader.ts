@@ -8,6 +8,8 @@ const MAX_ATTACHMENTS = 30;
 const MAX_REFERENCES = 100;
 const MAX_HEADER_BYTES = 128 * 1_024;
 const DEFAULT_TIMEOUT_MS = 24_000;
+export const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024;
+export const ALLOWED_ATTACHMENT_TYPES = new Set(['image/jpeg', 'image/png', 'application/pdf']);
 
 export type InboxClientOptions = {
   host: 'imap.gmail.com';
@@ -77,8 +79,12 @@ export type InboxMessage = {
 export type InboxResult = { messages: InboxMessage[]; checkedAt: string };
 
 export class InboxReadError extends Error {
-  constructor(readonly code: 'configuration' | 'provider' | 'timeout') {
-    super(code === 'timeout' ? 'The inbox check timed out.' : code === 'configuration' ? 'Inbox access is not configured.' : 'The inbox could not be checked.');
+  constructor(readonly code: 'configuration' | 'provider' | 'timeout' | 'not_found' | 'too_large' | 'unsupported_type') {
+    super({
+      timeout: 'The inbox check timed out.', configuration: 'Inbox access is not configured.', provider: 'The inbox could not be checked.',
+      not_found: 'That attachment was not found among allowed replies from the last 30 days.',
+      too_large: 'That attachment is larger than 8 MB.', unsupported_type: 'Only JPEG, PNG and PDF attachments can be read.',
+    }[code]);
     this.name = 'InboxReadError';
   }
 }
@@ -123,8 +129,9 @@ function messageIds(values: string[]) {
 
 function inspectStructure(root: BodyNode | undefined) {
   const attachments: InboxMessage['attachments'] = [];
+  const parts: string[] = [];   // IMAP part id per attachment, same order as `attachments`
   let textPart: string | null = null;
-  if (!root) return { attachments, textPart };
+  if (!root) return { attachments, parts, textPart };
 
   const pending = [root];
   let inspected = 0;
@@ -143,12 +150,13 @@ function inspectStructure(root: BodyNode | undefined) {
         size: Number.isFinite(node.size) ? Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, Math.floor(node.size!))) : 0,
         contentType: type || 'application/octet-stream',
       });
+      parts.push(node.part || '1');
     }
 
     if (!textPart && type === 'text/plain' && !isAttachment && disposition !== 'attachment') textPart = node.part || '1';
     if (!isAttachment && node.childNodes?.length) pending.push(...node.childNodes);
   }
-  return { attachments, textPart };
+  return { attachments, parts, textPart };
 }
 
 async function boundedText(stream: NodeJS.ReadableStream & { destroy?: () => void }) {
@@ -241,12 +249,11 @@ async function collectMessages(client: InboxClient, senders: string[], now: Date
   return output;
 }
 
-export async function readGmailInbox(config: ReaderConfig, dependencies: ReaderDependencies = {}): Promise<InboxResult> {
+async function withClient<T>(config: ReaderConfig, dependencies: ReaderDependencies, operation: (client: InboxClient, senders: string[], now: Date) => Promise<T>): Promise<T> {
   const senders = allowedAddresses(config.allowedSenders);
   if (!config.user || !config.pass || !senders.length) throw new InboxReadError('configuration');
-
-  const now = dependencies.now?.() ?? new Date();
-  const checkedAt = Number.isFinite(now.getTime()) ? now.toISOString() : new Date().toISOString();
+  const raw = dependencies.now?.() ?? new Date();
+  const now = Number.isFinite(raw.getTime()) ? raw : new Date();
   const options: InboxClientOptions = {
     host: 'imap.gmail.com', port: 993, secure: true, logger: false, disableAutoIdle: true,
     auth: { user: config.user, pass: config.pass }, connectionTimeout: 8_000, greetingTimeout: 8_000, socketTimeout: 15_000,
@@ -258,24 +265,17 @@ export async function readGmailInbox(config: ReaderConfig, dependencies: ReaderD
   });
   const timeoutMs = Math.min(Math.max(1, dependencies.timeoutMs ?? DEFAULT_TIMEOUT_MS), DEFAULT_TIMEOUT_MS);
   let timer: ReturnType<typeof setTimeout> | undefined;
-
-  const operation = async () => {
-    await client.connect();
-    await client.mailboxOpen('INBOX', { readOnly: true });
-    const messages = await collectMessages(client, senders, new Date(checkedAt));
-    await client.logout();
-    return { messages, checkedAt };
-  };
-
   const deadline = new Promise<never>((_, reject) => {
-    timer = setTimeout(() => {
-      client.close();
-      reject(new InboxReadError('timeout'));
-    }, timeoutMs);
+    timer = setTimeout(() => { client.close(); reject(new InboxReadError('timeout')); }, timeoutMs);
   });
-
   try {
-    return await Promise.race([operation(), deadline]);
+    return await Promise.race([(async () => {
+      await client.connect();
+      await client.mailboxOpen('INBOX', { readOnly: true });
+      const result = await operation(client, senders, now);
+      await client.logout();
+      return result;
+    })(), deadline]);
   } catch (error) {
     client.close();
     if (error instanceof InboxReadError) throw error;
@@ -283,4 +283,47 @@ export async function readGmailInbox(config: ReaderConfig, dependencies: ReaderD
   } finally {
     if (timer) clearTimeout(timer);
   }
+}
+
+export async function readGmailInbox(config: ReaderConfig, dependencies: ReaderDependencies = {}): Promise<InboxResult> {
+  return withClient(config, dependencies, async (client, senders, now) => ({ messages: await collectMessages(client, senders, now), checkedAt: now.toISOString() }));
+}
+
+async function boundedBytes(stream: NodeJS.ReadableStream & { destroy?: () => void }, limit: number) {
+  const chunks: Buffer[] = []; let bytes = 0;
+  for await (const value of stream) {
+    const chunk = Buffer.isBuffer(value) ? value : Buffer.from(value);
+    bytes += chunk.length;
+    if (bytes > limit) { stream.destroy?.(); throw new InboxReadError('too_large'); }
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks, bytes);
+}
+
+/** One attachment of one allow-listed reply, by Message-ID and listing index. Read-only; never marks or deletes mail. */
+export async function downloadGmailAttachment(config: ReaderConfig, messageId: string, index: number, dependencies: ReaderDependencies = {}) {
+  if (!validMessageId(messageId) || !Number.isInteger(index) || index < 0 || index >= MAX_ATTACHMENTS) throw new InboxReadError('not_found');
+  return withClient(config, dependencies, async (client, senders, now) => {
+    const found = await client.search({ header: { 'message-id': messageId.trim() } }, { uid: true });
+    const uids = Array.isArray(found) ? found.filter(uid => Number.isSafeInteger(uid) && uid > 0).slice(0, 5) : [];
+    if (!uids.length) throw new InboxReadError('not_found');
+    const fetched = await client.fetchAll(uids, { envelope: true, internalDate: true, bodyStructure: true }, { uid: true });
+    const allowed = new Set(senders);
+    const since = now.getTime() - THIRTY_DAYS_MS;
+    const message = fetched.find(m => {
+      const from = m.envelope?.from;
+      return m.envelope?.messageId?.trim() === messageId.trim() && from?.length === 1 && typeof from[0].address === 'string'
+        && allowed.has(from[0].address.trim().toLowerCase()) && receivedTime(m) >= since;
+    });
+    if (!message) throw new InboxReadError('not_found');
+    const { attachments, parts } = inspectStructure(message.bodyStructure);
+    const attachment = attachments[index], part = parts[index];
+    if (!attachment || !part) throw new InboxReadError('not_found');
+    if (!ALLOWED_ATTACHMENT_TYPES.has(attachment.contentType)) throw new InboxReadError('unsupported_type');
+    if (attachment.size > MAX_ATTACHMENT_BYTES) throw new InboxReadError('too_large');
+    const downloaded = await client.download(message.uid, part, { uid: true, maxBytes: MAX_ATTACHMENT_BYTES + 1, chunkSize: 64 * 1_024 });
+    if (!downloaded.content) throw new InboxReadError('provider');
+    const bytes = await boundedBytes(downloaded.content, MAX_ATTACHMENT_BYTES);
+    return { filename: attachment.filename, contentType: attachment.contentType, bytes };
+  });
 }
