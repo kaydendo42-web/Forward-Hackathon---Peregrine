@@ -4,12 +4,14 @@ import { useState } from 'react';
 import type { InboxMessage, Workspace } from '../core/types';
 import { acceptReply, matchReply } from '../lib/inbox';
 import { readPasscode, storePasscode } from '../lib/assist-client';
+import { IntakeReview } from './intake-review';
 
 type Props = { state: Workspace; entityId: string; busy: boolean;
   act: (operation: (s: Workspace) => Workspace, success?: string) => void;
-  check: (passcode: string) => void; openRequest: (id: string) => void };
+  check: (passcode: string) => void; openRequest: (id: string) => void;
+  readAttachments: (passcode: string, message: InboxMessage) => void; progress: string };
 
-function ReplyCard({ message, state, entityId, busy, act, openRequest }: Omit<Props, 'check'> & { message: InboxMessage }) {
+function ReplyCard({ message, state, entityId, busy, act, openRequest, readAttachments, progress }: Omit<Props, 'check'> & { message: InboxMessage }) {
   const draft = matchReply(state, message);
   const requests = state.requests.filter(r => draft ? draft.requestIds.includes(r.id) : r.entityId === entityId);
   const suggested = draft ? requests.find(r => r.lineId === 'CHANGES') ?? requests[0] : undefined;
@@ -26,7 +28,15 @@ function ReplyCard({ message, state, entityId, busy, act, openRequest }: Omit<Pr
     <p className="hint">{draft ? `Matched to: ${draft.subject}. Choose the request this reply answers.` : `Unmatched reply. Confirm it belongs to ${entityName} before assigning it.`}</p>
     <details><summary>Original email text and reference</summary><p className="hint">{message.messageId}</p><pre>{message.text || 'No plain-text body available. Read the original email in the firm mailbox.'}</pre></details>
     {message.textTruncated && <p className="callout">Only part of this email was retrieved. Read the complete email in the firm mailbox before accepting an answer.</p>}
-    {!!message.attachments.length && <div><strong>Attachments listed only</strong><ul>{message.attachments.map((a, i) => <li key={i}>{a.filename || '(Unnamed attachment)'} · {a.contentType} · {a.size.toLocaleString()} bytes</li>)}</ul><p className="hint">Attachment contents have not been downloaded or accepted. Save a CSV from the firm mailbox and upload it under its request; statement text can be pasted into AI assist for a proposal.</p></div>}
+    {!!message.attachments.length && <div className="intake-list">
+      <strong>Attachments</strong>
+      <ul>{message.attachments.map((a, i) => <li key={i}>{a.filename || '(Unnamed attachment)'} · {a.contentType} · {a.size.toLocaleString()} bytes</li>)}</ul>
+      <button disabled={busy} onClick={() => readAttachments(readPasscode(), message)}>Read {message.attachments.length} attachment{message.attachments.length === 1 ? '' : 's'}</button>
+      {progress && <p className="hint" role="status">{progress}</p>}
+      <p className="hint">Each file is downloaded once, read by the vision model and shown as a proposal. Nothing is linked until you accept it.</p>
+      {(state.intake ?? []).filter(p => p.messageId === message.messageId).sort((a, b) => a.attachmentIndex - b.attachmentIndex)
+        .map(p => <IntakeReview key={p.id} state={state} proposal={p} busy={busy} act={act} openRequest={openRequest} />)}
+    </div>}
     <label>Assign reply to request<select value={requestId} disabled={busy} onChange={e => { setRequestId(e.target.value); setManual(false); }}>
       <option value="">Select a request</option>{requests.map(r => <option key={r.id} value={r.id}>{r.label} · FY{r.financialYear}</option>)}
     </select></label>
@@ -50,7 +60,7 @@ export function InboxPanel(props: Props) {
     <p>Check the firm mailbox for replies from allowed demo clients in the last 30 days. The latest 50 are retrieved on demand. Matched replies appear under their entity; unmatched mail needs manual assignment.</p>
     <label>Inbox passcode<input type="password" autoComplete="off" value={passcode} onChange={e => { setPasscode(e.target.value); storePasscode(e.target.value); }} /></label>
     <button disabled={props.busy} onClick={() => props.check(passcode)}>Check inbox</button>
-    <p className="hint">Replies are proposals saved in this browser. Polling never marks mail read, deletes it, or changes client answers. Attachment contents are not retrieved.</p>
+    <p className="hint">Replies are proposals saved in this browser. Polling never marks mail read, deletes it, or changes client answers. Attachments are read only when you ask, one file at a time.</p>
     {!messages.length && <p className="empty">No replies saved for this entity. Send a draft from the Outbox, reply from the family mailbox, then check here.</p>}
     {[...messages].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).map(message => <ReplyCard key={`${props.entityId}:${message.messageId}`} {...props} message={message} />)}
   </section>;

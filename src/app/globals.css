@@ -134,3 +134,17 @@ footer>button { float:right; }
 .inbox-reply select { display:block; max-width:100%; width:100%; margin-top:5px; padding:9px 10px; background:white; color:var(--ink); border:1px solid #aebac6; border-radius:4px; }
 .inbox-reply select:focus-visible { outline:3px solid #327ebb; outline-offset:3px; }
 .inbox-reply>.text-button { display:block; margin-top:12px; }
+
+/* Attachment intake (Inbox) */
+.intake-list { margin-top: 0.75rem; }
+.intake-proposal { border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem; margin-top: 0.75rem; background: var(--paper); }
+.intake-proposal h3 small { font-weight: normal; color: var(--muted); }
+.intake-thumb { max-width: 100%; max-height: 320px; display: block; margin: 0.5rem 0; border: 1px solid var(--line); }
+.intake-document { border-top: 1px dashed var(--line); padding-top: 0.5rem; margin-top: 0.5rem; }
+.intake-facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.75rem; margin: 0.5rem 0; }
+.intake-facts dt { font-weight: 600; }
+.intake-facts dd { margin: 0; }
+.intake-amounts { width: 100%; border-collapse: collapse; margin: 0.5rem 0; }
+.intake-amounts th, .intake-amounts td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--line); }
+.intake-flag { margin: 0.25rem 0; }
+@media (max-width: 480px) { .intake-facts { grid-template-columns: 1fr; } }

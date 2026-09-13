@@ -36,7 +36,7 @@ test('sent request → matched reply → explicit acceptance → reload and dupl
   }] } }));
   await page.getByRole('button', { name: 'Check inbox' }).click();
   await expect(page.getByTestId('inbox-reply')).toContainText('Matched to:');
-  await expect(page.getByText('Attachments listed only')).toBeVisible();
+  await expect(page.getByRole('button', { name: /^Read \d+ attachments?$/ })).toBeVisible();   // attachments are listed; nothing downloaded until asked
   await page.getByRole('button', { name: 'Open request and AI assist' }).click();
   await expect(page.getByLabel('Client answer')).toHaveValue('');
   await page.getByRole('button', { name: 'Inbox', exact: true }).click();
