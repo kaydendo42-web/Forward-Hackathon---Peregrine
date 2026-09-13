@@ -1,4 +1,5 @@
 import type { Baseline, CollectionRequest, Decision, EvidenceInput, ReviewChange, SendReceipt, Workspace } from './types';
+import { greeting, type FamilyGroup } from './family';
 
 export const METHOD_VERSION = 'demo-method-1';
 
@@ -160,18 +161,53 @@ export function collectionStatus(req: CollectionRequest) {
   return 'Awaiting client';
 }
 
+const DEMO_FOOTER = '\n\nSYNTHETIC DEMO — fictional family group, no real client data. Please do not reply with real personal or financial information.';
+
+/** Requests still waiting on the client: unpaused, and either flagged for follow-up or untouched. */
+function outreachEligible(state: Workspace, entityId: string) {
+  return state.requests.filter(r => r.entityId === entityId && !r.paused &&
+    (r.review === 'follow_up' || (r.review === 'pending' && !r.answer && r.evidence.length === 0)));
+}
+function itemLines(requests: CollectionRequest[]) {
+  return requests.map((r, i) => `${i + 1}. ${r.question}${r.review === 'follow_up' ? `\n   Adviser clarification: ${r.reviewNote}` : ''}`).join('\n\n');
+}
+
+/**
+ * One email to the family's liaison covering every entity with outstanding items. Same
+ * eligibility as the per-entity draft; the draft's entityId is the group id so Outbox,
+ * Inbox and Activity can show it beside any member entity.
+ */
+export function queueGroupOutreach(state: Workspace, group: FamilyGroup, kind: 'initial' | 'reminder', now = new Date()) {
+  const sections = group.entityIds
+    .map(id => ({ entity: state.baselines.find(b => b.entityId === id), eligible: outreachEligible(state, id) }))
+    .filter((s): s is { entity: Baseline; eligible: CollectionRequest[] } => Boolean(s.entity) && s.eligible.length > 0);
+  const eligible = sections.flatMap(s => s.eligible);
+  if (!eligible.length) throw new Error('No unanswered requests need outreach in this family group. Responses and evidence await adviser review.');
+  const fingerprint = JSON.stringify([kind, group.id, eligible.map(r => [r.id, r.question, r.review, r.reviewNote])]);
+  if (state.outbox.some(d => d.groupId === group.id && d.fingerprint === fingerprint && d.status === 'draft')) return state;
+  const year = eligible[0].financialYear;
+  const body = `${greeting(group.liaison.firstName, kind, now)}\n\n` +
+    sections.map(s => `${s.entity.entityName}\n${itemLines(s.eligible)}`).join('\n\n') +
+    '\n\nIf an item no longer applies or a document is not yet available, just let us know. Reply to this email with documents attached and we will sort each one to the right entity for you.' +
+    `\n\nWarm regards,\nYour adviser at Peregrine${DEMO_FOOTER}`;
+  const count = sections.length;
+  return change({ ...state, outbox: [...state.outbox, {
+    id: `draft-${state.version + 1}`, entityId: group.id, groupId: group.id, kind, status: 'draft', requestIds: eligible.map(r => r.id),
+    subject: `FY${year} information ${kind === 'reminder' ? 'reminder' : 'request'} — ${group.name} (${count} ${count === 1 ? 'entity' : 'entities'})`, body, fingerprint,
+  }] }, group.id, 'outreach_drafted', `${kind} family draft to ${group.liaison.name} for ${eligible.length} requests across ${count} ${count === 1 ? 'entity' : 'entities'}. No email was sent.`);
+}
+
 export function queueOutreach(state: Workspace, entityId: string, kind: 'initial' | 'reminder') {
   const entity = state.baselines.find(b => b.entityId === entityId);
   if (!entity) throw new Error('Entity not found.');
-  const eligible = state.requests.filter(r => r.entityId === entityId && !r.paused &&
-    (r.review === 'follow_up' || (r.review === 'pending' && !r.answer && r.evidence.length === 0)));
+  const eligible = outreachEligible(state, entityId);
   if (!eligible.length) throw new Error('No unanswered requests need outreach. Responses and evidence await adviser review.');
   const fingerprint = JSON.stringify([kind, eligible.map(r => [r.id, r.question, r.review, r.reviewNote])]);
   if (state.outbox.some(d => d.entityId === entityId && d.fingerprint === fingerprint && d.status === 'draft')) return state;
   const year = eligible[0].financialYear;
   const body = `Hello ${entity.entityName},\n\n${kind === 'reminder' ? 'A reminder about the outstanding items' : 'We are collecting information'} for FY${year} (1 July ${year - 1}–30 June ${year}).\n\n` +
-    eligible.map((r, i) => `${i + 1}. ${r.question}${r.review === 'follow_up' ? `\n   Adviser clarification: ${r.reviewNote}` : ''}`).join('\n\n') +
-    '\n\nIf an item no longer applies or a document is not yet available, please tell us. Use your authorised document channel for sensitive records.\n\nYour adviser\n\nSYNTHETIC DEMO — fictional family group, no real client data. Please do not reply with real personal or financial information.';
+    itemLines(eligible) +
+    `\n\nIf an item no longer applies or a document is not yet available, please tell us. Use your authorised document channel for sensitive records.\n\nYour adviser${DEMO_FOOTER}`;
   return change({ ...state, outbox: [...state.outbox, {
     id: `draft-${state.version + 1}`, entityId, kind, status: 'draft', requestIds: eligible.map(r => r.id),
     subject: `FY${year} information ${kind === 'reminder' ? 'reminder' : 'request'} — ${entity.entityName}`, body, fingerprint,

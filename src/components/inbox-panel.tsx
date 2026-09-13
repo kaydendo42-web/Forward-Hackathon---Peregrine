@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { InboxMessage, Workspace } from '../core/types';
 import { acceptReply, matchReply } from '../lib/inbox';
 import { readPasscode, storePasscode } from '../lib/assist-client';
+import { groupFor } from '../core/family';
 import { IntakeReview } from './intake-review';
 
 type Props = { state: Workspace; entityId: string; busy: boolean;
@@ -25,7 +26,7 @@ function ReplyCard({ message, state, entityId, busy, act, openRequest, readAttac
   return <article className="draft inbox-reply" data-testid="inbox-reply">
     <h3>{message.subject || '(No subject)'}</h3>
     <p>{message.from} · {new Date(message.date).toLocaleString('en-AU')}</p>
-    <p className="hint">{draft ? `Matched to: ${draft.subject}. Choose the request this reply answers.` : `Unmatched reply. Confirm it belongs to ${entityName} before assigning it.`}</p>
+    <p className="hint">{draft ? `Matched to: ${draft.subject}${draft.groupId ? ' (family email — requests span entities)' : ''}. Choose the request this reply answers.` : `Unmatched reply. Confirm it belongs to ${entityName} before assigning it.`}</p>
     <details><summary>Original email text and reference</summary><p className="hint">{message.messageId}</p><pre>{message.text || 'No plain-text body available. Read the original email in the firm mailbox.'}</pre></details>
     {message.textTruncated && <p className="callout">Only part of this email was retrieved. Read the complete email in the firm mailbox before accepting an answer.</p>}
     {!!message.attachments.length && <div className="intake-list">
@@ -38,7 +39,7 @@ function ReplyCard({ message, state, entityId, busy, act, openRequest, readAttac
         .map(p => <IntakeReview key={p.id} state={state} proposal={p} busy={busy} act={act} openRequest={openRequest} />)}
     </div>}
     <label>Assign reply to request<select value={requestId} disabled={busy} onChange={e => { setRequestId(e.target.value); setManual(false); }}>
-      <option value="">Select a request</option>{requests.map(r => <option key={r.id} value={r.id}>{r.label} · FY{r.financialYear}</option>)}
+      <option value="">Select a request</option>{requests.map(r => <option key={r.id} value={r.id}>{draft?.groupId ? `${state.baselines.find(b => b.entityId === r.entityId)?.entityName ?? r.entityId}: ` : ''}{r.label} · FY{r.financialYear}</option>)}
     </select></label>
     {request?.answer && <details><summary>Existing client answer (will be kept)</summary><pre>{request.answer}</pre></details>}
     {accepted ? <p className="notice" data-testid="reply-accepted">Already accepted for this request.</p> : <>
@@ -54,7 +55,8 @@ function ReplyCard({ message, state, entityId, busy, act, openRequest, readAttac
 
 export function InboxPanel(props: Props) {
   const [passcode, setPasscode] = useState(readPasscode);
-  const messages = props.state.inbox.filter(m => { const draft = matchReply(props.state, m); return !draft || draft.entityId === props.entityId; });
+  const group = groupFor(props.entityId);
+  const messages = props.state.inbox.filter(m => { const draft = matchReply(props.state, m); return !draft || draft.entityId === props.entityId || (!!group && draft.groupId === group.id); });
   return <section aria-label="Family replies">
     <h2>Family replies</h2>
     <p>Check the firm mailbox for replies from allowed demo clients in the last 30 days. The latest 50 are retrieved on demand. Matched replies appear under their entity; unmatched mail needs manual assignment.</p>

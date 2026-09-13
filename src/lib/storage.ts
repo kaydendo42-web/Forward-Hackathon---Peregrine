@@ -23,7 +23,7 @@ const schema = z.object({ schemaVersion: z.literal(1), version: z.number().int()
   baselines: z.array(baseline).max(20), requests: z.array(request).max(1000),
   outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded', 'sent']),
     requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000),
-    to: text.optional(), messageId: text.optional(), sentAt: text.optional() })).max(1000),
+    to: text.optional(), messageId: text.optional(), sentAt: text.optional(), groupId: text.optional() })).max(1000),
   audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000),
   // Optional, not defaulted: workspaces saved before intake still load, and one without
   // proposals round-trips unchanged rather than gaining an empty array.

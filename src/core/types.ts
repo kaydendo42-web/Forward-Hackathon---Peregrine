@@ -27,6 +27,8 @@ export type Draft = {
   id: string; entityId: string; kind: 'initial' | 'reminder'; status: 'draft' | 'superseded' | 'sent';
   requestIds: string[]; subject: string; body: string; fingerprint: string;
   to?: string; messageId?: string; sentAt?: string;
+  // Set on a combined family-group email; entityId then holds the group id.
+  groupId?: string;
 };
 export type AuditEvent = { id: string; at: string; action: string; entityId: string; detail: string };
 export type ReviewChange = { requestId: string; decision: Decision; note: string };

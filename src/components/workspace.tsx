@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Baseline, InboxMessage, ReviewChange, Workspace as State } from '../core/types';
 import * as flow from '../core/workflow';
+import { groupFor } from '../core/family';
 import { parseMoney, readEvidenceCsv } from '../lib/evidence';
 import { commitWorkspace, keepOriginal, parseSavedWorkspace, readOriginal, sha256, STORAGE_KEY } from '../lib/storage';
 import { RequestPanel } from './request-panel';
@@ -52,6 +53,8 @@ export default function Workspace() {
     finally { locked.current = false; setBusy(false); }
   }
   function act(operation: (s: State) => State, success = 'Saved.') { void run(() => { const base = stateRef.current; persist(base, operation(base)); }, success); }
+  const group = groupFor(entityId);
+  const visibleDraft = (d: { entityId: string; groupId?: string }) => d.entityId === entityId || (!!group && d.groupId === group.id);
   function selectEntity(id: string) { setEntityId(id); setSelectedId(''); setCandidate(null); setReviewImport(null); setError(''); }
 
   async function loadFamily() {
@@ -171,14 +174,14 @@ export default function Workspace() {
           <ul>{candidate.lines.map(line => <li key={line.id}>{line.id}: {line.label} — {money(line.amountCents)}</li>)}</ul>
           <button disabled={busy} onClick={() => { const pack = candidate; act(s => flow.importBaseline(s, pack), 'Synthetic baseline confirmed.'); setEntityId(pack.entityId); setCandidate(null); }}>Confirm synthetic baseline</button><button onClick={() => setCandidate(null)}>Cancel import</button>
         </section>}
-        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox', 'Guidance'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
+        <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox', 'Guidance'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => visibleDraft(d) && d.status === 'draft').length})` : ''}</button>)}</nav>
         {tab === 'Inbox' && !clientView && <InboxPanel state={state} entityId={entityId} busy={busy} act={act} check={passcode => void run(() => fetchReplies(passcode))}
           readAttachments={(passcode, message) => void run(() => readAllAttachments(passcode, message))} progress={intakeProgress}
           openRequest={id => { setSelectedId(id); setTab('Requests'); }} />}
         {tab === 'Guidance' && !clientView && <GuidancePanel state={state} entityId={entityId} busy={busy} act={act} />}
         {tab === 'Requests' && <>
           <div className="section-heading"><div><h2>{requests.length ? `${accepted} of ${requests.length} requests reviewed` : 'Prepare the collection season'}</h2><p>{requests.length ? 'Evidence receipt and adviser acceptance are tracked separately.' : 'Download the workbooks below, or load the sample family. Then generate FY26 requests.'}</p></div>
-            {!clientView && requests.length > 0 && <div className="button-row"><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'initial'), 'Draft created. No email was sent.')}>Draft initial outreach</button><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'reminder'), 'Reminder draft created. No email was sent.')}>Draft reminder</button></div>}
+            {!clientView && requests.length > 0 && <div className="button-row"><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'initial'), 'Draft created. No email was sent.')}>Draft initial outreach</button><button disabled={busy} onClick={() => act(s => flow.queueOutreach(s, entityId, 'reminder'), 'Reminder draft created. No email was sent.')}>Draft reminder</button>{group && <><button disabled={busy} onClick={() => act(s => flow.queueGroupOutreach(s, group, 'initial'), `Family email drafted for ${group.liaison.name}. No email was sent.`)}>Draft family email</button><button disabled={busy} onClick={() => act(s => flow.queueGroupOutreach(s, group, 'reminder'), `Family reminder drafted for ${group.liaison.name}. No email was sent.`)}>Family reminder</button></>}</div>}
           </div>
           {requests.length > 0 && <div className="collection-grid"><div className="request-list">
             {requests.map(request => <article className={`request-row ${request.id === selected?.id ? 'selected' : ''}`} key={request.id}>
@@ -200,8 +203,8 @@ export default function Workspace() {
           </section>}
         </>}
         {tab === 'Outbox' && <section><h2>Draft outbox</h2><p>Drafts are generated on demand, not scheduled. Sending goes through Gmail SMTP to the verified demo inbox only; a response or changed request supersedes unsent drafts.</p>
-          {state.outbox.filter(d => d.entityId === entityId).length === 0 && <p className="empty">No drafts yet. Generate requests, then draft initial outreach.</p>}
-          {state.outbox.filter(d => d.entityId === entityId).toReversed().map(draft => <article className={`draft ${draft.status}`} key={draft.id}><h3>{draft.subject}</h3>
+          {state.outbox.filter(visibleDraft).length === 0 && <p className="empty">No drafts yet. Generate requests, then draft initial outreach or a family email.</p>}
+          {state.outbox.filter(visibleDraft).toReversed().map(draft => <article className={`draft ${draft.status}`} key={draft.id}><h3>{draft.subject}</h3>{draft.groupId && group && <p className="hint">Family group · one email to {group.liaison.name} ({group.liaison.role})</p>}
             <p data-testid="draft-status">{draft.status === 'draft' ? 'Draft — not sent' : draft.status === 'sent' ? `Sent to ${draft.to} · ${new Date(draft.sentAt ?? '').toLocaleString('en-AU')} · ${draft.messageId}` : 'Superseded — do not send'}</p>
             <pre>{draft.body}</pre>
             <div className="button-row"><button disabled={draft.status === 'superseded'} onClick={() => download(draft.body, `${draft.id}.txt`, 'text/plain')}>Download draft</button>{!clientView && <SendDraft draft={draft} busy={busy} send={sendMailDraft} />}</div></article>)}
@@ -211,7 +214,7 @@ export default function Workspace() {
           <h3>FY26 test evidence</h3><div className="sample-links">{fy26Samples.map(({ file, label }) => <a key={file} href={fy26Path(file)} download>{label}</a>)}</div>
           <p>CSV fixtures demonstrate structured extraction results. They are not genuine broker or bank documents. Arbitrary PDFs, images and invoices need a reviewed extraction stage in the next milestone.</p>
         </section>}
-        {tab === 'Activity' && <section><h2>Demo activity record</h2><p>Local workflow history, not a tamper-proof production audit trail.</p><ol className="audit-list">{state.audit.filter(e => e.entityId === entityId).toReversed().map(event => <li key={event.id}><strong>{event.action.replaceAll('_', ' ')}</strong><time>{new Date(event.at).toLocaleString('en-AU')}</time><p>{event.detail}</p></li>)}</ol></section>}
+        {tab === 'Activity' && <section><h2>Demo activity record</h2><p>Local workflow history, not a tamper-proof production audit trail.</p><ol className="audit-list">{state.audit.filter(e => e.entityId === entityId || (!!group && e.entityId === group.id)).toReversed().map(event => <li key={event.id}><strong>{event.action.replaceAll('_', ' ')}</strong><time>{new Date(event.at).toLocaleString('en-AU')}</time><p>{event.detail}</p></li>)}</ol></section>}
         {tab === 'Connections' && <section><h2>Connection plan</h2><table><thead><tr><th>System</th><th>Role</th><th>Current status</th></tr></thead><tbody>
           <tr><td>Vercel</td><td>Host the Next.js demo</td><td>This app is deployable without credentials or server-local storage.</td></tr>
           <tr><td>Supabase</td><td>Authenticated entity access, requests, evidence metadata and review events</td><td>Not connected. Browser-local storage is a demo adapter only.</td></tr>
