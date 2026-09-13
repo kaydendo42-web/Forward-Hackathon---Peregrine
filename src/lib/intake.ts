@@ -58,12 +58,26 @@ export function parseIntakeAmount(raw: unknown): number | null {
   return negative ? -value : value;
 }
 
-/** Pulls the first {...} block out of a possibly prose-wrapped reply and validates it. */
+/**
+ * Pulls the JSON out of a possibly prose-wrapped reply and validates it. The vision model
+ * sometimes answers with a bare array of documents, or prose around the object; both are accepted.
+ */
 export function parseIntakeReply(content: string): RawIntakeDocument[] {
-  const start = content.indexOf('{'), end = content.lastIndexOf('}');
-  if (start < 0 || end <= start) throw new Error('Model reply contained no JSON object.');
-  let parsed: unknown;
-  try { parsed = JSON.parse(content.slice(start, end + 1)); } catch { throw new Error('Model reply was not valid JSON.'); }
+  const candidates: string[] = [];
+  const objStart = content.indexOf('{'), objEnd = content.lastIndexOf('}');
+  const arrStart = content.indexOf('['), arrEnd = content.lastIndexOf(']');
+  if (objStart >= 0 && objEnd > objStart) candidates.push(content.slice(objStart, objEnd + 1));
+  if (arrStart >= 0 && arrEnd > arrStart) candidates.push(content.slice(arrStart, arrEnd + 1));
+  if (!candidates.length) throw new Error('Model reply contained no JSON object.');
+  let parsed: unknown; let sawJson = false;
+  for (const candidate of candidates) {
+    let value: unknown;
+    try { value = JSON.parse(candidate); } catch { continue; }
+    sawJson = true;
+    if (Array.isArray(value)) { parsed = { documents: value }; break; }
+    if (value && typeof value === 'object' && Array.isArray((value as { documents?: unknown }).documents)) { parsed = value; break; }
+  }
+  if (parsed === undefined) throw new Error(sawJson ? 'Model reply had no documents list.' : 'Model reply was not valid JSON.');
   const { documents } = rawReplySchema.parse(parsed);
   return documents.map(({ amounts, keyAmounts, ...rest }) => ({
     ...rest, amounts: (amounts ?? keyAmounts ?? []).map(a => ({ label: a.label, amountCents: parseIntakeAmount(a.amount) })),
@@ -89,20 +103,25 @@ export function buildIntakeContext(state: Workspace): IntakeContext {
 export type IntakeInput = { kind: 'image'; jpegBase64: string } | { kind: 'text'; text: string };
 export type ChatMessage = { role: 'system' | 'user'; content: string | ({ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } })[] };
 
-const SYSTEM_PROMPT = `You sort documents for an Australian accounting firm's synthetic demonstration family group. All names and figures are fictional test data.
-FY2026 is 1 July 2025 to 30 June 2026. One image may contain several documents; return one item per document.
-Copy the entity name, dates and amounts exactly as printed. Never invent an amount; leave it null if unreadable.
-Choose proposedEntityId and proposedRequestId only from the supplied lists, otherwise use an empty string.
-Set syntheticMarker true when the page says synthetic, fictional, demo or similar.
-Reply with JSON only.`;
+const SCHEMA_HINT = `{"documents":[{"docType":"","entityNameSeen":"","periodStart":"","periodEnd":"","amounts":[{"label":"","amount":"$0.00"}],"proposedEntityId":"","proposedRequestId":"","confidence":"high","reason":"","syntheticMarker":false}]}`;
 
-const SCHEMA_HINT = `{"documents":[{"docType":"","entityNameSeen":"","periodStart":"","periodEnd":"","amounts":[{"label":"","amount":"$0.00"}],"proposedEntityId":"","proposedRequestId":"","confidence":"high|medium|low","reason":"","syntheticMarker":false}]}`;
+// Terse on purpose. On 14 September the 11b vision model answered a longer, friendlier prompt
+// with a markdown description of the photo before any JSON (about 40 s at its token rate);
+// stating the rules as a service contract and putting the image before the text cut that to
+// roughly 10–20 s with parseable JSON every time.
+const SYSTEM_PROMPT = `You are a JSON extraction service for an Australian accounting firm's synthetic demonstration family group; all names and figures are fictional test data. FY2026 = 1 July 2025 – 30 June 2026.
+Rules: output exactly one JSON object matching ${SCHEMA_HINT} and nothing else. No markdown, no headings, no description of the image, no text before or after the JSON. One item per document seen. Copy names, dates and amounts exactly as printed; unreadable amount → null. proposedEntityId and proposedRequestId only from the supplied lists (match the entity name on the document), else "". syntheticMarker true if the page says synthetic, fictional or demo.`;
+
+/** Only what the model needs to pick a target: ids, names and labels. Question text stays out of the prompt. */
+function slimLists(context: IntakeContext) {
+  return JSON.stringify({ entities: context.entities, requests: context.requests.map(r => ({ id: r.id, entityId: r.entityId, label: r.label })) });
+}
 
 export function buildIntakeMessages(context: IntakeContext, input: IntakeInput): ChatMessage[] {
-  const instruction = `Entities and open requests (JSON):\n${JSON.stringify(context, null, 1)}\n\nFor each document ${input.kind === 'image' ? 'in the image' : 'in the text below'}, return ${SCHEMA_HINT}`;
+  const lists = `Lists (JSON): ${slimLists(context)}`;
   const user: ChatMessage = input.kind === 'image'
-    ? { role: 'user', content: [{ type: 'text', text: instruction }, { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${input.jpegBase64}` } }] }
-    : { role: 'user', content: `${instruction}\n\nDocument text:\n${input.text}` };
+    ? { role: 'user', content: [{ type: 'image_url', image_url: { url: `data:image/jpeg;base64,${input.jpegBase64}` } }, { type: 'text', text: `${lists}\nReturn the JSON object now.` }] }
+    : { role: 'user', content: `${lists}\n\nDocument text:\n${input.text}\n\nReturn the JSON object now.` };
   return [{ role: 'system', content: SYSTEM_PROMPT }, user];
 }
 
@@ -145,7 +164,11 @@ export function financialYearOf(context: IntakeContext, requestId: string) {
 
 /** Adds code-owned flags. Nothing is dropped: mismatches and invalid targets are shown to the adviser. */
 export function verifyIntake(documents: RawIntakeDocument[], context: IntakeContext): IntakeDocument[] {
-  return documents.map(({ syntheticMarker, ...doc }) => {
+  return documents.map(({ syntheticMarker, ...raw }) => {
+    // The model often reads the name correctly but leaves the id blank; a unique exact
+    // name match is filled in by code so the adviser's entity picker starts in the right place.
+    const exact = context.entities.filter(e => nameMatch(raw.entityNameSeen, e.entityName) === 'match');
+    const doc = !raw.proposedEntityId && exact.length === 1 ? { ...raw, proposedEntityId: exact[0].entityId } : raw;
     const entity = context.entities.find(e => e.entityId === doc.proposedEntityId);
     const candidates = entity ? [entity] : context.entities;
     const best = candidates.map(e => nameMatch(doc.entityNameSeen, e.entityName)).sort((x, y) => RANK[x] - RANK[y])[0] ?? 'mismatch';

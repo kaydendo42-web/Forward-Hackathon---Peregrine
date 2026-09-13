@@ -72,7 +72,7 @@ State this plainly in the pitch.
 
 - Synthetic entities only: Alex Taylor, Sam Taylor, Taylor Services Pty Ltd, Taylor Family Trust. No real TFNs, bank identifiers or signatures. Workbooks are limited prototype workpapers, not tax-return templates or lodged records.
 - Request wording uses deterministic demo rules (`demo-method-1`). The optional AI assist only *proposes*; nothing it produces is applied without an adviser clicking Accept, and the demo runs identically with it unconfigured.
-- Evidence intake is structured CSV. No PDF/image OCR.
+- Evidence intake is structured CSV, plus model-read photo/text-PDF attachments from the Inbox that an adviser must check and accept. No OCR guarantees.
 - The client-view toggle is a simulation, not a permission boundary. The activity log is local and not tamper-proof.
 - Review import changes only `decision` and `review_note`. There is no accepted-FY26 snapshot rolling into FY27; the annual loop is designed, not built.
 - Cross-tab conflicts are detected optimistically (version check at save) and reported; there is no server arbitration.
@@ -148,7 +148,17 @@ The same firm mailbox sends and receives. `SMTP_USER` is the firm address; `OUTR
 
 Replies and acceptance records survive reload in this browser. Polling deduplicates message IDs; the same reply cannot be accepted twice for the same request. This demo retains up to 200 replies and 1,000 reply acceptance records. Older saved workspaces load with empty Inbox records.
 
-Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-only messages require reading the original mailbox and entering relevant text. Attachment names/types/sizes are listed, but attachment bytes are not fetched: download a CSV from the firm mailbox and use the existing evidence upload, or paste statement text into AI assist for a proposal. No background inbox polling, production authentication, or durable shared mailbox state is implemented.
+Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-only messages require reading the original mailbox and entering relevant text. Attachment names/types/sizes are listed; bytes are fetched only when the adviser presses **Read attachments** (see below). CSVs still go through the existing evidence upload. No background inbox polling, production authentication, or durable shared mailbox state is implemented.
+
+## Attachment intake (optional, NVIDIA NIM vision)
+
+In the Inbox, a reply with JPEG, PNG or PDF attachments shows **Read N attachments**. Each file is downloaded from the firm mailbox once (read-only, 8 MB cap, one file per call). Photos are auto-oriented, shrunk to fit NIM's inline limit and sent to `NVIDIA_NIM_VISION_MODEL`; PDFs with a text layer have their text sent to `NVIDIA_NIM_MODEL`. The model's answer is shown as a proposal per document it saw: type, entity name seen, period, figures read, and a proposed entity and request line. Code adds flags the model cannot set — name mismatch, partial match, period outside FY2026, synthetic marker, invalid target. A mismatch or invalid target disables **Accept** until the adviser picks the target explicitly; that override is recorded in the activity record with the model, prompt version and file hash.
+
+Accepting links the file as evidence on the chosen request through the existing evidence rules (one closing-balance figure per bank request, no conflicting content under one document ID). Adviser review of the request stays a separate step. Rejecting keeps the file in the browser and logs the decision.
+
+Setup: `NVIDIA_NIM_VISION_MODEL` plus the AI assist and email settings above. The route answers 503 until all are present. Tested on 14 September 2026 with `meta/llama-3.2-11b-vision-instruct` (about 9 s per photo); `llama-3.2-90b-vision-instruct` queued past the 60 s route budget on the same key.
+
+Limits: figures are model reads and can be wrong — check them against the preview before accepting. Scanned PDFs without a text layer are refused with a clear message. Photos holding several documents read worse than one document per photo. Original bytes stay in the adviser's browser (IndexedDB); the server keeps nothing and logs nothing. Not OCR-grade, not a tax calculation.
 
 ## Next milestones
 

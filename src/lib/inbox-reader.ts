@@ -8,6 +8,7 @@ const MAX_ATTACHMENTS = 30;
 const MAX_REFERENCES = 100;
 const MAX_HEADER_BYTES = 128 * 1_024;
 const DEFAULT_TIMEOUT_MS = 24_000;
+const DOWNLOAD_TIMEOUT_MS = 40_000;   // one multi-megabyte attachment; the route's own 54 s deadline still applies
 export const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024;
 export const ALLOWED_ATTACHMENT_TYPES = new Set(['image/jpeg', 'image/png', 'application/pdf']);
 
@@ -249,7 +250,7 @@ async function collectMessages(client: InboxClient, senders: string[], now: Date
   return output;
 }
 
-async function withClient<T>(config: ReaderConfig, dependencies: ReaderDependencies, operation: (client: InboxClient, senders: string[], now: Date) => Promise<T>): Promise<T> {
+async function withClient<T>(config: ReaderConfig, dependencies: ReaderDependencies, maxTimeoutMs: number, operation: (client: InboxClient, senders: string[], now: Date) => Promise<T>): Promise<T> {
   const senders = allowedAddresses(config.allowedSenders);
   if (!config.user || !config.pass || !senders.length) throw new InboxReadError('configuration');
   const raw = dependencies.now?.() ?? new Date();
@@ -263,7 +264,7 @@ async function withClient<T>(config: ReaderConfig, dependencies: ReaderDependenc
     // ImapFlow reports failures through the awaited operation as well. Keep the
     // EventEmitter channel handled without logging provider or credential detail.
   });
-  const timeoutMs = Math.min(Math.max(1, dependencies.timeoutMs ?? DEFAULT_TIMEOUT_MS), DEFAULT_TIMEOUT_MS);
+  const timeoutMs = Math.min(Math.max(1, dependencies.timeoutMs ?? maxTimeoutMs), maxTimeoutMs);
   let timer: ReturnType<typeof setTimeout> | undefined;
   const deadline = new Promise<never>((_, reject) => {
     timer = setTimeout(() => { client.close(); reject(new InboxReadError('timeout')); }, timeoutMs);
@@ -286,7 +287,7 @@ async function withClient<T>(config: ReaderConfig, dependencies: ReaderDependenc
 }
 
 export async function readGmailInbox(config: ReaderConfig, dependencies: ReaderDependencies = {}): Promise<InboxResult> {
-  return withClient(config, dependencies, async (client, senders, now) => ({ messages: await collectMessages(client, senders, now), checkedAt: now.toISOString() }));
+  return withClient(config, dependencies, DEFAULT_TIMEOUT_MS, async (client, senders, now) => ({ messages: await collectMessages(client, senders, now), checkedAt: now.toISOString() }));
 }
 
 async function boundedBytes(stream: NodeJS.ReadableStream & { destroy?: () => void }, limit: number) {
@@ -303,7 +304,7 @@ async function boundedBytes(stream: NodeJS.ReadableStream & { destroy?: () => vo
 /** One attachment of one allow-listed reply, by Message-ID and listing index. Read-only; never marks or deletes mail. */
 export async function downloadGmailAttachment(config: ReaderConfig, messageId: string, index: number, dependencies: ReaderDependencies = {}) {
   if (!validMessageId(messageId) || !Number.isInteger(index) || index < 0 || index >= MAX_ATTACHMENTS) throw new InboxReadError('not_found');
-  return withClient(config, dependencies, async (client, senders, now) => {
+  return withClient(config, dependencies, DOWNLOAD_TIMEOUT_MS, async (client, senders, now) => {
     const found = await client.search({ header: { 'message-id': messageId.trim() } }, { uid: true });
     const uids = Array.isArray(found) ? found.filter(uid => Number.isSafeInteger(uid) && uid > 0).slice(0, 5) : [];
     if (!uids.length) throw new InboxReadError('not_found');
@@ -321,7 +322,7 @@ export async function downloadGmailAttachment(config: ReaderConfig, messageId: s
     if (!attachment || !part) throw new InboxReadError('not_found');
     if (!ALLOWED_ATTACHMENT_TYPES.has(attachment.contentType)) throw new InboxReadError('unsupported_type');
     if (attachment.size > MAX_ATTACHMENT_BYTES) throw new InboxReadError('too_large');
-    const downloaded = await client.download(message.uid, part, { uid: true, maxBytes: MAX_ATTACHMENT_BYTES + 1, chunkSize: 64 * 1_024 });
+    const downloaded = await client.download(message.uid, part, { uid: true, maxBytes: MAX_ATTACHMENT_BYTES + 1, chunkSize: 1_024 * 1_024 });
     if (!downloaded.content) throw new InboxReadError('provider');
     const bytes = await boundedBytes(downloaded.content, MAX_ATTACHMENT_BYTES);
     return { filename: attachment.filename, contentType: attachment.contentType, bytes };

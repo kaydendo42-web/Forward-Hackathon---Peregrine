@@ -55,6 +55,11 @@ describe('parseIntakeReply', () => {
     expect(docs[0]).toMatchObject({ entityNameSeen: '', periodStart: '', proposedEntityId: '', confidence: 'low', syntheticMarker: false });
     expect(docs[0].amounts).toEqual([{ label: 'x', amountCents: null }]);
   });
+  it('salvages a bare array of documents and a prose prefix', () => {
+    const docs = parseIntakeReply('The JSON object is:\n\n[{"docType":"Resolution","amounts":[]},{"docType":"Statement","amounts":[]}]');
+    expect(docs.map(d => d.docType)).toEqual(['Resolution', 'Statement']);
+    expect(parseIntakeReply('**Documents:**\n* [{"docType":"A","amounts":[]}] done')[0].docType).toBe('A');
+  });
   it('rejects replies without a JSON object or without documents', () => {
     expect(() => parseIntakeReply('No documents here.')).toThrow(/no JSON/i);
     expect(() => parseIntakeReply('{"items":[]}')).toThrow();
@@ -84,8 +89,10 @@ describe('buildIntakeMessages', () => {
     expect(msgs[0].role).toBe('system');
     expect(msgs[0].content).toMatch(/synthetic/i);
     const user = msgs[1].content as { type: string; text?: string; image_url?: { url: string } }[];
-    expect(user.find(p => p.type === 'image_url')?.image_url?.url).toBe('data:image/jpeg;base64,AAAA');
-    expect(user.find(p => p.type === 'text')?.text).toContain(TR_BANK);
+    expect(user[0].type).toBe('image_url');   // image before text: the model then answers with JSON instead of describing the photo
+    expect(user[0].image_url?.url).toBe('data:image/jpeg;base64,AAAA');
+    expect(user[1].text).toContain(TR_BANK);
+    expect(user[1].text).not.toContain('Provide the 30 June trust bank statement');   // question text stays out of the prompt
   });
   it('sends extracted PDF text inline', () => {
     const msgs = buildIntakeMessages(buildIntakeContext(family()), { kind: 'text', text: 'Closing balance 108,125.00' });
@@ -111,9 +118,13 @@ describe('verifyIntake', () => {
   it('flags a shared surname as partial', () => {
     expect(verifyIntake([raw({ entityNameSeen: 'Alex Taylor' })], ctx)[0].flags.nameMatch).toBe('partial');
   });
-  it('matches against every entity when the proposed entity is empty, and the target is then invalid', () => {
+  it('fills a blank entity from a unique exact name match; the target stays invalid until a request is chosen', () => {
     const [doc] = verifyIntake([raw({ proposedEntityId: '', proposedRequestId: '', entityNameSeen: 'alex taylor' })], ctx);
+    expect(doc.proposedEntityId).toBe('alex-taylor');
     expect(doc.flags).toMatchObject({ nameMatch: 'match', targetValid: false });
+    const [unknown] = verifyIntake([raw({ proposedEntityId: '', proposedRequestId: '', entityNameSeen: 'Oakwood Family Trust' })], ctx);
+    expect(unknown.proposedEntityId).toBe('');
+    expect(unknown.flags).toMatchObject({ nameMatch: 'mismatch', targetValid: false });
   });
   it('flags a request under another entity or a reviewed request as invalid', () => {
     expect(verifyIntake([raw({ proposedRequestId: ALE_DIV })], ctx)[0].flags.targetValid).toBe(false);
