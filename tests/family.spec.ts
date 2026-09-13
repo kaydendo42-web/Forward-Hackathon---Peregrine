@@ -17,7 +17,7 @@ test('one warm family email covers every entity with outstanding items', async (
   await expect(draft.locator('pre')).toContainText('Taylor Family Trust');
   await expect(draft.locator('pre')).toContainText('Reply to this email with documents attached');
   // The same draft is visible from another member entity, and the tab count agrees.
-  await page.getByRole('button', { name: /^Alex Taylor/ }).click();
+  await page.locator('.entity-button', { hasText: 'Alex Taylor' }).click();
   await expect(page.getByRole('button', { name: /^Outbox \(1\)/ })).toBeVisible();
   await page.getByRole('button', { name: /^Outbox/ }).click();
   await expect(page.locator('article.draft').first()).toContainText('Taylor family (2 entities)');
