@@ -1,0 +1,828 @@
+8 Financial and other information
+Instructions to complete your financial and other information.
+
+Last updated 3 August 2026
+
+Print or Download
+
+N - Functional currency translation rate
+
+Complete item 8 - label N if the company keeps its accounts solely or predominantly in a foreign currency and has chosen to use that currency as its applicable functional currency to work out its taxable income or tax loss. If the company is using a functional currency, see Guide to functional currency rules .
+
+Don't complete label N if the company has chosen to use a non-A$ functional currency only to calculate the net income attributable to the activities of an overseas permanent establishment, or the attributable income of a controlled foreign company, or transferor trust. For more information, see Foreign income return form guide .
+
+Write at label N the exchange rate employed to translate the net taxable income figure from the applicable functional currency into A$. The translation rate is the amount by which the functional currency amount must be divided in order to reflect an equivalent amount of A$, that is, the number of non-A$ currency units that equal one A$, rounded to 4 significant figures.
+
+If you complete label N , also complete item 8 - label O Functional currency chosen .
+
+O - Functional currency chosen
+
+Complete item 8 - label O if item 8 - label N Functional currency translation rate has been completed.
+
+Write at label O the functional currency code that corresponds to the functional currency chosen by the company. See Guide to functional currency rules for currency codes for item 8 - label O .
+
+Show amounts calculated for tax purposes at item 8 - labels:
+
+- A Opening stock
+
+- S Purchases and other costs
+
+- B Closing stock
+
+- J Total debt
+
+- K Commercial debt forgiveness .
+
+A - Opening stock
+
+Write at item 8 - label A the total value of all trading stock on hand at the beginning of the income year or accounting period for which the company tax return is being prepared. The amount shown by the company at label A is the value for income tax purposes under section 70-40 of the ITAA 1997. For small business entities using the simplified trading stock rules, see subsection 328-295(1) of the ITAA 1997. The opening value of an item of stock must equal its closing value in the previous income year.
+
+If a taxpayer didn't have any trading stock in the previous year, the value of trading stock at the start of the year is zero. This might occur in the case of a new business in the first year a taxpayer has trading stock. It might also occur where the trading stock rules for small business entities stop applying either because the entity is no longer eligible to be a small business entity, or because the entity chooses to account for changes to trading stock.
+
+Include motor vehicle floor plan stock and work in progress of manufactured goods.
+
+Don't include any amount that represents opening stock of a business that started operations during the income year. Include this amount at item 8 - label S Purchases and other costs .
+
+For more information, see General trading stock rules .
+
+S - Purchases and other costs
+
+Write at item 8 - label S the cost of direct materials used for manufacture, sale or exchange in deriving the gross proceeds or earnings of the business. This amount includes freight inwards.
+
+Former STS taxpayers
+
+If the company is eligible and continuing to use the STS accounting method, only write at label S the costs that the company has paid. (See Former STS taxpayers ).
+
+For information on goods and services tax (GST) and input tax credits, see item 6 Calculation of total profit or loss .
+
+B - Closing stock
+
+If the company is an eligible small business entity, see Small business entities . Otherwise, see All other companies.
+
+Small business entities
+
+The company must account for changes in the value of its trading stock only if the difference between the following 2 amounts is more than $5,000:
+
+- The value of the company's stock on hand at the start of the income year as shown at item 8 - label A Opening stock .
+
+- A reasonable estimate of the value of the company's stock on hand at the end of the income year.
+
+If the difference is $5,000 or less, the company can still choose to conduct a stocktake and account for changes in the value of trading stock.
+
+If the difference between the value of the opening stock and a reasonable estimate of its closing stock is more than $5,000, the company must account for changes in the value of its trading stock. Go to step 2 if the difference is more than $5,000 or the company wishes to account for changes in the value. Otherwise, go to step 1 .
+
+Step 1: Difference is $5,000 or less
+
+If the difference referred to above is $5,000 or less and the company chooses not to account for this difference, the closing stock value written at item 8 - label B Closing stock is the same value that the company wrote for item 8 - label A Opening stock . Don't put the company's reasonable estimate at label B Closing stock .
+
+Print the code in the CODE box at label B Closing stock from table 5 that matches the code the company used to value closing stock in the previous year.
+
+If this is the company's first year in business, the value of its closing stock will be zero. Print code C in the CODE box.
+
+Table 5: Valuation method codes
+
+Code
+
+Valuation method
+
+C
+
+Cost
+
+M
+
+Market selling value
+
+R
+
+Replacement value
+
+Step 2: Difference is more than $5,000
+
+If the difference referred to above is more than $5,000 or the company chooses to account for the difference in trading stock, the closing stock values must be brought to account under section 70-35 of the ITAA 1997.
+
+Include in closing stock value at label B Closing stock the value of all stock on hand, regardless of whether the company has paid for the stock.
+
+For more information, see Valuing trading stock .
+
+All other companies
+
+Write at item 8 - label B the total value of all trading stock on hand at the end of the income year or accounting period for which the company tax return is being prepared. The amount at label B is the value calculated for income tax purposes under section 70-45 of the ITAA 1997.
+
+If the company is registered or required to be registered for GST, the value of closing stock should not include an amount equal to the input tax credit that the company has claimed or is entitled to claim. Some items of trading stock, such as shares, are not subject to GST meaning there will be no input tax credits to consider.
+
+Include motor vehicle floor plan stock and work in progress of manufactured goods.
+
+Don't include any amount that represents closing stock of a business that stopped operations during the income year. Include this amount at item 6 Income - label R Other gross income .
+
+Print the code in the CODE box from table 5 indicating the method used to value closing stock for income tax purposes. If more than one method is used, use the code applicable to the method representing the highest value.
+
+Different methods of valuation may be used to value the same item of trading stock in different income years, and similar items may be valued using different methods in the same income year.
+
+However, the opening value of an item in a particular income year must equal the closing value for that item in the previous income year. The company can't reduce the value of stock on hand by creating reserves to offset future reduction of the value of stock, or any other factors. Keep records showing how each item was valued.
+
+If incorrect trading stock information has been included on a tax return, advise us by submitting a full statement of the facts, accompanied by a reconciliation of the value of stock as returned for each income year with the values permissible under the law.
+
+Companies engaged in manufacturing include the value of partly manufactured goods as part of their stock and materials on hand at the end of the income year.
+
+For more information on the circumstances in which packaging items held by a manufacturer, wholesaler or retailer are 'trading stock' as defined in section 70-10 of the ITAA 1997, see Taxation Ruling TR 98/7 Income tax: whether packaging items (i.e. containers, labels, etc) held by a manufacturer, wholesaler or retailer are trading stock.
+
+For more information on the circumstances in which materials and spare parts held by a taxpayer in supplying services are 'trading stock' as defined in section 70-10 of the ITAA 1997, see Taxation Ruling TR 98/8 Income tax: whether materials and spare parts held by a taxpayer supplying services are trading stock .
+
+Consolidated or MEC groups
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at item 8 - label B the value for trading stock on hand as at the end of the latest non-membership period.
+
+The amount at label B is generally a tax-neutral value. This may not be the case if the company was a continuing majority-owned entity when it became a member of the group.
+
+Trading stock election
+
+A company may elect to value an item of trading stock below the lowest value of cost, market selling value or replacement value because of obsolescence or any other special circumstances. The value that is elected must be reasonable.
+
+For guidelines on trading stock valuations where obsolescence or other special circumstances exist, see Taxation Ruling TR 93/23 Income tax: valuation of trading stock subject to obsolescence or other special circumstances .
+
+If an election is made, print X in the Yes box.
+
+Otherwise print X in the No box.
+
+Include amounts taken from the company's financial statements at the end of the accounting period at item 8 - labels C Trade debtors to H Total liabilities , and label N Loans to shareholders and their associates as these amounts relate to accounting values.
+
+C - Trade debtors
+
+Write at item 8 - label C the total amounts owing to the company at the end of the accounting period for goods and services provided during the income year, that is, the gross amount of current trade debtors from the company's accounts. Also include this amount at item 8 - label D All current assets .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label C the relevant amount as at the end of the latest non-membership period.
+
+D - All current assets
+
+Write at item 8 - label D all current assets of the company, including cash on hand, short-term bills receivable, inventories and trade debtors as written at item 8 - label C Trade debtors .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label D the relevant amount as at the end of the latest non-membership period.
+
+E - Total assets
+
+Write at item 8 - label E all assets of the company, including fixed, tangible and intangible assets and all current assets as written at item 8 - label D All current assets .
+
+For a consolidated or MEC group include all the assets of the group as disclosed in the financial accounts and not the amounts that are calculated by way of the allocable cost amount.
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label E the relevant amount as at the end of the latest non-membership period.
+
+F - Trade creditors
+
+Write at item 8 - label F the total amounts owed by the company at the end of the accounting period for goods and services received during the income year, that is, current trade creditors. Also include this amount at item 8 - label G All current liabilities .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label F the relevant amount as at the end of the latest non-membership period.
+
+G - All current liabilities
+
+Write at item 8 - label G the total obligations payable by the company within the next accounting period. Also include the amount written at item 8 - label F Trade creditors .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label G the relevant amount as at the end of the latest non-membership period.
+
+H - Total liabilities
+
+Write at item 8 - label H , all liabilities of the company, including other creditors and deferred liabilities such as loans secured by mortgage and long-term loans. Also include the amount written at item 8 - label G All current liabilities .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label H the relevant amount as at the end of the latest non-membership period.
+
+J - Total debt
+
+Write at item 8 - label J the average total debt of the company for the income year. Calculate the average total debt by adding the opening and closing balances of the company's total debt for the income year and dividing this total by 2.
+
+The total debt of a company includes all financial instruments and arrangements that were used by the company to provide funds for their operations and investments. The instruments and arrangements that are shown at label J include all loans, securities and instruments that give rise to deductible finance expenses, which include any of the following:
+
+- interest, a payment in the nature of interest, or a payment in substitution for interest
+
+- payments made for assignments of the right to interest
+
+- a discount on a security for a finance arrangement
+
+- an amount that is taken under a tax law to be an amount of interest for a lease, a hire-purchase arrangement or any other financial instrument specified by that law
+
+- any application or processing fee for a finance arrangement
+
+- any finance expense for a repurchase agreement or securities lending arrangement
+
+- any other form of yield associated with a finance arrangement
+
+- any such amount that, instead of being paid to a party to the arrangement, is dealt with in any way on behalf of that party.
+
+Accordingly, there is no requirement that amounts included at label J satisfy the definition of 'debt interest' for the purposes of Division 974 of the ITAA 1997 (the debt and equity rules).
+
+For an overview of the debt and equity rules, see Guide to the debt and equity tests .
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label J the relevant amount calculated as at the end of the latest non-membership period.
+
+K - Commercial debt forgiveness
+
+Write at item 8 - label K the net forgiven amount of the debt calculated under section 245-85 of the ITAA 1997. Broadly, a debt is a commercial debt if any part of the interest payable on the debt is, or would be, an allowable deduction. A debt is forgiven if the company's obligation to pay the debt is released, waived or otherwise extinguished.
+
+The net forgiven amount of commercial debts must be applied to reduce the company's deductible revenue (tax) losses, net capital losses, certain undeducted revenue or capital expenditure and the cost base of certain capital gains tax (CGT) assets, in that order.
+
+For more information, see Appendix 5 .
+
+Show at labels J to H and labels D to V amounts calculated for tax purposes.
+
+J - Franked dividends paid
+
+Write at item 8 - label J the amount of fully franked dividends paid or credited during the income year, including non-share dividends or deemed dividends that are fully franked, and the franked deemed dividend component of any off-market share buy-back price under section 159GZZZP of the ITAA 1936.
+
+From 7:30 pm (AEDT) on 25 October 2022 only a company that isn't a listed public company can announce and undertake an off-market share buy-back with a dividend as part of the buy-back price.
+
+If a partly franked dividend has been paid during the income year, include the franked portion at label J and the unfranked portion at item 8 - label K Unfranked dividends paid .
+
+Don't include dividends paid by one member to another within a consolidated or MEC group .
+
+Keep a record of the following:
+
+- dividends or non-share dividends paid
+
+- recipients
+
+- dates paid
+
+- amounts paid.
+
+K - Unfranked dividends paid
+
+Write at item 8 - label K the amount of unfranked dividends paid or credited during the income year, including amounts deemed to be dividends by various sections of the ITAA 1936 and the ITAA 1997. Include unfranked non-share dividends, unfranked deemed dividends under Division 7A of Part III of the ITAA 1936 and the unfranked deemed dividend component of any off-market share buy-back price under section 159GZZZP of the ITAA 1936.
+
+From 7:30 pm (AEDT) on 25 October 2022 only a company that isn't a listed public company can announce and undertake an off-market share buy-back with a dividend as part of the buy-back price.
+
+Consolidated and MEC groups don't include at this label:
+
+- dividends paid by one member to another within a consolidated or MEC group
+
+- a dividend paid under a demerger unless the head entity of the demerger group has elected under subsection 44(2) of the ITAA 1936 that it be treated as an assessable dividend.
+
+Division 7A of Part III of the ITAA 1936 applies to payments, loans and debt forgiveness provided by a private company to its shareholders or their associates, that are not otherwise included in the shareholder's or their associate's assessable income or expressly made non-assessable. For example, dividends, salary and wages or fringe benefits on which the company has paid fringe benefits tax. The provision of private company owned assets, including under a lease or licence, are treated as payments under Division 7A. For more information, see Payments and other benefits affected .
+
+Unless a payment, loan or debt forgiveness made by a private company to its shareholders or their associates is subject to a specified exclusion , it will be treated as an assessable, unfranked dividend in the hands of the recipient. This is also known as a Division 7A deemed dividend , and the amount of the dividend will be limited if the private company's distributable surplus is less than the total of all dividends the company would otherwise be taken to pay under Division 7A in the income year.
+
+Division 7A applies to closely-held corporate limited partnerships in the same way it applies to private companies.
+
+Payments made by a private company to its shareholders or their associates in 2025-26 can be converted to a complying loan before the end of the private company's lodgment day. The private company's lodgment day is the earlier of the due date for lodgment or the date of lodgment of the company's tax return for 2025-26.
+
+Loans, including payments converted to loans, made by a private company to its shareholders or their associates in 2025-26 must be either repaid or made subject to a complying loan agreement before the private company's lodgment day. This will prevent the loan from being treated as an assessable, unfranked dividend.
+
+For complying loans made in an earlier income year that haven't been fully repaid by the end of 2025-26, an assessable, unfranked dividend may arise if the Division 7A minimum yearly repayment has not been made to the private company by the end of 2025-26. The Division 7A calculator and decision tool helps you calculate the required minimum yearly repayment on a complying loan.
+
+Keep a record of the following:
+
+- dividends or non-share dividends paid
+
+- recipients
+
+- dates paid
+
+- amounts paid.
+
+Cooperatives - option to frank dividends
+
+Cooperative companies may frank distributions made to members from assessable income.
+
+Cooperative companies that don't choose to frank distributions made to members are entitled to claim a deduction to the extent that a distribution of assessable income isn't franked.
+
+P - Opening franking account balance
+
+Write at item 8 - label P the balance of the franking account at the beginning of 2025-26 (the balance can be zero).
+
+If the balance of the franking account is in deficit at the beginning of 2025-26 leave label P Opening franking account balance blank. You're required to have lodged a franking account tax return for 2024-25 and have paid franking deficit tax (FDT) for that income year if you have a deficit balance at the beginning of 2025-26.
+
+M - Closing franking account balance
+
+Show at item 8 - label M the balance of the franking account at the end of 2025-26. The franking account balance limit doesn't apply if you were a foreign resident (other than a New Zealand franking company).
+
+Provide the franking account balance at the end of 2025-26 (the balance can be zero).
+
+If there is a deficit balance in the franking account at the end of the income year:
+
+- leave the closing franking account balance blank
+
+- the company must lodge a Franking account tax return 2026
+
+- pay franking deficit tax (FDT) by the last day of the month following the end of the income year. If the company is a late balancing company that has elected to have its FDT liability determined on 30 June 2026, it must lodge its franking account tax return on or before 31 July 2026.
+
+If the company is a pooled development fund (PDF) and its venture capital sub-account is in deficit at the end of the PDF's income year or immediately before it stops being a PDF, the company is liable to pay venture capital deficit tax. If the PDF has a liability to venture capital deficit tax, you must lodge a Venture capital deficit tax return .
+
+Shareholder loans and other advances made by private companies that are deemed dividends are not frankable unless a section in the ITAA 1936 or ITAA 1997 provides that the dividend can be franked. For example, where the Commissioner exercises a limited power to permit the deemed dividend to be franked, or where the deemed dividend is paid in connection with a relationship breakdown.
+
+Deemed dividends may also arise when a shareholder (or associate of such shareholder) of a private company that has (or will have by a certain time) an unpaid present entitlement from a trust estate receives a payment or loan or has a debt forgiven in their favour by the trustee of the trust estate. However, this will not result in a debit to the franking account of the private company with the unpaid present entitlement.
+
+A company needs to determine whether its franking account needs adjustment, because these measures may affect imputation benefits available to shareholders, deny franking credits, or give rise to additional franking debits.
+
+If you're a company that receives a R&D refundable tax offset, then only include franking credits arising from either payment of pay as you go (PAYG) instalments or income tax after all deferred franking debits have been utilised. For more information on how a R&D tax offset affects your franking account, see the Franking account tax return and instructions 2026 .
+
+For more information, see Imputation .
+
+Franking account tax return
+
+Corporate tax entities may be entitled to claim a FDT offset. In certain circumstances, the FDT offset reduction rule reduces the amount of FDT that can be offset against future income tax liabilities. For more information, see Franking deficit tax offset .
+
+As a result of these rules, you must complete label C Offsetable portion of current year FDT in the Franking account tax return 2026 .
+
+Complete a franking account tax return for all Australian corporate tax entities (including head companies of consolidated or MEC groups, corporate limited partnerships, corporate unit trusts and public trading trusts) and New Zealand franking companies that have either:
+
+- a liability to pay FDT
+
+- a liability to pay OFT
+
+- an obligation to disclose information to the Commissioner for their benchmark franking percentage.
+
+Lodge the franking account tax return separately from your company tax return. If you lodge your franking account tax return at the time your company tax return is due, your franking account tax return may be late and an interest charge may apply to any outstanding tax amounts. Your franking account tax return is generally due one month after the end of your income year.
+
+For more information on completing this tax return, see Franking account tax return and instructions 2026 .
+
+Consolidated and MEC groups
+
+If the company was a subsidiary member of a consolidated or MEC group at the end of the income year and is completing a tax return because of any non-membership periods, write at label M its franking account balance as at the end of the latest non-membership period if it is a surplus balance. If there is a deficit balance at the end of any non-membership period, the company must lodge a franking account tax return and pay FDT.
+
+X - Select your aggregated turnover range
+
+You must complete item 8 - label X if you're relying on your aggregated turnover for eligibility for any of the following:
+
+- Instant asset write-off
+
+- Small business CGT concessions
+
+- Small business restructure roll-over
+
+Select a category below based on your aggregated turnover range and write the category code at label X .
+
+Your aggregated turnover range selected can be either your 2025-26 aggregated turnover or your 2024-25 aggregated turnover.
+
+Table: Category of aggregated annual turnover ranges
+
+Category
+
+Aggregated annual turnover ranges
+
+A
+
+$0 to less than $7.5 million
+
+B
+
+$7.5 million to less than $10 million
+
+C
+
+$10 million to less than $20 million
+
+D
+
+$20 million to less than $40 million
+
+E
+
+$40 million to less than $50 million
+
+F
+
+$50 million to less than $100 million
+
+G
+
+$100 million to less than $200 million
+
+H
+
+$200 million to less than $300 million
+
+I
+
+$300 million to less than $400 million
+
+J
+
+$400 million to less than $500 million
+
+K
+
+$500 million to less than $600 million
+
+L
+
+$600 million to less than $700 million
+
+M
+
+$700 million to less than $800 million
+
+N
+
+$800 million to less than $900 million
+
+O
+
+$900 million to less than $1 billion
+
+P
+
+$1 billion or over
+
+You will not be penalised for specifying an incorrect category where you make your best attempt to calculate your aggregated turnover.
+
+For more information, see Calculate your aggregated turnover and Entities connected with you and control relationships .
+
+Y - Aggregated turnover
+
+Item 8 - label Y is mandatory where you have an aggregated turnover of $1 billion or more, or you're a significant global entity (SGE).
+
+Write at item 8 - label Y your actual aggregated turnover rounded to the nearest $100 million. Your actual aggregated turnover specified can be either your aggregated turnover for 2025-26 or your 2024-25 aggregated turnover. For further information, see Satisfying the aggregated turnover threshold .
+
+If you're an SGE, complete item 8 - label X (write category code P ).
+
+You must also complete label G1 at item 3 Status of Company
+
+You will not be penalised for specifying an incorrect amount where you make your best attempt to calculate your aggregated turnover.
+
+H - Excess franking offsets
+
+Write at item 8 - label H any excess franking offset calculated as follows.
+
+Step 1: Calculate the amount of franking tax offsets
+
+Franking tax offsets are available under Division 207 of the ITAA 1997 as a result of receiving a franked distribution, and Subdivision 210-H of the ITAA 1997 as a result of receiving a franked distribution franked with a venture capital credit. The amount of franking tax offset that a company is entitled to is equal to the share of franking credits included in distributions received from partnerships and trusts, the amount of franking credits included at item 7 - labels J Franking credits and C Australian franking credits from a New Zealand company .
+
+Don't include any franking tax offsets that are subject to the refundable tax offset rules under Division 67 of the ITAA 1997. For example, franking tax offsets of a life insurance company are generally subject to the refundable tax offset rules to the extent that they relate to distributions paid on shares and other membership interests held on behalf of policy holders. Don't include these amounts. Generally, the franking tax offsets of other companies are not subject to the refundable tax offset rules.
+
+Step 2: Calculate the income tax that would be payable
+
+Calculate the amount of income tax that would be payable, taking into account all tax offsets (including its foreign income tax offset) except for the following tax offsets:
+
+- any franking tax offsets
+
+- any tax offsets subject to the tax offset carry forward rules or the refundable tax offset rules
+
+- any tax offset arising from an FDT liability.
+
+Step 3: Calculate the amount of excess franking offsets
+
+If the amount of franking tax offsets from step 1 exceeds the amount of hypothetical tax calculated at step 2, the excess is the amount of excess franking offset which should be written at item 8 - label H .
+
+Excess franking offsets can affect the choice a company can make in how much of any prior year tax loss it can deduct this year. For more information, see item 7 - label R - Tax losses deducted .
+
+If the company has excess franking offsets, it may convert the excess franking offsets into an amount of tax loss to carry forward to later income years. For more information, see item 13 - label U - Tax losses carried forward to later income years .
+
+Example 13: excess franking offsets
+
+For 2025-26 Veck Company Ltd, has the following:
+
+- item 6 - label H Total dividends , franked distributions of $280
+
+- item 7 - label J Franking credits of $120
+
+- item 7 - label X Other deductible expenses of $80.
+
+The $120 franking tax offset isn't subject to the refundable tax offset rules in Division 67 of the ITAA 1997. Veck Company Ltd has no net exempt income for the year and it doesn't have a tax loss for the year.
+
+Veck Company Ltd is a base rate entity and its applicable company tax rate for 2025-26 is 25%.
+
+Veck Company Ltd would work out its excess franking offsets as follows:
+
+- Calculate the amount of franking tax offsets it is entitled to.
+
+In this instance, Veck Company Ltd's franking tax offsets are not subject to the refundable tax offset rules, therefore it is entitled to franking tax offsets of $120 . However, for the purposes of calculating the amount of excess franking offset, these offsets are ignored in step 2 below.
+
+- Calculate the amount of income tax payable, ignoring franking tax offsets.
+
+Calculated as:
+
+Taxable income ($280 + $120 &minus; $80) = $320
+
+Gross tax (25% of $320) = $80
+
+Non-refundable non-carry forward tax offsets $0 (Veck Company Ltd is required to disregard the franking tax offset).
+
+Tax payable = $80
+
+The excess franking offsets amount is equal to $40, that is, the amount left over after deducting the amount at step 2 from the amount at step 1 ($120 &minus; $80) . Veck Company Ltd would record $40 at label H .
+
+Veck Company Ltd would now convert this amount of excess franking offsets into a tax loss by dividing the excess franking offsets amount ($40) by the applicable corporate tax rate for imputation purposes for 2025-26 (25%) which results in a tax loss amount of $160.
+
+Veck Company Ltd would record the amount of this tax loss at item 13 - label U Tax losses carried forward to later income years .
+
+End of example
+
+N - Loans to shareholders and their associates
+
+Complete item 8 - label N if:
+
+- the company is a private company or a closely-held corporate limited partnership
+
+- the company or closely-held corporate limited partnership has a loan to a shareholder or an associate of a shareholder that has a debit balance at the end of the income year, and
+
+- the recipient of the loan was a natural person, partnership or trust.
+
+For the purposes of completing label N, all references to shareholders include partners in a closely-held corporate limited partnership.
+
+Write at label N the total of all such loans that have a debit balance at the end of the income year. Write the total in whole figures only.
+
+Print the relevant code from table 6 in the CODE box at label N .
+
+Table 6: Loan codes
+
+Code
+
+Description
+
+A
+
+All loans were made on or after 4 December 1997.
+
+B
+
+All loans were made before 4 December 1997.
+
+M
+
+Some loans were made before 4 December 1997 and some loans were made on or after 4 December 1997.
+
+Division 7A applies to closely-held corporate limited partnerships in the same way it applies to private companies.
+
+Division 7A applies to loans made by a private company to its shareholders or their associates. Unless one of the specified exclusions apply, a loan will be treated as an assessable, unfranked dividend in the hands of the recipient. This is also known as a Division 7A deemed dividend , and the amount of the dividend will be limited if the private company's distributable surplus is less than the total of all dividends the company would otherwise be taken to pay under Division 7A during the income year.
+
+Payments made by a private company to its shareholders or their associates in 2025-26 can be converted to complying loans before the end of the private company's lodgment day. The private company's lodgment day is the earlier of the due date for lodgment or the date of lodgment of the company's tax return for 2025-26.
+
+Loans, including payments converted to loans, made by a private company to its shareholders or their associates in 2025-26 must be either repaid or made subject to a complying loan agreement before the end of the private company's lodgment day. This will prevent the loan from being treated as an assessable, unfranked dividend.
+
+D - Total salary and wage expenses
+
+Write at item 8 - label D the total salary, wage and other labour costs incurred, including directors' remuneration, as per income statements.
+
+These expenses include any salary and wage component of item 6 - label A Cost of sales , that is:
+
+- allowances
+
+- bonuses
+
+- casual labour
+
+- retainers and commissions paid to people who received a retainer
+
+- workers compensation paid through the payroll.
+
+Also included are:
+
+- direct and indirect labour costs
+
+- directors' fees
+
+- holiday pay
+
+- locums
+
+- long service leave
+
+- lump sum payments
+
+- other employee benefits
+
+- overtime
+
+- payments under an incentive or profit sharing scheme
+
+- retiring allowances
+
+- sick pay.
+
+Any salary and wages paid by a private company to a current or former shareholder or director of the company, or to an associate of such a person, is included here and at item 8 - label Q Payments to associated persons .
+
+However, don't include:
+
+- agency fees
+
+- contract payments
+
+- sub-contract payments
+
+- service fees
+
+- superannuation
+
+- reimbursements or allowances for travel
+
+- management fees
+
+- consultant fees
+
+- wages or salaries reimbursed under a government program.
+
+Salary and wage expenses can't be deducted where you haven't complied with your pay as you go (PAYG) withholding obligations. See Removing tax deductibility of non-compliant payments .
+
+Print the code in the CODE box from table 7 at label D that matches the description of the expense component where salary and wage expenses have been wholly or predominantly reported at item 6 .
+
+Table 7: Salary and wage expenses codes
+
+Code
+
+Salary and wage expenses included in:
+
+C
+
+Cost of sales
+
+A
+
+All other expenses
+
+B
+
+Cost of sales and All other expenses
+
+O
+
+Other than Cost of sales and/or All other expenses
+
+Q - Payments to associated persons
+
+An associated person is a current or former shareholder or director of the company, or an associate of such a person. Write at item 8 - label Q the amounts paid to associated persons, including:
+
+- salaries
+
+- wages
+
+- commissions
+
+- superannuation contributions
+
+- allowances
+
+- payments in consequence of retirement or termination of employment, paid by a private company to associated persons.
+
+Also include the amounts of salaries and wages paid to associated persons at item 8 - label D Total salary and wage expenses .
+
+Excessive remuneration paid to an associated person may not be deductible and could be treated as an unfranked dividend (see section 109 of the ITAA 1936).
+
+Keep records to establish the reasonableness of remuneration including:
+
+- age, if under 18 years old
+
+- hours worked
+
+- nature of duties performed
+
+- other amounts paid, for example, retiring gratuities, bonuses and commissions
+
+- total remuneration.
+
+G - Gross foreign income
+
+Write at item 8 - label G assessable income derived by the company from foreign sources, grossed up by the amount of the foreign tax withheld or paid at source on that income.
+
+If you report a distribution from a trust at item 8 - label G a completed Trust income schedule 2026 needs to be attached to the company tax return.
+
+R - Net foreign income
+
+Write at item 8 - label R assessable income derived by the company from foreign sources grossed up by the amount of the foreign tax, but net of expenses. This amount includes:
+
+- foreign source capital gains, after offsetting any unapplied capital losses
+
+- assessable dividends paid by a New Zealand company
+
+- income attributable to a dividend from a New Zealand company received from a partnership or trust.
+
+Don't write at label R :
+
+- attributed foreign income (such as attributed income from a controlled foreign company (CFC))
+
+- any amount of Australian franking credits attached to franked distributions received from a New Zealand franking company. Include these amounts at item 7 - label C Australian franking credits from a New Zealand company .
+
+If the amount at label R is a loss, print L in the CODE box.
+
+Foreign losses are not quarantined from domestic assessable income (or from assessable foreign income of a different class) from the first income year starting on or after 1 July 2008.
+
+Foreign source capital gains are made by an Australian resident company if a CGT event happens to any of its overseas CGT assets unless the gains are excluded from assessable income.
+
+Any foreign source capital gains made during the income year should be reported at label R and should also be included as part of the company's total capital gain which is reported at item 7 - label A Net capital gain . For more information on CGT, see the Guide to capital gains tax 2026 .
+
+Don't apply debt deductions other than those attributable to an overseas PE of the taxpayer against foreign source income for the purpose of calculating net foreign income or loss.
+
+The company may need to complete either a:
+
+- Consolidated groups losses schedule
+
+- Losses schedule
+
+If you report a distribution from a trust at item 8 - label R , a completed Trust income schedule 2026 needs to be attached to the company tax return.
+
+Attributed foreign income
+
+Complete item 8 - labels B , U and V to report attributed foreign income.
+
+If you report a distribution from a trust at item 8 - labels B , U , or V , a completed Trust income schedule 2026 needs to be attached to the company tax return.
+
+B - Listed country
+
+Write at item 8 - label B the amount of attributed foreign income from controlled foreign entities in listed countries. Listed countries are included in Regulation 19 of the Income Tax Assessment (1936 Act) Regulation 2015.
+
+Don't include amounts attributed from transferor trusts, see item 8 - label V - Transferor trust .
+
+U - Unlisted country
+
+Write at item 8 - label U the amount of attributed foreign income from controlled foreign entities in unlisted countries. Unlisted countries are countries that are not listed countries in Regulation 19 of the Income Tax Assessment (1936 Act) Regulation 2015 .
+
+Don't include amounts attributed from transferor trusts, see item 8 - label V Transferor trust below.
+
+V - Transferor trust
+
+Write at item 8 - label V the amount of attributed foreign income from transferor trusts. A company has an interest in a transferor trust if the company has ever made, or caused to be made, a transfer of property or services to a non-resident trust. 'Transfer', 'property' and 'services' are defined in section 102AAB of the ITAA 1936. Sections 102AAJ and 102AAK of the ITAA 1936 provide guidance on whether there has been a transfer or deemed transfer of property or services to a non-resident trust.
+
+Taxation of financial arrangements (TOFA)
+
+Complete the TOFA labels T , U and S .
+
+TOFA rules
+
+For the purposes of these instructions, 'TOFA rules' is a reference to the TOFA rules contained in Division 230 of the ITAA 1997, and not to the 'foreign exchange (forex) gains or losses' rules contained in Division 775 of the ITAA 1997.
+
+The TOFA rules found in Division 230 of the ITAA 1997 generally provide for:
+
+- methods of taking into account gains and losses from financial arrangements, being accruals and realisation, fair value, forex retranslation, hedging, and reliance on financial reports and balancing adjustment
+
+- the time when the gains and losses from financial arrangements will be brought to account.
+
+The TOFA rules will apply to the following entities:
+
+- authorised deposit-taking institutions, securitisation vehicles and financial sector entities with an aggregated turnover of $20 million or more
+
+- superannuation entities, managed investment schemes or entities with a similar status to a managed investment scheme under foreign law relating to corporate regulation with assets of $100 million or more
+
+- any other entity (excluding individuals) which satisfies one or more of the following
+
+- an aggregated turnover of $100 million or more
+
+- assets of $300 million or more
+
+- financial assets of $100 million or more.
+
+Once the TOFA rules apply to a company, they will continue to apply to that company, even if its aggregated turnover, value of assets or value of financial assets subsequently falls below the requisite threshold.
+
+A company that doesn't meet these requirements can elect to have the TOFA rules apply to it.
+
+The aggregated turnover tests may mean that the TOFA rules will apply to companies that don't meet the turnover thresholds in their own right. Aggregated turnover includes the annual turnover of any entity a company is connected with, or any affiliate of the company, including overseas entities. See, Taxation Determination TD 2021/7 Income tax: aggregated turnover - calculating the annual turnover of a connected entity or affiliate with a different accounting period to you.
+
+There are a number of elections available to companies under the TOFA rules. Elections under the TOFA rules are irrevocable and should be carefully considered before being made.
+
+For more information about completing the TOFA labels, including at labels T , U and S , see:
+
+- TOFA tax return labels
+
+- TOFA elections
+
+- Guide to taxation of financial arrangements (TOFA)
+
+T - Total TOFA gains
+
+Write at item 8 - label T the total of all assessable TOFA gains from financial arrangements recognised at item 6 and item 7 .
+
+In working out a company's total TOFA gains, take into account the company's assessable TOFA gains from financial arrangements included in any of the following:
+
+- item 6 - label D Gross distribution from partnerships
+
+- item 6 - label E Gross distribution from trusts
+
+- item 6 - label F Gross interest
+
+- item 6 - label H Total dividends
+
+- item 6 - label J Unrealised gains on revaluation of assets to fair value
+
+- item 6 - label R Other gross income
+
+- item 7 - label E TOFA income from financial arrangements not included in item 6 .
+
+U - Total TOFA losses
+
+Write at item 8 - label U the total of all allowable TOFA losses from financial arrangements recognised at item 6 and item 7 .
+
+In working out a company's total TOFA losses, take into account the company's allowable TOFA losses from financial arrangements included in any of the following:
+
+- item 6 - label D Gross distribution from partnerships
+
+- item 6 - label E Bad debts
+
+- item 6 - label V Interest expenses within Australia
+
+- item 6 - label J Interest expenses overseas
+
+- item 6 - label G Unrealised losses on revaluation of assets to fair value
+
+- item 6 - label S All other expenses
+
+- item 7 - label W TOFA deductions from financial arrangements not included in item 6 .
+
+S - TOFA gains
+
+Work out the TOFA gains from unrealised movements in the value of financial arrangements.
+
+Write at item 8 - label S TOFA gains from unrealised movements in the value of financial arrangements the total of all TOFA gains recognised at item 6 as a result of unrealised movements in the value of financial arrangements. A company may have TOFA gains from unrealised movements in the value of financial arrangements as a result of making certain TOFA rules tax-timing method elections.
+
+Continue to: 9 Capital allowances
+
+Return to: Instructions to complete the Company tax return 2026
+
+QC 106450
+
+Print or Download

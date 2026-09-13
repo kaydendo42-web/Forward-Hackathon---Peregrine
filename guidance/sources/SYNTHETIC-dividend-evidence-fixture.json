@@ -1,0 +1,19 @@
+{
+  "id": "SYNTHETIC-dividend-evidence-fixture",
+  "title": "SYNTHETIC TEST FIXTURE - Peregrine demo guidance note: dividend evidence for the 2025-26 income year",
+  "url": null,
+  "retrievedAt": "2026-09-13T07:40:55.249Z",
+  "sha256": "8ec68eba388981949ef5a1b175040055a9737b23af44c79f98b2263369605848",
+  "publishedDate": "2026-09-13",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "synthetic_fixture",
+  "synthetic": true,
+  "covers": [
+    "ALE-DIV-CASH"
+  ],
+  "httpStatus": null,
+  "characters": 3130,
+  "note": "Authored for this demo. Not ATO material and states no real rule. Never present as official guidance."
+}

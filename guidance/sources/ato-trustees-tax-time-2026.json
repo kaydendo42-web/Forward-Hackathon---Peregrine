@@ -1,0 +1,20 @@
+{
+  "id": "ato-trustees-tax-time-2026",
+  "title": "What trustees need to know for Tax Time 2026",
+  "url": "https://www.ato.gov.au/businesses-and-organisations/business-bulletins-newsroom/what-trustees-need-to-know-for-tax-time-2026",
+  "retrievedAt": "2026-09-13T07:40:03.135Z",
+  "sha256": "fbaaed1ee0ec873224cf492d4e3526c900bb0de80d90169c2da101bd4ea661ba",
+  "publishedDate": "2026-05-15T06:10:28.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "TR-DOC",
+    "TR-DIST-ALE",
+    "TR-DIST-SAM"
+  ],
+  "httpStatus": 200,
+  "characters": 4248
+}

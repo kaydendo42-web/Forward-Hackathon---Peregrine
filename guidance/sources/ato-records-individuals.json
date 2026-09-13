@@ -1,0 +1,23 @@
+{
+  "id": "ato-records-individuals",
+  "title": "Records you need to keep",
+  "url": "https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/records-you-need-to-keep",
+  "retrievedAt": "2026-09-13T07:40:03.445Z",
+  "sha256": "f6adc9eff3035d66cada71bda4f3778b2df10508587769aa0e1aa1bfc13e05de",
+  "publishedDate": "2026-06-07T14:00:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-EMP",
+    "ALE-INT",
+    "ALE-DIV-CASH",
+    "ALE-DIV-CREDIT",
+    "SAM-EMP",
+    "SAM-INT"
+  ],
+  "httpStatus": 200,
+  "characters": 18804
+}

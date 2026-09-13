@@ -1,0 +1,22 @@
+{
+  "id": "ato-trust-return-2026",
+  "title": "Statement of distribution - item 58",
+  "url": "https://www.ato.gov.au/forms-and-instructions/trust-tax-return-2026-instructions/instructions-to-complete-the-trust-tax-return-2026/instructions-for-trust-items-33-to-61-and-the-declaration/statement-of-distribution-item-58",
+  "retrievedAt": "2026-09-13T07:40:02.750Z",
+  "sha256": "5e814dd6b9c708050b9df1b6e2371f0ce0aeb98434f9c25449929b1b0199e633",
+  "publishedDate": "2026-05-29T14:00:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "TR-BANK",
+    "TR-INVEST",
+    "TR-DIST-ALE",
+    "TR-DIST-SAM",
+    "TR-DOC"
+  ],
+  "httpStatus": 200,
+  "characters": 89233
+}

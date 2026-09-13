@@ -1,0 +1,22 @@
+{
+  "id": "ato-company-return-2026",
+  "title": "8 Financial and other information",
+  "url": "https://www.ato.gov.au/forms-and-instructions/company-tax-return-2026-instructions/instructions-to-complete-the-company-tax-return-2026/items-6-to-14/8-financial-and-other-information",
+  "retrievedAt": "2026-09-13T07:40:02.618Z",
+  "sha256": "f91e84c6e5009363d1d6d583d0892ed4f16fe9b0a3840cab30264f4d8ed90dec",
+  "publishedDate": "2026-08-02T14:00:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "CO-BANK",
+    "CO-AR",
+    "CO-AP",
+    "CO-ASSET",
+    "CO-LOAN"
+  ],
+  "httpStatus": 200,
+  "characters": 45181
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ato-itr-2026-partnerships-trusts",
+  "title": "13 Partnerships and trusts 2026",
+  "url": "https://www.ato.gov.au/forms-and-instructions/individual-supplementary-tax-return-2026-instructions/income-questions-13-24-supplementary-tax-return-2026/13-partnerships-and-trusts-2026",
+  "retrievedAt": "2026-09-13T07:40:02.303Z",
+  "sha256": "3b37fd9e24564b5e8b5de083b1077b770e8d64e4872956d6431b3698c0ef1bd3",
+  "publishedDate": "2026-05-29T22:36:00.000+00:00",
+  "appliesToYears": [
+    2026
+  ],
+  "sourceStatus": "final_guidance",
+  "synthetic": false,
+  "covers": [
+    "ALE-TRUST",
+    "SAM-TRUST"
+  ],
+  "httpStatus": 200,
+  "characters": 43788
+}

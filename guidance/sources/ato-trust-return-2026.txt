@@ -1,0 +1,1225 @@
+Statement of distribution - item 58
+Instructions to complete item 58 in the tax return, statement of distribution to beneficiaries of the trust.
+Last updated 30 May 2026
+
+Print or Download
+
+Distribution details
+
+The information disclosed in the statement of distribution must be provided to each beneficiary to whom that information relates to allow them to complete their own tax return.
+
+Beneficiaries of closely held trusts need to quote their TFN to the trustee to avoid having amounts withheld from their payments or unpaid entitlements. If a beneficiary doesn't quote their TFN before a payment or entitlement occurs, the trustee must withhold from the payment or entitlement, pay the withheld amount to the ATO and lodge an annual report with details of all withheld amounts.
+
+For more information, see TFN withholding rules for closely held trusts .
+
+If required, the Annual TFN withholding report is lodged separately by either PLS or paper.
+
+Before completing the statement of distribution, see Appendix 11 .
+
+Failure to make a correct trustee beneficiary (TB) statement may result in liability for trustee beneficiary non-disclosure tax (TBNT), currently imposed at the rate of 47%.
+
+Note: A trust can't distribute an overall trust loss, but a statement of distribution may still be needed. For more information, see Trust losses .
+
+Is a beneficiary presently entitled to a share of the income of the trust estate?
+
+The way the net income of a trust is taxed will depend on whether:
+
+- there are beneficiaries presently entitled to a share of the income of a trust estate
+
+- the trust has derived capital gains or franked distributions which the trustee has 'streamed' to specific beneficiaries.
+
+In the absence of the trustee making certain beneficiaries specifically entitled to amounts of capital gains or franked distributions, a resident beneficiary is assessed on the same percentage share of the net income (for tax purposes) of the trust if they are:
+
+- presently entitled to a share of the income of the trust estate (for trust purposes) and
+
+- not under a legal disability.
+
+There are a number of steps in determining whether a beneficiary is presently entitled to a share of the income of the trust.
+
+Step 1: Calculate the income of the trust available for distribution
+
+Determine the total income of the trust that was legally available for distribution to trust beneficiaries in the income year (the distributable income ). This is the amount at item 57 Income of the trust estate - label A .
+
+Step 2: Determine the beneficiary's entitlement to distributable income
+
+Determine the amount of the trust's distributable income that the beneficiary was presently entitled to at any time during the year, even if it has been paid or applied on their behalf. A beneficiary's entitlement to income may be prescribed by the trust deed, or it may depend on the exercise of a trustee's discretion.
+
+A beneficiary will be deemed to be presently entitled to the income of a trust estate if they have an indefeasible vested interest in that income. An indefeasible interest is one that can't be brought to an end or varied. For example, it isn't able to be varied by the exercise of a power by the trustee or another person. A vested interest is one that presently exists. However, it can be either a present right or one that can be enjoyed in the future.
+
+The principal beneficiary of a special disability trust is considered to be presently entitled to all of the income of the trust estate. For more information, see Completing a trust tax return for a special disability trust .
+
+Step 3: Calculate the beneficiary's percentage share of the distributable income
+
+Convert each beneficiary's entitlement to the distributable income to a percentage share of the total distributable income. This percentage share is relevant in working out the amount of the trust's net income (for tax purposes) that's assessed to a beneficiary (or to the trustee on the beneficiary's behalf where the beneficiary is under a legal disability or is a non-resident at the end of the income year). It is also relevant to the allocation of certain types of income, tax credits and other trust amounts to beneficiaries.
+
+A beneficiary will also be taken to be presently entitled to any income they are paid or that's applied on their behalf, at the discretion of the trustee.
+
+Step 4: Apply relevant adjustments
+
+If allowed by the trust deed, the trustee of a trust may stream a trust's capital gains and franked distributions to beneficiaries for tax purposes by making them specifically entitled to the amounts (see Streaming trust capital gains and franked distributions ). Broadly, beneficiaries who are made specifically entitled to the trust's capital gains will be taken to have made capital gains referable to so much of those gains as are included in the trust's net income (with appropriate adjustments for any CGT discounts or concessions). Beneficiaries who are made specifically entitled to the trust's franked distributions will be assessed on so much of those distributions as are included in the trust's net income, as well as on any corresponding franking credits.
+
+In these circumstances, work out how much of the balance of the trust's net income for tax purposes (that is, excluding capital gains and franked distributions that any entity is specifically entitled to) is assessed to relevant beneficiaries or the trustee. To work this out, the trustee will generally need to use the beneficiaries (or trustee's) adjusted Division 6 percentage share instead of their percentage share of distributable income calculated at step 3 .
+
+The adjusted Division 6 percentage is broadly worked out as:
+
+- the income of the trust estate to which a beneficiary is presently entitled ignoring any franked distributions and capital gains to which they are specifically entitled
+
+- divided by the income of the trust calculated on the assumption that it excludes any capital gains or franked distributions to which any entity is specifically entitled.
+
+For a trustee, if the sum of the adjusted Division 6 percentage of all beneficiaries is less than 100%, the difference is the trustee's adjusted Division 6 percentage.
+
+The streaming rules don't apply to AMITs or CCIV sub-fund trusts that meet the requirements to be an AMIT, which are subject to the separate attribution rules that enable capital gains and franked distributions to be attributed to members for tax purposes (see Managed investment trusts: election into capital treatment ).
+
+Trustees of trusts that didn't stream capital gains and franked distributions to beneficiaries (or the trustee) for tax purposes in 2025-26, or weren't in receipt of franked distributions or capital gains in 2025-26, don't calculate an adjusted Division 6 percentage and, instead, just use each beneficiary's percentage share of distributable income calculated above.
+
+These adjustments can only apply if total net income of the trust for tax purposes is greater than zero.
+
+For more information, see Trusts .
+
+Is there income of the trust estate to which no beneficiary is presently entitled?
+
+Include at the end of item 58 Income to which no beneficiary is presently entitled that part of the net (taxable) income of the trust at item 26 Total net income or loss that hasn't been assessed to either:
+
+- a beneficiary
+
+- the trustee on behalf of a beneficiary who is presently entitled to a share of the income of the trust but is either
+
+- not a resident at the end of the income year
+
+- under a legal disability.
+
+The trustee also prints X in the Yes box at Is any tax payable by the trustee? on page 2 of the trust tax return.
+
+Generally, to work out the amount to record at labels A , B , U , F , G and H under Income to which no beneficiary is presently entitled at the end of item 58 :
+
+- convert the amount of the trust's distributable income to which no beneficiary is presently entitled as a percentage of the total distributable income, and
+
+- multiply this result by the component of the trust's net income that relates to each entry.
+
+If the trust has beneficiaries (or the trustee) that are specifically entitled to amounts of capital gains or franked distributions, the amount recorded at labels A , B , U , F , G and H under Income to which no beneficiary is presently entitled at the end of item 58 will need to be calculated having regard to the adjusted Division 6 percentage share of the income of the trust.
+
+For more information, see Trusts .
+
+The trustee is assessable under section 99A of the ITAA 1936 and is liable to pay tax at the highest marginal rate on that part of the net income of the trust that hasn't been assessed to a beneficiary or to the trustee on a beneficiary's behalf. The applicable tax rate is the highest marginal rate of tax for resident individuals.
+
+However, section 99A of the ITAA 1936 will not apply if the Commissioner thinks it would be unreasonable for the special rate of tax to apply to the net income of a trust estate that:
+
+- resulted from the will or intestacy of a deceased person
+
+- consists of property either of a bankrupt vested in the official receiver in bankruptcy or that's being administered under Part XI of the Bankruptcy Act 1966 (as amended)
+
+- consists of property that was transferred to the trustee for the benefit of the beneficiary
+
+- by way of, or in satisfaction of a claim for, damages for loss of parental support, personal injury, disease, or physical or mental impairment
+
+- by way of workers or criminal injury compensation
+
+- directly as a result of the death of a person and from the proceeds of a life assurance policy, a superannuation fund or an employer of the deceased person
+
+- out of a public fund established and maintained exclusively for the relief of persons in necessitous circumstances
+
+- as a result of a family breakdown (see section 102AGA of the ITAA 1936 for when the transfer of property is as a result of a family breakdown).
+
+Where the Commissioner exercises his discretion that it would be unreasonable for section 99A to apply to the trust for an income year, the trustee will pay tax at concessional rates.
+
+For deceased estates that are resident trust estates and in respect of which the Commissioner has exercised his discretion:
+
+- for the first 3 income years including the income year the deceased died, the general individual tax rates incorporating the tax free threshold will apply (this concessional treatment can't be extended)
+
+- for the fourth and subsequent years , modified individual tax rates apply where the benefit of the tax-free threshold isn't available.
+
+For other resident trust estates in respect of which the Commissioner has exercised his discretion to not apply section 99A in assessing the trustee, the modified individual tax rates also apply.
+
+Requesting an exercise of the Commissioner's discretion
+
+If you would like the Commissioner's discretion to be exercised, submit full details in support of the request including:
+
+- if the trust resulted from the will or intestacy of a deceased person - whether the trust is a deceased estate or a testamentary trust
+
+- if the trust is a testamentary trust
+
+- the name of the deceased person
+
+- the date of death of the deceased person
+
+- the clauses in the will that instruct for the creation of the trust
+
+- details of the balance sheet capital accounts
+
+- details of any unpaid present entitlements of the trust
+
+- whether the trust property consists only of
+
+- property vested in the trustee as the result of a will
+
+- property that represents accumulations of income or capital from the above property
+
+- property from the sale of any of the above property
+
+- property from the re-investment of any of the above property
+
+- if shares are held in private companies and special rights attach directly or indirectly to those shares, a statement showing
+
+- the name of the company
+
+- the class and paid-up value of the shares
+
+- details of the special rights
+
+- whether those rights have been exercised during the year
+
+- if a loan has been made to or by the trust, a statement showing the nature of the debt, the terms of the loan and the borrower's or lender's full name, address and family relationship, if any, to the beneficiaries
+
+- full details for such loans if relatives of the beneficiaries or other persons not at arm's length have made loans to a private company in which the trust holds shares, or to a partnership in which the trustee is a partner
+
+- the names of any other trusts to which the person has contributed in the ways mentioned or in which the beneficiaries of the trust lodging this tax return are interested
+
+- this information need not be furnished for public securities, debentures in public companies and loans made in normal commercial transactions where the parties are at arm's length
+
+- if a person, other than in a purely commercial transaction at arm's length, has directly or indirectly transferred money or property to the trust, conferred benefits on the trust or conferred special privileges on the property of the trust, the full name and address of the person and the family relationship, if any, of that person to the beneficiaries
+
+- names of any other trusts to which the person referred to in the 2 previous dot points has contributed in the ways mentioned in those sub-paragraphs or in which the beneficiaries of the trust lodging this tax return are interested
+
+- details of property which has been transferred to a trust by a relative of the beneficiaries, and income from that property which must or may be used to pay for that property
+
+- if the trustee is a discretionary object in relation to another trust the details of any distributions of income or capital received from the other trust
+
+- reasons why the trustee is not making distributions and is instead accumulating amounts within the trust.
+
+In exercising the discretion, the Commissioner will consider whether any tax is avoided under the arrangement, and whether the arrangement is achieving legitimate and reasonable family and business objectives. Where relevant, the Commissioner would also consider whether the arrangement is for the good of the public generally or arises out of an exercise of public duty.
+
+If the Commissioner has previously exercised the discretion in relation to the trust, provide on a separate sheet of paper the reference number and the income years the discretion was exercised for. Alternatively, you can attach a copy of the decision you received.
+
+Attach the statement to the tax return and print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return.
+
+Can trust capital gains be reduced?
+
+Can trust capital gains be reduced by the CGT discount and/or the small business 50% reduction where there is income to which no beneficiary is presently entitled?
+
+If the trustee is assessable under section 99A of the ITAA 1936 on some or all of the net income of the trust, capital gains included in that part of the trust's net income aren't eligible for the CGT discount and the small business 50% reduction (see section 115-222 of the ITAA 1997).
+
+If the trustee is assessable under section 99A of the ITAA 1936 on some or all of the net income of the trust and the amount on which the trustee is assessed includes a capital gain to which either (but not both) the CGT discount or the small business 50% reduction has been applied, work out the amount assessable to the trustee as if the part attributable to the capital gain was double the amount it actually is.
+
+If the trustee is assessable under section 99A of the ITAA 1936 on some or all of the net income of the trust, and the amount on which the trustee is assessed includes a capital gain to which both the CGT discount and the small business 50% reduction have been applied, work out the amount assessable to the trustee under section 99A as if the part attributable to the capital gain was 4 times the amount it actually is.
+
+Provide a statement on a separate sheet of paper showing details of the amount assessable under section 99A using the above method.
+
+Attach the statement to the tax return and print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return.
+
+Has the trust received an employment termination payment (ETP) or superannuation lump sum?
+
+Include death benefit ETPs and superannuation lump sums on the statement of distribution at label B Non-primary production under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The trustee is liable to pay the tax, if any, on these amounts. The amount of tax payable by the trustee depends on the components of the ETP or superannuation lump sum and the extent that the dependants of the deceased have benefitted from the estate. For more information on ETPs and superannuation lump sums, see item 13 Superannuation lump sums and employment termination payments .
+
+Has the trust received a listed investment company (LIC) capital gain amount?
+
+If the following persons or entities are beneficiaries and the trustee claimed a deduction in respect of a LIC capital gain amount in calculating the trust's net income for tax purposes, the trustee must advise these beneficiaries of their share of the deduction:
+
+- trustee of a trust
+
+- trustee of a superannuation entity
+
+- company (including a life insurance company)
+
+- partnership.
+
+Each beneficiary's share of the deduction is so much of that deduction as is reflected in their share of the net income of the trust.
+
+Completing item 58
+
+The total of the amounts at labels N , A , B , U , F , G and H on this statement equals the amount at item 26 Total net income or loss , except in the case:
+
+- of certain ETPs, as covered in item 13 Superannuation lump sums and employment termination payments
+
+- where a beneficiary's or a trustee's share of franking credits at label N has been reduced because of an entitlement to a foreign income tax offset
+
+- where part of the net income isn't taxable either to the trustee or beneficiary.
+
+If part of the net income isn't taxable to either the trustee or a beneficiary, for example, where it isn't attributable to sources in Australia and it relates to a share of income that a non-resident beneficiary, who isn't the trustee of another trust, is entitled to:
+
+- attach a statement highlighting this to the tax return
+
+- print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return
+
+- include the information outlined at Non-resident beneficiaries .
+
+If part of a distribution isn't taxable to either the trustee or a beneficiary, for example, the distribution to a non-resident beneficiary includes dividends, interest, or royalties on which withholding tax has been withheld and remitted to us, franked dividends excluded from non-resident withholding tax, or a distribution to a foreign resident which requires an Australian managed investment trust to withhold an amount:
+
+- attach a statement highlighting this to the tax return
+
+- print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return
+
+- include the information outlined at Non-resident beneficiaries .
+
+Trust losses
+
+A trust can't distribute an overall trust loss. In these circumstances, there will be no income of the trust estate to which any beneficiary can be presently entitled, which will generally result in the trustee being assessed on any net income of the trust for tax purposes, if there is any.
+
+However, a beneficiary may still be able to be made specifically entitled to (and assessed in respect of) a capital gain if it forms part of the capital of the trust rather than being included in the calculation of trust income.
+
+You may still need to record certain information on the statement of distribution for the purposes of certain primary production concessions. See Beneficiaries of primary production trusts that report a loss .
+
+If the trust has overall income, but has a negative net income for tax purposes, it can't distribute that tax loss to beneficiaries.
+
+Beneficiary details
+
+Use these instructions to complete the beneficiary details:
+
+- If the number of beneficiaries exceeds 3
+
+- Beneficiary 1, Beneficiary 2, Beneficiary 3
+
+- Entity code
+
+- Assessment calculation code
+
+- Share of income of the trust estate
+
+- Share of credit for tax withheld - foreign resident withholding
+
+- Australian franking credits from a New Zealand franking company
+
+- Share of income - Primary production and Non-primary production
+
+- PP - NCMI
+
+- PP - Excluded from NCMI
+
+- Non-PP - NCMI
+
+- Non-PP - Excluded from NCMI
+
+- Credit for tax withheld where ABN not quoted
+
+- Franked distributions
+
+- Franking credit
+
+- TFN amounts withheld
+
+- Share of credit for TFN amounts withheld from payments from closely held trusts
+
+- Capital gains
+
+- Gross capital gain
+
+- Capital losses applied
+
+- CGT discount applied
+
+- CGT small business concessions applied
+
+- NCMI Capital gains
+
+- Excluded from NCMI capital gains
+
+- Share of credit for foreign resident capital gains withholding amounts
+
+- Attributed foreign income
+
+- Other assessable foreign source income
+
+- Foreign income tax offset
+
+- Share of National Rental Affordability Scheme tax offset
+
+- Early stage venture capital limited partnership (ESVCLP) tax offset
+
+- Early stage venture capital limited partnership tax offset carried forward from previous year
+
+- Early stage investor tax offset
+
+- Early stage investor tax offset carried forward from previous year
+
+- Div 6AA Eligible income
+
+If the number of beneficiaries exceeds 3
+
+For paper tax returns, if there are more than 3 beneficiaries, photocopy extra pages and complete the statement of distribution for each additional beneficiary.
+
+Attach the additional beneficiary details to the tax return and print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return.
+
+Complete the statement of distribution even for those beneficiaries under a legal disability on whose behalf the trustee will be assessed.
+
+Beneficiary 1, Beneficiary 2, Beneficiary 3
+
+For each beneficiary presently entitled or having an indefeasible and vested interest in trust income, show the following details.
+
+Individuals
+
+For individual beneficiaries, show:
+
+- tax file number (TFN)
+
+- full name, including title, family name, and given names
+
+- residential address (street address, not a PO Box)
+
+- date of birth
+
+- entity type code .
+
+Non-individuals
+
+for non-individuals, show:
+
+- TFN
+
+- full name of entity - for example, ABC Trust
+
+- business address (street address not a PO Box)
+
+- entity type code .
+
+Entity code
+
+Print the appropriate code for the beneficiary entity type at label U Entity code (next to the TFN):
+
+- C - Company
+
+- F - Fund
+
+- I - Individual
+
+- P - Partnership
+
+- S - Self-managed super fund
+
+- T - Trust.
+
+Ensure you complete these details fully and in the correct area.
+
+Example 11: beneficiary is a company
+
+If the beneficiary is a company, then complete the details as:
+
+- Tax file number: 123 456 789
+
+- Entity code: C
+
+- Non-individual name: John Smith Pty Ltd
+
+- Business address: 123 Brown Street
+
+- Suburb/town: Melbourne
+
+- State/territory: Vic
+
+- Postcode: 3000
+
+End of example
+
+Assessment calculation code
+
+Show at label V Assessment calculation code an assessment calculation code from Appendix 12 for:
+
+- each beneficiary presently entitled to a share of the income of the trust (even those beneficiaries under a legal disability on whose behalf the trustee will be assessed)
+
+- income to which no beneficiary is presently entitled and in which no beneficiary has an indefeasible vested interest.
+
+Bankrupt estates are lodged under assessment calculation code 37 .
+
+Share of income of the trust estate
+
+Show at label W Share of income of the trust estate each beneficiary's share of the income of the trust estate recorded at item 57 Income of the trust estate - label A to which they are presently entitled.
+
+A beneficiary's entitlement to income may be prescribed by the trust deed, or it may depend on the exercise of a trustee's discretion. A beneficiary will be taken to be presently entitled to any income they are paid or that's applied on their behalf, at the discretion of the trustee.
+
+A beneficiary will be deemed to be presently entitled to the income of a trust estate if they have an indefeasible vested interest in that income. An indefeasible interest is one that can't be brought to an end or varied, for example, it isn't able to be varied by the exercise of a power by the trustee or another person. A vested interest is one that presently exists. However, it can be either a present right or one that can be enjoyed in the future.
+
+The principal beneficiary of a special disability trust is considered to be presently entitled to all of the income of the trust estate. For more information, see item 57 Income of the trust estate .
+
+Share of credit for tax withheld - foreign resident withholding
+
+You complete label L if the trust is a non-resident trust and completed either:
+
+- Item 6 Tax withheld - label U Credit for tax withheld - foreign resident withholding (excluding capital gains)
+
+- item 8 Partnerships and trusts - label U Share of credit for tax withheld - foreign resident withholding (excluding capital gains).
+
+Show at label L Share of credit for tax withheld - foreign resident withholding (excluding capital gains) each beneficiary's share of credit for tax withheld where income of the trust is subject to foreign resident withholding.
+
+Except for relevant trusts that have made beneficiaries specifically entitled to franked distributions or capital gains, you work out a beneficiary's share of the credit by multiplying the amount of tax withheld by the beneficiary's percentage share of the trust income. Show whole dollars only.
+
+For trusts that have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of the credit by multiplying the amount of tax withheld by their adjusted Division 6 percentage share . Show whole dollars only.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the amount of tax withheld at label L under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+If the trust has no net income, the beneficiaries aren't entitled to a share of the credit for tax withheld. Instead, show the sum of the amounts withheld at label L under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of the amounts at label L must equal the total amount of credit shown on the tax return at item 6 Tax withheld - label U Credit for tax withheld - foreign resident withholding (excluding capital gains) and item 8 Partnerships and trusts - label U Share of credit for tax withheld - foreign resident withholding (excluding capital gains) .
+
+Don't include any amounts of foreign resident capital gains withholding at label L . This amount should be included at label Z Share of credit for foreign resident capital gains withholding amounts .
+
+Australian franking credits from a New Zealand franking company
+
+Show at label N Australian franking credits from a New Zealand franking company the beneficiary's share of the Australian franking credit received from a New Zealand franking company, including any amounts received through another trust or a partnership. The beneficiary's share of this credit is broadly calculated as the total of:
+
+- the credit attaching to any part of the relevant distribution from the New Zealand franking company to which the beneficiary is specifically entitled , plus
+
+- the beneficiary's adjusted Division 6 percentage of the credit attaching to any part of the relevant distribution to which no beneficiary is specifically entitled .
+
+The amount at label N isn't necessarily the amount that can be claimed by each beneficiary.
+
+If the beneficiary is under a legal disability, the trustee will be assessed; see above. In these circumstances, include at label N in the beneficiary's statement of distribution the amount of Australian franking credits attached to a New Zealand franking company dividend allowed to the trustee.
+
+If there are relevant distributions to which no beneficiary is presently entitled, include the trustee's share of the Australian franking credits attached to a dividend paid by a New Zealand franking company at label N under Income to which no beneficiary is presently entitled at the end of item 58 . The trustee's share is worked out in the same way as their share of the franking credit on a franked distribution by an Australian company; see below.
+
+Under section 220-405 of the ITAA 1997, the Australian franking credits may be reduced by the relevant part of the supplementary dividend paid by the New Zealand franking company if:
+
+- the supplementary dividend was paid in connection with the franked dividend, and
+
+- the beneficiary under a legal disability or trustee is entitled to a foreign income tax offset because the franked dividend is included in their assessable income; for more information, see Appendix 1 .
+
+Amounts shown at label N aren't included at label D Franking credit .
+
+Share of income - Primary production and Non-primary production
+
+Show at label A Primary production and label B Non-primary production each beneficiary's share of the trust's primary production income and non-primary production income included in the net income of the trust for tax purposes, except to the extent that these amounts are recorded at other labels, at item 58 (outside of the Share of income section).
+
+The trust's primary production income is generally indicated at item 5 Business income and expenses and item 8 Partnerships and trusts , less any primary production deductions.
+
+The trust's non-primary production income is the amount shown at item 26 Total net income or loss , less:
+
+- primary production income as calculated above
+
+- amounts attributable to capital gains (shown at item 21 Capital gains )
+
+- foreign income included at item 22 Attributed foreign income and item 23 Other assessable foreign source income .
+
+All of these amounts are shown at separate labels on the statement of distribution.
+
+While the trust's non-primary production income includes franked distributions, for the purpose of recording beneficiaries' shares of franked distributions included in the net income of the trust on the statement of distribution, these amounts shouldn't be shown at label B . Franked distributions (both fully and partially franked) should be shown at label U Franked distributions on the distribution statement. Unfranked distributions should continue to be shown at label B .
+
+If the trust carries on a business of primary production and has disposed of Australian Carbon Credit Units (ACCUs), for beneficiaries who are individuals include at label A (Primary production) of the statement of distribution their share of the net income of the trust attributable to the sale of the ACCUs if:
+
+- the individual doesn't hold their interest as a trustee
+
+- the individual is taken to carry on a business of primary production because they are the beneficiary of the trust for the purpose of the farm management deposit or tax averaging rules
+
+- the trust started to hold the ACCUs on or after 1 July 2022
+
+- either
+
+- the units were issued to the trust by the Clean Energy Regulator in relation to an eligible offsets project, or
+
+- under an arrangement with a carbon service provider (CSP), the ACCUs were transferred to the trust by the CSP and were issued to the CSP under the Carbon Credits (Carbon Farming Initiative) Act 2011 in relation to an eligible offsets project on or after 1 July 2022.
+
+At all times while the eligible offsets project is carried on, the trust must have carried on a primary production business in the same area as the eligible offsets project or in an area connected to where the eligible offsets project is carried on.
+
+Don't include these amounts at label B Non-primary production of the statement of distribution. The trust will still include these amounts at label H (in the Trust tax return, item 5 , Other business income, Non-primary production). For more information, see Taxation of Australian carbon credit units for primary producers .
+
+The amount shown at label A is worked out by multiplying the primary production income by the beneficiary's percentage share of the trust's income or adjusted Division 6 percentage share, in the case of relevant trusts with capital gains or franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part.
+
+The amount shown at label B is worked out by multiplying the non-primary production income by the beneficiary's percentage share of the trust's income for trusts that:
+
+- didn't receive franked distributions either directly or indirectly through a partnership or trust during the income year, and
+
+- didn't have any capital gains that any beneficiary (or the trustee) was specifically entitled to.
+
+The non-primary production income amount you show at label B will need to be worked out differently if the trust is a relevant trust with capital gains or franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part.
+
+For relevant trusts with capital gains or franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part, the amount you show at label B in respect of a beneficiary should include the beneficiary's adjusted Division 6 percentage of all other non-primary production income of the trust, excluding franked distributions.
+
+Franked distributions are shown at label U Franked distributions , see Franked distributions .
+
+For more information, see Trusts .
+
+If the shares or interests aren't held at risk as required under the holding period and related payments rules, or there is other manipulation of the imputation system, don't include the relevant franking credits here or at label D Franking credit on the statement of distribution at this item.
+
+For more information, see Appendix 1 and Qualified person test .
+
+The amounts shown at labels A and B under any calculation method may be different from the primary production and non-primary production income actually distributed to the beneficiary, or which they were entitled to receive from the trust.
+
+If the trust made a loss from its primary production or non-primary production activities, print L in the box to the right of label A and B , as appropriate. The total of the amounts shown at label N , A , B , U , F , G and H should be a positive amount, because trusts can't distribute losses.
+
+Beneficiaries of primary production trusts that report a loss
+
+Eligible primary producer beneficiaries can access income averaging and hold a farm management deposit in years even where a primary production trust reports a loss for trust purposes.
+
+What you are required to show at label A will depend on the type of trust that has made the loss for trust purposes.
+
+Fixed trusts
+
+If the trust is a fixed trust, all the eligible beneficiaries are able to access income averaging and hold farm management deposit.
+
+Discretionary trusts
+
+If the trust is a discretionary trust, the trustee will need to choose those beneficiaries who will still be eligible for the concessions.
+
+Trustees may choose beneficiaries who will be eligible for income averaging or hold farm management deposits.
+
+The trustee's choices must be:
+
+- made in writing
+
+- signed by both the trustee and the beneficiary
+
+- made by the time that the trust return is lodged (unless the Commissioner allows a later time).
+
+The trustee may choose the greater of either:
+
+- 12 beneficiaries
+
+- the number of primary producer beneficiaries chosen in the previous income year.
+
+How to complete primary production
+
+Print 0 (zero) at label A Primary production for each eligible beneficiary, that is:
+
+- all fixed trust beneficiaries
+
+- each chosen discretionary trust beneficiary eligible for income averaging.
+
+If, as a result of the trustee's choices, a primary producer is eligible to access farm management deposits but isn't eligible for income averaging, don't show anything at label A for that beneficiary.
+
+For more information, see:
+
+- Tax averaging for primary producers
+
+- Farm management deposits scheme
+
+PP - NCMI
+
+If you showed an amount at item 32 Non-concessional MIT income (NCMI)
+
+Show at label A1 PP - NCMI the total share of primary production NCMI for the relevant beneficiary of the trust.
+
+The total distributed to all beneficiaries at label A1 can't be greater than the total at item 32 - label A , E and G Non-concessional MIT income (NCMI) .
+
+PP - Excluded from NCMI
+
+Show at label A2 PP - Excluded from NCMI the total share of primary production income excluded from NCMI for the relevant beneficiary of the trust.
+
+The total distributed to all beneficiaries at label A2 can't be greater than the total at item 32 - label B , F and H Excluded from NCMI .
+
+Non-PP - Managed investment scheme amount
+
+Non-primary production managed investment scheme (MIS) amounts refer to income from investments not related to agriculture, forestry, or fishing, such as property trusts, share funds, and cash management trusts. Examples include interest, dividends, franked distributions, and rental income from property schemes.
+
+Show at label B1 - Non-PP MIS amount the portion of B Non-primary production income that is investment income distributed to the relevant beneficiary of the trust.
+
+Non-PP - NCMI
+
+Show at label B2 Non - PP NCMI the portion of non-primary production NCMI distributed to the relevant beneficiary of the trust.
+
+The total distributed to all beneficiaries at label B2 can't be greater than the total at item 32 - label C , I and K Non-concessional MIT income (NCMI) .
+
+Non-PP - Excluded from NCMI
+
+Show at label B3 Non - PP Excluded from NCMI the portion of non-primary production income excluded from NCMI distributed to the relevant beneficiary of the trust.
+
+The total amount distributed to all beneficiaries at label B3 can't be greater than the total at item 32 - label D , J and L Excluded from NCMI .
+
+Credit for tax withheld where ABN not quoted
+
+Show at label C Credit for tax withheld where ABN not quoted each beneficiary's share of credit for tax withheld where an ABN wasn't quoted.
+
+Except for relevant trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you work out a beneficiary's share of the credit by multiplying the amount of tax withheld by the beneficiary's percentage share of the trust income. Show whole dollars only.
+
+For trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of the credit by multiplying the amount of tax withheld by their adjusted Division 6 percentage share. Show whole dollars only.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the amount of tax withheld at label C under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+If the trust has no net income, the beneficiaries aren't entitled to a share of the credit for tax withheld. Instead, show the sum of the amounts withheld at label C under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of label C amounts for each completed statement of distribution equals the sum of any credit claimed at:
+
+- item 6 Tax withheld - label T Tax withheld where ABN not quoted
+
+- item 8 Partnerships and trusts - label C Share of credit for tax withheld where ABN not quoted .
+
+Franked distributions related to investment amounts
+
+Show at label U2 - Franked distribution related to investment the portion of label U Franked distribution income that is investment income distributed to the relevant beneficiary.
+
+Franked distributions
+
+Show at label U Franked distributions each beneficiary's share of franked distributions, to the extent they formed part of the net income of the trust for tax purposes. The amount you show at label U also includes the beneficiary's share of attached franking credits (the franking credit 'gross-up').
+
+Trusts which haven't made beneficiaries (or the trustee) specifically entitled to franked distributions generally work out a beneficiary's share of the franked distributions by multiplying the total amount of the trust's franked distributions (and any attached franking credits) to the extent to which those distributions formed part of the net income of the trust estate for tax purposes by the beneficiary's percentage share of the trust income. Show whole dollars only.
+
+For relevant trusts with franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part, the amount you show at label U in respect of a beneficiary should generally include:
+
+- the amount of the net franked distributions that the beneficiary is specifically entitled (net franked distributions are determined by reducing the franked distributions by expenses that are directly relevant to them), to the extent that those distributions formed part of the net income of the trust estate for tax purposes, plus any attached franking credits, plus
+
+- the beneficiary's adjusted Division 6 percentage share of any net franked distributions of the trust that no beneficiary is specifically entitled to the extent that those distributions formed part of the net income of the trust estate for tax purposes, plus that same share of any attached franking credits.
+
+Rateable Reduction
+
+The reduction applies if the sum of the franked distributions (less directly relevant deductions) and net capital gain of the trust exceeds the net income of the trust (excluding franking credits).
+
+The adjustment has the effect that the capital gains (before reversing any discounts or Small Business Concessions) and franked dividends of the trust that are assessed to the beneficiaries and trustee will not exceed the amount of the net income of the trust.
+
+When rateable reduction applies to franked distributions the adjustment amount is subtracted from the amount that would have been reported at label U , and not reported as a negative amount at label A or B in the Trust statement of distribution, noting that rateable reduction doesn't reduce the franking credits attached to the franked distributions.
+
+If you have more than one beneficiary where rateable reduction applies the reduction is apportioned across all beneficiaries proportionately.
+
+For more information, see Trusts .
+
+While dividends from a New Zealand franking company are taken into account when calculating a beneficiary's share of franked distributions, the New Zealand franking company dividend amount (and associated franking credits) shouldn't be included at label U . Show the New Zealand franking company dividend amount at label H Other assessable foreign source income .
+
+The total amount of franking credits (the franking credit 'gross-up') included at this label for a beneficiary would generally equal the total of the credits at label D Franking credit .
+
+If the shares or interests aren't held at risk as required under the holding period and related payments rules, or there is other manipulation of the imputation system, don't include the relevant franking credits here or at label D .
+
+For more information, see Appendix 1 and Qualified person test .
+
+Franking credit
+
+For trusts that didn't make any beneficiary (or the trustee) specifically entitled to franked distributions, the amount shown at label D Franking credit is worked out by:
+
+- multiplying the total franking credits included in the trust's net income
+
+- at item 8 Partnerships and trusts - label D Share of franking credits from franked distributions and
+
+- at item 12 Dividends - label M Franking credit
+
+- by the beneficiary's percentage share of the trust income (include cents).
+
+The amount shown at label D will need to be worked out differently if the trust is a relevant trust with franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part.
+
+For relevant trusts with capital gains or franked distributions that any beneficiary (or the trustee) is specifically entitled to in full or in part, the amount shown at label D in respect of a beneficiary should include:
+
+- any franking credits attaching to franked distributions to which the beneficiary is specifically entitled , to the extent to which those distributions formed part of the net income of the trust estate for tax purposes, plus
+
+- the beneficiary's adjusted Division 6 percentage share of any franking credits attaching to any part of the franked distributions forming part of the net income of the trust estate, to which no beneficiary is specifically entitled .
+
+If the trustee is assessable on a part of the net income under section 99 or 99A, the trustee may have a share of the franking credit on the dividend. To work out the trustee's entitlement, express that part of the dividend in respect of which no beneficiary has an entitlement as a percentage of the total dividend. Multiply the result by the amount of the franking credit on that dividend at label D under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of label D amounts for each completed statement of distribution must equal the sum of franking credits claimed at:
+
+- item 8 Partnerships and trusts - label D Share of franking credits from franked distributions
+
+- item 12 Dividends - label M Franking credit .
+
+Amounts shown at label N Australian franking credits from a New Zealand franking company aren't included at label D .
+
+For more information, see Appendix 1 and Trusts .
+
+TFN amounts withheld
+
+Show at label E TFN amounts withheld each beneficiary's share of credit for amounts withheld from payments of interest, dividends and unit trust distributions by investment bodies because the recipient didn't quote a TFN. Include cents.
+
+Except for relevant trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you work out a beneficiary's share of the credit by multiplying the amount of tax withheld by the beneficiary's percentage share of the trust income.
+
+For trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of the credit by multiplying the amount of tax withheld by their adjusted Division 6 percentage share.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the credit for the TFN amounts withheld at label E under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+Where the trustee claims the credit withheld on behalf of presently entitled beneficiaries under a legal disability, the beneficiary must not also claim this amount on their income tax return.
+
+If the trust has no net income, the beneficiaries don't have a share of credit for the TFN amounts withheld. Instead, show the total of the TFN amounts at label E under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The amounts at label E for each completed statement of distribution must equal the sum of TFN amounts withheld on interest, dividends and unit trust distributions at:
+
+- item 8 Partnerships and trusts - label E Share of credit for TFN amounts withheld from interest, dividends and unit trust distributions
+
+- item 11 Gross interest - label I TFN amounts withheld from gross interest
+
+- item 12 Dividends - label N TFN amounts withheld from dividends .
+
+Share of credit for TFN amounts withheld from payments from closely held trusts
+
+Show at label O Share of credit for TFN amounts withheld from payments from closely held trusts each beneficiary's share of credit for any amount withheld by the trustee of a closely held trust from a distribution made to you as a trustee beneficiary, because a TFN wasn't provided. Include cents.
+
+Except for relevant trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you work out a beneficiary's share of the credit by multiplying the amount of tax withheld by the beneficiary's percentage share of the trust income.
+
+For trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of the credit by multiplying the amount of tax withheld by their adjusted Division 6 percentage share.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the credit for the TFN amounts withheld from payments from closely held trusts at label O under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+If the trust has no net income, the beneficiaries aren't entitled to a share of the credit for tax withheld. Instead, show the total of the amounts withheld at label O under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total amounts at label O for each completed statement of distribution must equal the total of TFN amounts withheld on closely held trust distributions shown at item 8 Partnerships and trusts - label O Credit for TFN amounts withheld from payments from closely held trusts on the trust return. Include cents.
+
+Don't show at label O any amounts you have withheld, as the trustee of a closely held trust, from payments or distributions where the beneficiary hasn't provided their TFN to you. These should be reported at label T Total TFN amounts withheld from payments under Annual Trustee Payment report information .
+
+For more information on the TFN withholding rules for closely held trusts, see TFN withholding for closely held trusts .
+
+Capital gains
+
+Show at label F Capital gains each beneficiary's share of the trust's (net) capital gains. Show whole dollars only.
+
+Table: CGT calculation elements for label F Capital gains
+
+Label
+
+Calculation element
+
+Amount
+
+F1
+
+Gross capital gain
+
+$
+
+F2
+
+Capital losses applied
+
+$
+
+F3
+
+CGT discount applied
+
+$
+
+F4
+
+CGT small business concessions applied
+
+$
+
+F
+
+F1 &minus; F2 &minus; F3 &minus; F4 = F Capital gains
+
+$
+
+Except for relevant trusts which have made beneficiaries (or the trustee) specifically entitled to capital gains, you work out a beneficiary's share of capital gains by multiplying:
+
+- the amount of the trust's capital gains, to the extent that it forms part of the net income of the trust estate for tax purposes, by
+
+- the beneficiary's percentage share of the trust income.
+
+For a relevant trust which has made beneficiaries (or the trustee) specifically entitled to capital gains the amount shown at label F is:
+
+- the total of the beneficiary's share of capital gains that the beneficiary is specifically entitled, to the extent that it forms part of the net income of the trust estate for tax purposes
+
+- plus the beneficiary's adjusted Division 6 percentage share of any capital gains that no beneficiary is specifically entitled, to the extent they form part of the net income of the trust.
+
+If a rateable reduction is reported, it should be apportioned evenly against the beneficiary's CGT amounts. A worked example of how to report rateable reduction at Label F Capital gains is included on our Rateable Reduction webpage .
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the trust's capital gains at the end of item 58 - label F under Income to which no beneficiary is presently entitled .
+
+The legislation that provides for the streaming of capital gains for tax purposes, includes an option for eligible trustees to choose to be assessed on capital gains of the trust in certain circumstances. For more information, see item 59 Choice of resident trustee to be assessed to capital gains on behalf of beneficiaries . If this option applies, show that share of the trust's capital gains at item 59 - label Y . Capital gains under which this choice has been made should only be shown at item 59 and shouldn't be shown at item 58 - label F for each relevant beneficiary.
+
+The total amounts at item 58 - label F from all completed statements of distribution, plus the amount at item 59 - label Y , would generally equal the amount at item 21 Capital gains - label A Net capital gain . This is unless the trust properly applies deductible expenses or revenue losses against the net capital gain in working out the net income of the trust.
+
+For more information, see:
+
+- Guide to capital gains tax 2026
+
+- Worksheet 5
+
+Gross capital gain
+
+Show at label F1 Gross capital gain each beneficiary's share of the trust's gross capital gains. Show whole dollars only.
+
+To work out the total amount reportable at label F1 , calculate the gross capital gain from each capital gains tax event (being proceeds less the cost base, and prior to any losses or concessions being applied) and multiply by the relevant beneficiary's entitlement percentage. The total of the calculated amounts is the amount reportable.
+
+If you apply a CGT rollover to defer any capital gain from crystallising from a CGT event the outcome should generally be nil, as there would be no capital gain to stream to a beneficiary.
+
+For more information, see
+
+- Guide to capital gains tax 2026
+
+- Streaming trust capital gains and franked distributions
+
+- Rateable reduction
+
+Capital losses applied
+
+Show at label F2 Capital losses applied the capital losses that applied to the share of gross capital gains distributed to each beneficiary of the trust. Show whole dollars only.
+
+For more information, see:
+
+- Losses schedule and instructions 2026
+
+- Guide to capital gains tax 2026
+
+CGT discount applied
+
+Show at label F3 CGT discount applied , the CGT discount that applied to the share of gross capital gains distributed to each beneficiary of the trust. Show whole dollars only.
+
+The 12-month holding rule means the trust can only discount a capital gain if the asset was acquired at least 12 months before the CGT event. If capital losses from the current or previous tax years are being applied to reduce the capital gains, they must be applied before applying any CGT discount.
+
+CGT small business concessions applied
+
+Show at label F4 CGT small business concessions applied the trust's small business CGT concessions that applied to the share of gross capital gains distributed to each beneficiary of the trust. Show whole dollars only.
+
+For more information, see:
+
+- Small business CGT concessions eligibility overview
+
+- Guide to capital gains tax 2026
+
+Information to be provided to beneficiaries
+
+To complete their own tax returns and meet their CGT obligations, beneficiaries will need the following information:
+
+- In relation to their share of the trust's net capital gain (amount reported at label F ):
+
+- the amount of label F1 Gross capital gains which is from collectables and all other capital gains (in whole dollars)
+
+- the amount of label F1 Gross capital gains from active assets versus non-active assets (in whole dollars)
+
+- whether each capital gain is a discount capital gain
+
+- the 'gross up' of each gain they receive from a trust (after considering the losses applied by the trustee)
+
+- label F4 CGT small business concessions applied amount of any capital gains that have been reduced by the small business 50% reduction and/or any of the other small business CGT concessions (in whole dollars)
+
+- the amount and type of any capital gains that they are specifically entitled to (in whole dollars)
+
+- details of any non-assessable payment made in the income year in respect of an interest in the trust (CGT event - E4 section 104-70 of the ITAA 1997) - indicating the extent to which the payment is attributable to each of the following
+
+- tax-exempted amounts, subsection 104-71(1) of the ITAA 1997
+
+- tax-free amounts, subsection 104-71(3) of the ITAA 1997
+
+- CGT concession amounts, under item 7 of the table in subsection 104-71(4) of the ITAA 1997
+
+- CGT concession amounts, under another item (other than item 7) of the table in subsection 104-71(4) of the ITAA 1997
+
+- tax-deferred amounts, associated with the small business 50% active asset reduction, frozen indexation, building allowance and accounting difference in income
+
+- details of any capital gains on which the trustee has chosen to be assessed on behalf of a beneficiary to ensure that the beneficiary isn't assessed on this amount.
+
+For more information, see:
+
+- Small business CGT concessions eligibility overview
+
+- Does capital gains tax apply to you
+
+NCMI Capital gains
+
+If you show a capital gain amount at item 32 Non-concessional MIT income (NCMI), show at item 58 - label F5 NCMI capital gains the total NCMI capital gains amount for the relevant beneficiary of the trust.
+
+The total distributed to all beneficiaries at label F5 can't be greater than item 32 Non-concessional MIT income - label X Capital gains .
+
+Excluded from NCMI capital gains
+
+Show at label F6 Excluded from NCMI capital gains the total capital gains amount excluded from NCMI for the relevant beneficiary of the trust.
+
+The total distributed to all beneficiaries at label F6 can't be greater than item 32 Non-concessional MIT income - label Z Capital gains .
+
+Share of credit for foreign resident capital gains withholding amounts
+
+Show at label Z Share of credit for foreign resident capital gains withholding amounts each beneficiary's share of foreign resident capital gains withholding. Include cents, if applicable.
+
+Except for relevant trusts which have made beneficiaries specifically entitled to capital gains, you work out a beneficiary's share of the foreign resident capital gains withholding by multiplying the amount of foreign resident capital gains withholding by the beneficiary's percentage share of the trust income.
+
+For trusts which have made beneficiaries specifically entitled to capital gains, you generally work out a beneficiary's share of the foreign resident capital gains withholding by multiplying the foreign resident capital gains withholding by their adjusted Division 6 percentage share.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the foreign resident capital gains withholding at the end of item 58 - label Z under Income to which no beneficiary is presently entitled .
+
+If the trust has no net income, the beneficiaries aren't entitled to a share of the foreign resident capital gains withholding. Instead, show the sum of the amounts of foreign resident capital gains withholding at the end of item 58 - label Z under Income to which no beneficiary is presently entitled .
+
+Attributed foreign income
+
+Show at label G Attributed foreign income each beneficiary's share of attributed foreign income included in the net income of the trust in whole dollars only. Except for relevant trusts that have made beneficiaries specifically entitled to amounts of franked distributions or capital gains, this amount is generally worked out by multiplying a beneficiary's percentage share of trust income by the total attributed foreign income of the trust.
+
+For trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of attributed foreign income by multiplying the total attributed foreign income of the trust by their adjusted Division 6 percentage share. Show whole dollars only.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the trust's attributed foreign income at the end of item 58 - label G under Income to which no beneficiary is presently entitled .
+
+The total amounts at label G from all completed statements of distribution must equal the sum of any attributed foreign income shown at item 22 Attributed foreign income .
+
+If the beneficiary wasn't a resident of Australia at any time during the income year, see Non-resident beneficiaries .
+
+Other assessable foreign source income
+
+Show at label H Other assessable foreign source income each beneficiary's share of other assessable net foreign source income included in the net income of the trust for tax purposes. Except for relevant trusts that have made beneficiaries specifically entitled to amounts of franked distributions or capital gains, this amount is generally worked out by multiplying a beneficiary's percentage share of trust income by the total of the trust's other assessable net foreign source income.
+
+For trusts that have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of assessable net foreign source income by multiplying the total of the trust's other assessable net foreign source income by their adjusted Division 6 percentage share. Show whole dollars only.
+
+The total amounts at label H from all completed statements of distribution must equal the amount of net foreign source income shown at item 23 Other assessable foreign source income - label V Net .
+
+If the beneficiary wasn't a resident of Australia at any time during the income year, see Non-resident beneficiaries .
+
+Other assessable foreign source income from a financial investment amount
+
+Show at label H1 - Other assessable FSI from a financial investment amount the portion of label H Other assessable foreign source income that is investment income distributed to the relevant beneficiary. The amount at label H1 cannot be greater than the amount at label H.
+
+Foreign income tax offset
+
+Show at label I Foreign income tax offset each beneficiary's share of foreign income tax offsets. Include cents.
+
+Except for relevant trusts that have made beneficiaries specifically entitled to amounts of franked distributions or capital gains, this amount is worked out by multiplying a beneficiary's percentage share of trust income by the total of the trust's foreign income tax offsets.
+
+For trusts which have made beneficiaries specifically entitled to franked distributions or capital gains, you generally work out a beneficiary's share of assessable net foreign source income by multiplying the total of the trust's other assessable net foreign source income by their adjusted Division 6 percentage share.
+
+If there is trust income to which no beneficiary is presently entitled, show that share of the trust's foreign income tax offset at label I under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total amounts at label I from all completed statements of distribution must equal the amount of foreign income tax offsets shown at item 23 Other assessable foreign source income - label Z Foreign income tax offset . Include cents.
+
+Share of National Rental Affordability Scheme tax offset
+
+Show at label R Share of National rental affordability scheme tax offset each beneficiary's share of the NRAS tax offset. Include cents.
+
+A beneficiary's share of the NRAS tax offset will depend on their entitlement to the NRAS rent derived by the trustee (or flowing to the trustee via a partnership or another trust) having regard to the trust deed and any relevant trustee resolution.
+
+The beneficiary's entitlement to the NRAS rent is expressed as a percentage of the total NRAS rent derived from all rental dwellings covered by the certificate issued by the Secretary of the Department of Social Services. To work out the beneficiary's entitlement to the NRAS rent where it has come via one or more trusts or partnership, you'll need to work out the entitlements to the NRAS rent of each interposed entity in the chain through which the amount flowed.
+
+The beneficiary's percentage entitlement is then multiplied by the amount of the tax offset stated on the certificate relating to those dwellings (or in any amended certificate).
+
+If only some of the beneficiaries to whom the income of the trust has been distributed are entitled to benefit from the NRAS rent, then only those beneficiaries will be entitled to the offset.
+
+If the trustee is assessable on a part of the net income under section 99 or 99A, the trustee may be entitled to the NRAS offset. To work out the trustee's entitlement, express that part of the NRAS rent in respect of which no beneficiary has an entitlement as a percentage of the total NRAS rent derived from all rental dwellings covered by the certificate. Multiply the result by the amount of the tax offset stated on the certificate and show at label R under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+A trustee may also be entitled to the NRAS offset if the trust doesn't have any net income for the year; see section 380-20 of the ITAA 1997. Record the trustee's entitlement at label R under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of the amounts shown at label R for each completed statement of distribution must equal the amount of NRAS tax offset entitlement shown at item 53 National rental affordability scheme (NRAS) tax offset entitlement - label F . Include cents.
+
+Early stage venture capital limited partnership (ESVCLP) tax offset
+
+Show at label T Early stage venture capital limited partnership tax offset each beneficiary's allocation of the early stage venture capital limited partnership (ESVCLP) tax offset. Include cents.
+
+The trustee determines the amount of the ESVCLP tax offset to allocate to any one or more beneficiaries. If a beneficiary is entitled to a fixed proportion of any capital gain from these investments that gave rise to the tax offset, the trustee must allocate that same fixed proportion of the tax offset to the beneficiary. Otherwise, there are no requirements as to how the trustee may decide to allocate the tax offset between the beneficiaries.
+
+The trustee is entitled to the ESVCLP tax offset if the trustee is liable to pay tax on behalf of a beneficiary under section 98 of the ITAA 1936 (a beneficiary under a legal disability or a non-resident beneficiary) or under sections 99 or 99A of the ITAA 1936 (no beneficiary is presently entitled). The amount of the trustee's tax offset entitlement in the current year is reduced by the amount of the tax offset allocated to any beneficiary in respect of that year.
+
+Show the trustee's ESVCLP tax offset entitlement at label T under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of the amounts shown at label T for each completed statement of distribution must equal the amount of the ESVCLP tax offset reported at item 55 Non-refundable carry forward tax offset - label H Early stage venture capital limited partnership tax offset . Include cents.
+
+This tax offset is non-refundable. If the trustee is entitled to an amount of tax offset and is unable to utilise it in the current year, the trustee may be able to carry forward the tax offset.
+
+The amount of unused ESVCLP tax offset from the current year will be shown on the trustee's notice of assessment for 2025-26.
+
+Early stage venture capital limited partnership tax offset carried forward from previous year
+
+The trustee's notice of assessment from 2024-25 should show if the trustee has any unused ESVCLP tax offset that's carried forward to 2025-26.
+
+Show at label K under Income to which no beneficiary is presently entitled at the end of item 58 the amount of unused ESVCLP tax offset carried forward by the trustee from 2024-25.
+
+Additional information for trustee's assessments
+
+Provide the following additional information only if there is more than one trustee assessment for the current year.
+
+If there is an amount at label T or K under Income to which no beneficiary is presently entitled at the end of item 58 and the trustee is liable to pay tax under sections 98, 99 or 99A of the ITAA 1936, provide a statement setting out the following:
+
+- the identity of each beneficiary to which section 98 applies and the amount of ESVCLP tax offset to be applied in the trustee's assessment on behalf of that beneficiary, and
+
+- the amount of ESVCLP tax offset to be applied to the trustee's assessment under sections 99 or 99A, if applicable.
+
+The total amount of the ESVCLP tax offset applied in the trustee's assessments must not exceed the sum of the amounts at labels T and K .
+
+Attach the statement to the tax return and print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return. If you don't provide this additional information, we may need to contact you before we can process the trust tax return.
+
+For more information, see ESVCLP tax incentives and concessions .
+
+Early stage investor tax offset
+
+Show at label J Early stage investor tax offset each beneficiary's allocation of the early stage investor tax offset. Include cents.
+
+The trustee determines the amount of the early stage investor tax offset to allocate to the beneficiaries. If a beneficiary is entitled to a fixed proportion of any capital gain from these investments that gave rise to the tax offset, the trustee must allocate that same fixed proportion of the tax offset to the beneficiary. Otherwise, there are no requirements as to how the trustee may decide to allocate the tax offset between its beneficiaries.
+
+The trustee is entitled to the early stage investor tax offset if the trustee is liable to pay tax on behalf of a beneficiary under section 98 (a beneficiary under a legal disability or a non-resident beneficiary) or under sections 99 or 99A (no beneficiary is presently entitled). The amount of the trustee's tax offset entitlement in the current year is reduced by the amount of the tax offset allocated to any beneficiary in respect of that year.
+
+Show the trustee's early stage tax offset entitlement at label J under Income to which no beneficiary is presently entitled at the end of item 58 .
+
+The total of the amounts shown at label J for each completed statement of distribution must equal the amount of the early stage investor tax offset reported at item 55 Non-refundable carry forward tax offsets - label I Early stage investor tax offset . Include cents.
+
+This tax offset is non-refundable. However, the trustee can carry it forward if the tax offset hasn't been fully allocated to beneficiaries and/or utilised by the trustee in the current year.
+
+The amount of unused early stage investor tax offset will be shown on the trustee's notice of assessment for 2025-26.
+
+Early stage investor tax offset carried forward from previous year
+
+The trustee's notice of assessment from 2024-25 should show if the trustee has any unused early stage investor tax offset that's carried forward to 2025-26.
+
+Show at label M Early stage investor tax offset carried forward from previous year under Income to which no beneficiary is presently entitled at the end of item 58 the amount of unused early stage investor tax offset carried forward by the trustee from 2024-25.
+
+Additional information for trustee's assessments
+
+Provide the following additional information only if there is more than one trustee assessment for the current year.
+
+If there is an amount at label J or M under Income to which no beneficiary is presently entitled at the end of item 58 and the trustee is liable to pay tax under sections 98, 99 or 99A of the ITAA 1936, provide a statement setting out both the following:
+
+- the identity of each beneficiary to which section 98 applies and the amount of early stage investor tax offset to be applied in the trustee's assessment on behalf of that beneficiary
+
+- the amount of early stage investor tax offset to be applied to the trustee's assessment under section 99 or 99A, if applicable.
+
+The total amount of early stage investor tax offset applied in the trustee's assessments mustn't exceed the sum of the amounts at label J and M .
+
+Attach the statement to the tax return and print X in the Yes box at Have you attached any 'other attachments'? at the top of the tax return. If you don't provide this additional information, we may need to contact you before we can process the trust tax return.
+
+For more information, see Tax incentives for early stage investors .
+
+Div 6AA Eligible income
+
+Show at label C1 Div 6AA Eligible income, for beneficiaries who are under 18 years old at the end of the income year, the amount of the beneficiary's share of net income that's eligible income .
+
+Small business income tax offset information
+
+Complete the share of net small business income as below.
+
+Share of net small business income
+
+Show at label Y Share of net small business income each beneficiary's share of the net small business income.
+
+Work this out by multiplying the trust's net small business income by the beneficiary's proportional share of the trust income.
+
+The total of all the amounts at label Y for each statement of distribution must equal item 5 Business income and expenses - label V Net small business income .
+
+You must advise any beneficiaries who are individuals of their share of net small business income from the trust to help them to work out their entitlement to the small business income tax offset.
+
+Trustees and beneficiaries who are prescribed persons (under 18 years old and not excepted persons) aren't entitled to the offset.
+
+Non-resident beneficiary additional information
+
+Under Division 6 of the ITAA 1936, a trustee will be liable to pay tax on:
+
+- shares of net income of a trust where non-resident companies and individual beneficiaries (not being trustees) are presently entitled to a share of the income of the trust; show both these amounts at item 58 Non-resident beneficiary additional information - label J subsection 98(3) assessable amount
+
+- the share of net income of a trust where a beneficiary who is presently entitled to the income of the trust is itself a trustee and is a non-resident at the end of the income year; show these amounts at item 58 Non-resident beneficiary additional information - label K subsection 98(4) assessable amount .
+
+Subsection 98(3) assessable amount
+
+Complete at this section:
+
+- Non-resident company beneficiary assessable amount.
+
+- Non-resident individual beneficiary assessable amount
+
+Non-resident company beneficiary assessable amount.
+
+If you have entered assessment calculation code 134 (non-resident company beneficiaries that are a base rate entity) or 139 (non-resident company beneficiaries that aren't a base rate entity) at item 58 - label V Assessment calculation code , you must include an amount at label J .
+
+Show at label J the amount you are liable to pay tax on under subsection 98(3) of the ITAA 1936 on behalf of the corporate beneficiary who is a non-resident at the end of the income year. Show whole dollars only. This amount may be zero if tax has been paid under subsection 98(4) by a previous trust and this trust isn't assessable.
+
+The amount you are liable to pay tax on is calculated on all of the following:
+
+- so much of the corporate beneficiary's share of the trust's net income that's attributable to a period (if any) that the corporate beneficiary was a resident
+
+- so much of the corporate beneficiary's share of the trust's net income that's attributable to the period that the corporate beneficiary wasn't a resident and also attributable to Australian sources
+
+- so much of the corporate beneficiary's share of the trust's net income attributable to the trust's net capital gain whether or not the source of that gain was attributable to Australian sources.
+
+For more information, see:
+
+Taxation Determination TD 2022/12 - Income tax: is the source concept in Division 6 of Part III of the Income Tax Assessment Act 1936 relevant in determining whether a non-resident beneficiary of a resident trust, or trustee for that trust, is assessed on an amount of trust capital gain arising under Subdivision 115-C of the Income Tax Assessment Act 1997?
+
+Taxation Determination TD 2022/13 - Income tax: does Subdivision 855-A (or subsection 768-915(1)) of the Income Tax Assessment Act 1997 disregard a capital gain that a foreign resident (or temporary resident) beneficiary of a resident non-fixed trust has because of subsection 115-215(3)? published on 31 August 2022 .
+
+Don't include income from which foreign resident withholding tax has been withheld (such as unfranked dividends, interest and royalties), fully franked dividends or amounts on which managed investment trust withholding tax is payable. Don't include the capital gains for which you aren't liable to pay tax under subsection 855-40(3) of the ITAA 1997.
+
+If the non-resident corporate beneficiary's share of the trust's net income includes an amount that's attributable to a discounted capital gain made by the trust, work out the amount you are liable to pay tax on under subsection 98(3) as if the part attributable to the capital gain was double the amount it actually is, see section 115-220 of the ITAA 1997. This ensures that a trustee assessed on behalf of a non-resident corporate beneficiary doesn't get the benefit of the CGT discount that the corporate beneficiary wouldn't be entitled to if it were assessed.
+
+Show the non-resident corporate beneficiary's share of the trust's net capital gain amount at item 58 - label F Capital gains.
+
+Show the non-resident corporate beneficiary's share of the trust's net income attributable to the trust's net capital gain grossed-up to the extent the trust applied a CGT discount when calculating its net capital gain at item 58 - label J .
+
+If the beneficiary is a non-resident at the end of the year and hasn't been a non-resident for the entire year, show clearly in a separate schedule full details of its share of the net income. It is important to provide the information set out at Non-resident beneficiaries so that the appropriate tax rates can be applied.
+
+Non-resident individual beneficiary assessable amount
+
+If you have entered assessment calculation code 138 (non-resident individual beneficiaries) at item 58 - label V Assessment calculation code , you must include an amount at label J .
+
+Show at label J the amount you are liable to pay tax on under subsection 98(3) of the ITAA 1936 on behalf of an individual beneficiary who is a non-resident at the end of the income year. Show whole dollars only. This amount may be zero if tax has been paid under subsection 98(4) of the ITAA 1936 by a previous trust and this trust isn't assessable.
+
+The amount you are liable to pay tax on is calculated as:
+
+- so much of the non-resident beneficiary's share of the trust's net income that's attributable to a period (if any) that the beneficiary was a resident, and
+
+- so much of the non-resident beneficiary's share of the trust's net income that's attributable to the period that the beneficiary wasn't a resident and also attributable to Australian sources, and
+
+- so much of the non-resident beneficiary's share of the trust's net income attributable to the trust's net capital gain whether or not the source of those gains was attributable to Australian sources.
+
+For more information, see: TD 2022/12 and TD 2022/13 .
+
+Don't include income subject to withholding tax (unfranked dividends, interest and royalties), fully franked dividends or amounts on which managed investment trust withholding tax is payable. Don't include any capital gains for which you aren't liable to pay tax under subsection 855-40(3) of the ITAA 1997.
+
+The beneficiary's share of the trust's net income may include an amount that's attributable to a discounted capital gain made by the trust. To work out the amount you are liable to pay tax on under subsection 98(3) which may involve limitations to the CGT discount for gains accrued after 8 May 2012, see, sections 115-220 and 115-120 of the ITAA 1997. This ensures that a trustee assessed on behalf of a non-resident individual beneficiary gets the same CGT discount benefit that the individual beneficiary gets when it is assessed.
+
+If the beneficiary is a non-resident at the end of the year, but hasn't been a non-resident for the entire year, ensure you have printed X in the Yes box at item 29 Overseas transactions - label A . It is important to provide the information set out at Non-resident beneficiaries so that the appropriate tax rates can be applied.
+
+Subsection 98(4) assessable amount
+
+- Complete at this section the Non-resident trustee beneficiary assessable amount .
+
+Non-resident trustee beneficiary assessable amount
+
+If you have entered assessment calculation code 140 (non-resident trustee beneficiary) at label V Assessment calculation code , you must include an amount at label K . This amount may be zero if tax has been paid under subsection 98(4) by another trust and this trust isn't assessable. Any amounts reported at label K shouldn't be included under TB statement information at item 58 - label P Tax preferred amounts or label Q Untaxed part of share of net income .
+
+Show at label K the amount you are liable to pay tax on under subsection 98(4) of the ITAA 1936 because a trustee beneficiary, who is presently entitled to a share of the trust's distributable income, is the trustee of a trust for which at least one trustee was a non-resident at the end of the income year (show whole dollars only). If a trustee of another trust has already been assessed under subsection 98(4), then you'll not be assessed.
+
+The amount you are liable to pay tax on is calculated on both of the following:
+
+- so much of the non-resident trustee beneficiary's share of the net income of the trust as is attributable to Australian sources
+
+- so much of the non-resident trustee beneficiary's share of the trust's net income attributable to the trust's net capital gain whether or not the source of those gains was attributable to Australian sources.
+
+For more information, see TD 2022/12 and TD 2022/13 .
+
+Don't include income subject to withholding tax (unfranked dividends, interest and royalties), fully franked dividends or amounts on which managed investment trust withholding tax is payable. Don't include any capital gains for which the trustee isn't liable to pay tax under subsection 855-40(3) of the ITAA 1997.
+
+If the non-resident trustee beneficiary's share of net income of the trust includes an amount that's attributable to a discounted capital gain made by the trust, work out the amount the trustee is liable to pay tax on under subsection 98(4) as if the part attributable to the capital gain was double the amount it actually is; see section 115-220 of the ITAA 1997. This ensures that a trustee assessed on behalf of a non-resident trustee beneficiary doesn't get the benefit of the CGT discount that a trustee beneficiary wouldn't be entitled to if it were assessed.
+
+Show the non-resident trustee beneficiary's share of the trust's net capital gain amount at item 58 - label F Capital gains.
+
+Show the non-resident trustee beneficiary's share of the trust's net income attributable to the trust's net capital gain grossed-up to the extent that the trust applied a CGT discount when calculating its net capital gain at label K .
+
+If the beneficiary is a non-resident at the end of the year and hasn't been a non-resident for the entire year, show clearly in a separate schedule full details of its share of the net income. It is important to provide the information set out at Non-resident beneficiaries so that the appropriate tax rates can be applied.
+
+Trustee beneficiary (TB) statement information
+
+There are reporting obligations that apply to certain distributions to trustee beneficiaries of a closely held trust (that's not an excluded trust) within the meaning of section 102UC of the ITAA 1936 (the trustee beneficiary reporting rules).
+
+Failure to meet these reporting obligations may result in a liability for trustee beneficiary non-disclosure tax, currently imposed at a rate of 47%.
+
+This section is to be completed by all closely held trusts that have an obligation under the trustee beneficiary reporting rules. You don't need to complete this section if you aren't the trustee of a closely held trust or if you are the trustee of an excluded trust for the purposes of the trustee beneficiary reporting rules. Appendix 11 contains information about what constitutes a closely held trust and an excluded trust for these purposes. If you are making a distribution to another trust, read Appendix 11 before completing this section.
+
+If you aren't making a TB statement for the trustee beneficiary, print X in the No box. A TB statement isn't required where the trustee beneficiary wasn't presently entitled to tax-preferred amounts and its share of the trust's net income doesn't include an untaxed part.
+
+If you are making a TB statement, print X in the Yes box for this trustee beneficiary, and then:
+
+- for resident beneficiaries, ensure the name and TFN of the trustee beneficiary is recorded in the beneficiary details section
+
+- for non-resident beneficiaries, ensure the name and address of the trustee beneficiary is recorded in the beneficiary details section
+
+- at item 58 - label P Tax preferred amounts show any tax-preferred amounts to which the trustee beneficiary is presently entitled; if there are no tax-preferred amounts, print 0 (zero) at label P
+
+- at item 58 - label Q Untaxed part of share of net income show any untaxed part of a share of net income of the trustee beneficiary; if there is no untaxed part of a share of net income, print 0 (zero) at label Q .
+
+Information that non-residents must provide on the TB statement
+
+A non-resident beneficiary who received income from Australian government allowances and payments or Australian government pensions and allowances must report them to the trustee. The amounts are reported at item 14 Other Australian income and distributed to the beneficiary at item 58 Share of income - label B Non-primary production . The trustee must provide this information on the TB statement.
+
+A non-resident beneficiary who received an Australian government pension or allowance will be taxed at resident tax rates. The non-resident beneficiary remains ineligible for resident tax offsets and benefits and is exempt from the Medicare levy and the Medicare levy surcharge. On the TB statement, record:
+
+- non-residency status
+
+- the total amount received by the beneficiary of any Australian Government allowances and payments like JobSeeker payment, Youth Allowance and the Austudy payment; see Question 5 on the Tax return for individuals 2026
+
+- the total amount received by the beneficiary of any Australian Government pensions and allowances; see Question 6 on the Tax return for individuals 2026.
+
+For more information on the definitions of tax-preferred amounts and untaxed part of a share of net income, see Appendix 11 .
+
+Annual Trustee Payment report information
+
+This section is to be completed by all closely held trusts (including family trusts) which are subject to the TFN withholding rules for closely held trusts that have either:
+
+- made payments during the income year
+
+- withheld amounts from payments made to beneficiaries.
+
+The definition of an excluded trust for the purposes of the TFN withholding rules differs from the definition of an excluded trust for the purposes of the trustee beneficiary reporting rules. For more information, see Appendix 11 .
+
+Show at item 58 - label S Distribution from ordinary or statutory income during income year an amount where you have made one or more distributions during the income year (not as a result of determining present entitlement at year end) that:
+
+- are wholly or partly from the ordinary or statutory income of the trust for that year, and
+
+- the total of those distributions exceeds the beneficiary's share of the net income of the trust shown at item 58 .
+
+Only include at label S the amount by which these distributions made during the income year exceed the beneficiary's share of the net income.
+
+If the only distributions of ordinary or statutory income made by the trust are as a result of determining present entitlement at year end, show nothing at label S . In these cases, an amount will generally be shown at item 58 - label W Share of income of the trust estate .
+
+Show at item 58 - label T Total TFN amounts withheld from payments the amounts withheld from all payments or distributions to the beneficiary where the beneficiary's TFN wasn't provided to you. This includes amounts withheld from payments during the year or as a result of determining present entitlement at the end of the year. Don't show at label T the beneficiary's share of amounts that were reported at item 8 Partnerships and trusts - label O Credit for TFN amounts withheld from payments from closely held trusts , these are included at item 58 - label O Share of credit for TFN amounts withheld from payments from closely held trusts .
+
+For more information on the TFN withholding rules for closely held trusts, see Appendix 11 .
+
+Continue to: Trustee choice, beneficiaries and non-resident trust - items 59 to 61
+
+Return to: Instructions to complete the Trust tax return 2026
+
+QC 106700
+
+Print or Download

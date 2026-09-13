@@ -1,0 +1,135 @@
+1 Salary or wages 2026
+Complete question 1 to declare income from salary or wages where tax was withheld.
+Last updated 30 May 2026
+
+Print or Download
+
+Things you need to know
+
+Declare at this question income from salary or wages where tax was withheld, this includes:
+
+- salary and wages
+
+- commissions
+
+- bonuses
+
+- money from part-time or casual work
+
+- parental leave pay
+
+- amounts for lost salary or wages paid under
+
+- an income protection policy
+
+- a sickness or accident insurance policy
+
+- a workers compensation scheme
+
+- foreign employment - if you're an Australian Government agency employee (and not a member of a disciplined force), include at this question income you earned delivering Australian Official development assistance .
+
+If your income statement or PAYG payment summary - individual non-business shows any allowances, include them at question 2 Allowances, earnings, tips, directors fees etc .
+
+If you don't have salary or wage income, go to question 2 Allowances, earnings, tips, directors fees etc 2026 .
+
+What you need to answer this question
+
+You'll need your income statement, PAYG payment summary - individual non-business, PAYG payment summary - foreign employment, or similar statement such as a letter or signed statement, from each employer or payer, showing the following details:
+
+- gross income (that shows as 'Gross payments' on your income statement or payment summary)
+
+- payment type indicator (if you're a working holiday maker )
+
+- total tax withheld
+
+- foreign tax paid, if applicable
+
+- the employer's or payer's Australian business number (ABN) or withholding payer number (WPN).
+
+If you can't find or think there is an issue with your income statement, payment summaries or similar statements, contact your employer or payer. For more information, see Income statements .
+
+Make sure you keep all your records for 5 years from the date you lodge your tax return. A shorter record-keeping period may apply in some situations.
+
+Completing your tax return
+
+To complete this question, follow the steps.
+
+For the purposes of this question, don't combine amounts from different income statements, payment summaries, or similar unless we instruct you to do so at Step 3.
+
+Step 1
+
+Write the type of occupation where you earned most of your income at question 1 - Your main salary and wage occupation .
+
+Be as specific as possible when you describe how you earned your salary and wages.
+
+For example, 'insurance clerk' rather than 'clerk', 'facilities manager' rather than 'manager', 'bar attendant' rather than 'student'.
+
+For public servants, provide work type - for example, 'call centre operator'.
+
+Step 2
+
+If you have more than 5 income statements and payment summaries, go to Step 3. Otherwise, read on.
+
+For each income statement and payment summary, write at question 1 :
+
+- the payer's ABN or WPN
+
+- the 'Total Australian tax withheld' amounts under Tax withheld
+
+- the gross payment amounts under Income .
+
+If your income statement or payment summary includes Gross payment type H , print H in the payment type box. Gross payment type H applies to income you earned as a working holiday maker while on a 417 or 462 visa.
+
+If this applies to you, you must complete question A4 Working holiday maker net income 2026 .
+
+You have finished this question, see Where to go next .
+
+Step 3
+
+Complete this step if you have more than 5 income statements and payment summaries.
+
+Gross payment type H , applies to income you earned as a working holiday maker while on a 417 or 462 visa.
+
+From your income statement and PAYG payment summary - individual non-business with no Gross payment type H :
+
+- add up the total tax withheld, write the total under Tax withheld at the left of label C
+
+- add up the gross payment amounts, write the total under Income at label C
+
+- write the ABN if you have only one income statement or payment summary of this type
+
+- leave the ABN blank if you have more than one income statement or payment summary of this type.
+
+From your income statement and PAYG payment summary - individual non-business with Gross payment type H :
+
+- add up the total tax withheld, write the total under Tax withheld at the left of label D
+
+- add up the gross payment amounts, write the total under Income at label D
+
+- print H in the payment type box
+
+- write the ABN if you have only one income statement or payment summary of this type
+
+- leave the ABN blank if you have more than one income statement or payment summary of this type
+
+- complete question A4 .
+
+From your income statement and PAYG payment summary - foreign employment :
+
+- add up the total tax withheld, write the total under Tax withheld at the left of label E
+
+- add up the gross payment amounts, write the total under Income at label E
+
+- write the ABN if you have only one income statement or payment summary of this type
+
+- leave the ABN blank if you have more than one income statement or payment summary of this type.
+
+Where to go next
+
+- Go to question 2 Allowances, earnings, tips, directors fees etc 2026 .
+
+- Return to main menu Individual tax return instructions 2026 .
+
+QC 106579
+
+Print or Download

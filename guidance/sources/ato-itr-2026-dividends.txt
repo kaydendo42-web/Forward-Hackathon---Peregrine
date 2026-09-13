@@ -1,0 +1,137 @@
+11 Dividends 2026
+Complete question 11 to declare dividends and distributions you receive or are credited from Australian companies.
+Last updated 30 May 2026
+
+Print or Download
+
+Things you need to know
+
+Declare at this question dividends and distributions that you received or are credited from Australian companies that you had shares in. These include:
+
+- dividends applied under a dividend reinvestment plan
+
+- dividends that were dealt with on your behalf
+
+- bonus shares that qualify as dividends
+
+- distributions by a corporate limited partnership
+
+- dividends you receive from a corporate unit trust
+
+- dividends you receive from a public trading trust
+
+- dividends you receive from a listed investment company.
+
+You may also include the following as dividends:
+
+- earnings you received, or are credited with, on a non-share equity interest
+
+- amounts you received from, or are credited by
+
+- a private company as a shareholder or an associate of a shareholder in the form of payments, loans or debts forgiven (these are generally unfranked dividends)
+
+- the trustee of a trust estate in the form of payments, loans or debts forgiven where a private company in which you're a shareholder, or an associate of a shareholder, had an unpaid present entitlement (or was going to have such an entitlement by a certain time) from the trust (these are generally unfranked dividends).
+
+Don't include dividends you received under a demerger unless the company advises you to include them.
+
+Your dividend statements should show the amounts and payment dates.
+
+If you received, or were credited with, a dividend when you aren't an Australian resident, see Foreign resident withholding tax - Dividends .
+
+Don't include at this question
+
+If you:
+
+- received a distribution from an exchange traded fund (ETF), a managed investment trust (MIT) or an attribution managed investment trust (AMIT), see supplementary tax return question 13 Partnerships and trusts 2026
+
+- received a distribution from a partnership or trust, see supplementary tax return question 13 Partnerships and trusts 2026
+
+- carried on a business of trading in shares, see supplementary tax return question 15 Net income or loss from business 2026
+
+- sold, redeemed, cancelled or otherwise disposed of shares during the year (but didn't carry on a business of trading in shares), see supplementary tax return question 18 Capital gains 2026
+
+- received dividends from a foreign company, see the supplementary tax return question 20 Foreign source income and foreign assets or property 2026
+
+- received dividends from a New Zealand company with Australian franking credits attached, see supplementary tax return question 20 Foreign source income and foreign assets or property 2026
+
+- received dividends or a distribution on which family trust distribution tax has been paid, see supplementary tax return question A5 Amount on which family trust distribution tax has been paid 2026 .
+
+If you didn't receive or aren't credited with any dividends by Australian companies, go to question 12 Employee share schemes 2026 .
+
+What you need to answer this question
+
+You'll need your statements from each Australian company, corporate limited partnership, corporate unit trust, public trading trust and listed investment company that paid you dividends or made distributions to you from 1 July 2025 to 30 June 2026 inclusive.
+
+Your statements may show:
+
+- amounts of franked and unfranked dividends
+
+- amounts of franking credits
+
+- TFN amounts withheld from unfranked dividends.
+
+Franking credits are amounts of tax paid by the company that are allocated to your dividend or distribution. You include as assessable income both:
+
+- the amount of your dividend or distribution
+
+- the amount of the franking credits allocated to you.
+
+You also received a tax credit on your tax assessment for an amount equal to the franking credits.
+
+You may not be entitled to claim the franking credits if any of the following apply:
+
+- within 45 days of buying the shares (excluding the dates of purchase and disposal), you either sold them or entered into an arrangement to reduce the risk of making a loss on them (for certain preference shares, this period extends to 90 days)
+
+- you had shares and were under an obligation to make, or likely to make, a related payment
+
+- you received a dividend as a result of a dividend washing arrangement.
+
+For more information, see Holding period rule, Related payments rule and Dividend washing integrity rule in Special circumstances 2026 .
+
+TFN amounts are amounts of tax withheld from dividends and some distributions by investment bodies because you didn't give them your TFN or ABN. TFN amounts show on your dividend statement. You must include these amounts in the amount of unfranked dividends in your tax return.
+
+If you had any shares in joint names, show only your proportion of the dividends. This will be half if you held the shares equally with one other person. Keep a record of how you work out your proportion if you and the other joint owners didn't own the shares equally.
+
+Completing your tax return
+
+To complete this question, follow the steps.
+
+If any of your statements don't show franked and unfranked portions of the dividend, show the total dividend amount at label T .
+
+Step 1
+
+Add up all the unfranked dividend amounts from your statements, including any TFN amounts withheld. Include any other amount that is treated as dividends.
+
+Write the total amount at label S .
+
+Step 2
+
+Add up all the franked dividend amounts from your statements and any other franked dividends you receive or are credited to you.
+
+Write the total amount at label T .
+
+Step 3
+
+Add up the 'franking credit amounts' from your statements. Don't include them if the holding period rule , related payments rule or dividend washing integrity rule prevent you from claiming them. For more information, see You and your shares 2026 .
+
+Write the total amount at label U .
+
+Step 4
+
+Add up all the TFN amounts withheld that haven't been refunded to you.
+
+Write the total, including cents at label V .
+
+Keep your dividend statements.
+
+Where to go next
+
+- Go to question 12 Employee share schemes 2026 .
+
+- Return to main menu Individual tax return instructions 2026 .
+
+- Go back to question 10 Gross interest 2026 .
+
+QC 106592
+
+Print or Download
