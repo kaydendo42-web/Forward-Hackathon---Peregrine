@@ -20,6 +20,7 @@ Your next milestone is **a polished version of the working demo journey**: Reque
 | `src/components/inbox-panel.tsx` | Reply matching, assignment, editable answer and acceptance |
 | `src/components/send-draft.tsx` | Recipient, passcode and explicit send confirmation |
 | `src/components/assist-panel.tsx` | AI proposal presentation; coordinate changes with the ongoing AI verification track |
+| `src/components/intake-review.tsx` | Attachment proposal card (added 14 Sept); presentation only, keep labels and the disabled-until-override rule |
 | `tests/demo.spec.ts`, `tests/inbox.spec.ts` | Existing behavior and mobile regression journeys |
 
 Keep API routes, workflow rules, persistence and mailbox behavior with Kayden's track. If a design needs a new field or action, describe it in the PR before changing that contract. In particular, preserve the shared send-operation lock and receipt handling in `workspace.tsx`.

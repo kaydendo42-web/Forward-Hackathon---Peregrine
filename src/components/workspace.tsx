@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { Baseline, ReviewChange, Workspace as State } from '../core/types';
+import type { Baseline, InboxMessage, ReviewChange, Workspace as State } from '../core/types';
 import * as flow from '../core/workflow';
 import { parseMoney, readEvidenceCsv } from '../lib/evidence';
 import { commitWorkspace, keepOriginal, parseSavedWorkspace, readOriginal, sha256, STORAGE_KEY } from '../lib/storage';
@@ -10,6 +10,8 @@ import { AssistPanel } from './assist-panel';
 import { SendDraft } from './send-draft';
 import { InboxPanel } from './inbox-panel';
 import { checkInbox, importReplies } from '../lib/inbox';
+import { buildIntakeContext, recordIntakeProposal } from '../lib/intake';
+import { readAttachment } from '../lib/intake-client';
 import { sendDraft } from '../lib/send-client';
 import { download, money } from '../lib/format';
 import { entities, evidencePath, fy26Path, fy26Samples, workbookPath } from '../lib/samples';
@@ -24,6 +26,7 @@ export default function Workspace() {
   const [candidate, setCandidate] = useState<Baseline | null>(null);
   const [reviewImport, setReviewImport] = useState<{ version: number; changes: ReviewChange[] } | null>(null);
   const [resetConfirm, setResetConfirm] = useState(false);
+  const [intakeProgress, setIntakeProgress] = useState('');
 
   useEffect(() => {
     try { const saved = parseSavedWorkspace(localStorage.getItem(STORAGE_KEY)); setState(saved); stateRef.current = saved; }
@@ -99,6 +102,22 @@ export default function Workspace() {
     const added = next.inbox.length - base.inbox.length;
     setNotice(`Inbox checked: ${added} new ${added === 1 ? 'reply' : 'replies'}. No answers applied automatically.`);
   }
+  async function readAllAttachments(passcode: string, message: InboxMessage) {
+    const failures: string[] = [];
+    for (let i = 0; i < message.attachments.length; i++) {
+      setIntakeProgress(`Reading ${i + 1} of ${message.attachments.length}: ${message.attachments[i].filename || 'attachment'}…`);
+      try {
+        const base = stateRef.current;
+        const proposal = await readAttachment(passcode, message.messageId, i, buildIntakeContext(base));
+        const id = `intake-${base.version + 1}-${i}`;
+        // Commit from the latest state so a proposal saved by an earlier iteration is kept.
+        persist(stateRef.current, recordIntakeProposal(stateRef.current, { ...proposal, id, review: { status: 'pending', decidedAt: '', note: '' } }));
+      } catch (e) { failures.push(`${message.attachments[i].filename || `attachment ${i + 1}`}: ${e instanceof Error ? e.message : 'failed'}`); }
+    }
+    setIntakeProgress('');
+    if (failures.length) throw new Error(`${message.attachments.length - failures.length} of ${message.attachments.length} attachments read. Not read — ${failures.join('; ')}`);
+    setNotice(`${message.attachments.length} attachment${message.attachments.length === 1 ? '' : 's'} read. Nothing linked yet — review each proposal below.`);
+  }
   async function sendMailDraft(draftId: string, to: string, passcode: string) {
     if (locked.current) throw new Error('Another operation is running. Try sending when it finishes.');
     const base = stateRef.current;
@@ -153,6 +172,7 @@ export default function Workspace() {
         </section>}
         <nav className="tabs" aria-label="Workspace views">{['Requests', 'Outbox', ...(!clientView ? ['Inbox'] : []), 'Files', 'Activity', 'Connections'].map(name => <button key={name} aria-pressed={tab === name} className={tab === name ? 'active' : ''} onClick={() => setTab(name)}>{name}{name === 'Outbox' ? ` (${state.outbox.filter(d => d.entityId === entityId && d.status === 'draft').length})` : ''}</button>)}</nav>
         {tab === 'Inbox' && !clientView && <InboxPanel state={state} entityId={entityId} busy={busy} act={act} check={passcode => void run(() => fetchReplies(passcode))}
+          readAttachments={(passcode, message) => void run(() => readAllAttachments(passcode, message))} progress={intakeProgress}
           openRequest={id => { setSelectedId(id); setTab('Requests'); }} />}
         {tab === 'Requests' && <>
           <div className="section-heading"><div><h2>{requests.length ? `${accepted} of ${requests.length} requests reviewed` : 'Prepare the collection season'}</h2><p>{requests.length ? 'Evidence receipt and adviser acceptance are tracked separately.' : 'Download the workbooks below, or load the sample family. Then generate FY26 requests.'}</p></div>
@@ -195,7 +215,7 @@ export default function Workspace() {
           <tr><td>Supabase</td><td>Authenticated entity access, requests, evidence metadata and review events</td><td>Not connected. Browser-local storage is a demo adapter only.</td></tr>
           <tr><td>Google Drive</td><td>Original documents and versioned workpaper copies</td><td>Not connected. Use restricted entity/year folders; OAuth setup is next.</td></tr>
           <tr><td>Xero</td><td>Read-only current-year ledger comparisons</td><td>Not connected. Verify the university account's reporting permissions first.</td></tr>
-          <tr><td>AI assist</td><td>Propose fields from pasted text, follow-up wording and change requests</td><td>Implemented; requires NIM credentials and the demo passcode. Proposals need adviser acceptance. No PDF/OCR.</td></tr>
+          <tr><td>AI assist</td><td>Propose fields from pasted text, follow-up wording and change requests</td><td>Implemented; requires NIM credentials and the demo passcode. Proposals need adviser acceptance. Photo and text-PDF attachments are read into proposals via the Inbox; no OCR guarantees.</td></tr>
           <tr><td>Email</td><td>Send approved drafts and retrieve family replies</td><td>Implemented; requires a firm Gmail mailbox and App Password. Inbox checks are manual; attachments are metadata only. No scheduler or durable server outbox.</td></tr>
         </tbody></table><p>Jason's guidance changes should be reviewed and versioned before use. Current method: {flow.METHOD_VERSION}. This demo does not monitor or invent ATO changes.</p></section>}
         <footer><span>Peregrine · limited synthetic workpapers, not complete tax returns</span><button className="text-button" onClick={() => setResetConfirm(true)}>Reset demo</button>

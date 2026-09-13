@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createWorkspace } from '../core/workflow';
 import type { Workspace } from '../core/types';
 import { inboxMessageSchema, inboxReceiptSchema } from './inbox';
+import { intakeProposalSchema } from './intake';
 
 export const STORAGE_KEY = 'peregrine-synthetic-workspace-v1';
 const text = z.string().max(8000), money = z.number().int().min(-1e12).max(1e12).nullable();
@@ -21,7 +22,10 @@ const schema = z.object({ schemaVersion: z.literal(1), version: z.number().int()
   outbox: z.array(z.object({ id: text, entityId: text, kind: z.enum(['initial', 'reminder']), status: z.enum(['draft', 'superseded', 'sent']),
     requestIds: z.array(text), subject: text, body: z.string().max(100_000), fingerprint: z.string().max(100_000),
     to: text.optional(), messageId: text.optional(), sentAt: text.optional() })).max(1000),
-  audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000) });
+  audit: z.array(z.object({ id: text, at: text, action: text, entityId: text, detail: text })).max(10_000),
+  // Optional, not defaulted: workspaces saved before intake still load, and one without
+  // proposals round-trips unchanged rather than gaining an empty array.
+  intake: z.array(intakeProposalSchema).max(500).optional() });
 
 export function parseSavedWorkspace(raw: string | null): Workspace {
   if (raw === null) return createWorkspace();

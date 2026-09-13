@@ -2,7 +2,7 @@ import { EventEmitter } from 'node:events';
 import { Readable } from 'node:stream';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { readGmailInbox, type InboxClient, type InboxClientOptions } from '../src/lib/inbox-reader';
+import { downloadGmailAttachment, readGmailInbox, type InboxClient, type InboxClientOptions } from '../src/lib/inbox-reader';
 
 const NOW = new Date('2026-09-12T04:00:00.000Z');
 
@@ -19,6 +19,7 @@ type SeedMessage = {
   headers?: Buffer;
   bodyStructure?: BodyNode;
   text?: string;
+  parts?: Record<string, Buffer>;
 };
 
 type BodyNode = {
@@ -49,7 +50,13 @@ class FakeInboxClient extends EventEmitter implements InboxClient {
   async fetchAll(uids: number[]) { this.fetches.push([...uids]); return this.seeds.filter(seed => uids.includes(seed.uid)); }
   async download(uid: number, part: string, options?: { maxBytes?: number }): ReturnType<InboxClient['download']> {
     this.downloads.push({ uid, part, maxBytes: options?.maxBytes });
-    const text = this.seeds.find(seed => seed.uid === uid)?.text ?? '';
+    const seed = this.seeds.find(seed => seed.uid === uid);
+    const binary = seed?.parts?.[part];
+    if (binary) {
+      const limited = options?.maxBytes ? binary.subarray(0, options.maxBytes) : binary;
+      return { meta: { expectedSize: binary.length, contentType: 'application/octet-stream' }, content: Readable.from([limited]) };
+    }
+    const text = seed?.text ?? '';
     return { meta: { expectedSize: Buffer.byteLength(text), contentType: 'text/plain', charset: 'utf-8' }, content: Readable.from([Buffer.from(text)]) };
   }
   async logout() { this.loggedOut = true; }
@@ -250,5 +257,65 @@ describe('readGmailInbox', () => {
     await rejection;
     expect(fake.closed).toBe(true);
     expect(fake.loggedOut).toBe(false);
+  });
+});
+
+const JPEG = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(100, 1)]);
+const multipart: BodyNode = { type: 'multipart/mixed', childNodes: [
+  { part: '1', type: 'text/plain', size: 20 },
+  { part: '2', type: 'image/jpeg', size: JPEG.length, disposition: 'attachment', dispositionParameters: { filename: 'statement.jpg' } },
+  { part: '3', type: 'application/zip', size: 10, disposition: 'attachment', dispositionParameters: { filename: 'x.zip' } },
+] };
+function downloadWith(fake: FakeInboxClient, messageId = '<msg-7@example.com>', index = 0) {
+  return downloadGmailAttachment(
+    { user: 'adviser@example.com', pass: 'app-password', allowedSenders: 'family@example.com' }, messageId, index,
+    { createClient: () => fake, now: () => NOW, timeoutMs: 1_000 },
+  );
+}
+
+describe('downloadGmailAttachment', () => {
+  // Attachment indexes count attachments only: part 2 (jpeg) is index 0, part 3 (zip) is index 1.
+  it('finds the message by id, checks the sender, and returns the nth attachment bytes read-only', async () => {
+    const fake = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '2': JPEG } })]);
+    const result = await downloadWith(fake);
+    expect(result).toMatchObject({ filename: 'statement.jpg', contentType: 'image/jpeg' });
+    expect(Buffer.compare(result.bytes, JPEG)).toBe(0);
+    expect(fake.searches[0]).toEqual({ header: { 'message-id': '<msg-7@example.com>' } });
+    expect(fake.downloads).toEqual([{ uid: 7, part: '2', maxBytes: 8 * 1024 * 1024 + 1 }]);
+    expect(fake.opened).toEqual([{ path: 'INBOX', readOnly: true }]);
+    expect(fake.loggedOut).toBe(true);
+    expect([...fake.flags]).toEqual(['\\Seen']);
+  });
+  it('not_found when the id is unknown, the sender is not allowed, or the message is too old', async () => {
+    const empty = new FakeInboxClient({} as InboxClientOptions, [], []);
+    await expect(downloadWith(empty)).rejects.toMatchObject({ code: 'not_found' });
+    const stranger = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '2': JPEG }, envelope: { messageId: '<msg-7@example.com>', from: [{ address: 'stranger@example.com' }], date: new Date('2026-09-11T09:00:00.000Z') } })]);
+    await expect(downloadWith(stranger)).rejects.toMatchObject({ code: 'not_found' });
+    const old = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '2': JPEG }, internalDate: new Date('2026-07-01T00:00:00.000Z') })]);
+    await expect(downloadWith(old)).rejects.toMatchObject({ code: 'not_found' });
+  });
+  it('not_found for an attachment index that does not exist', async () => {
+    const fake = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '2': JPEG } })]);
+    await expect(downloadWith(fake, '<msg-7@example.com>', 5)).rejects.toMatchObject({ code: 'not_found' });
+  });
+  it('unsupported_type for a declared type outside the allow-list, before downloading', async () => {
+    const fake = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '3': Buffer.alloc(10) } })]);
+    await expect(downloadWith(fake, '<msg-7@example.com>', 1)).rejects.toMatchObject({ code: 'unsupported_type' });
+    expect(fake.downloads).toEqual([]);
+  });
+  it('too_large when the declared size or the stream exceeds 8 MB', async () => {
+    const big: BodyNode = { type: 'multipart/mixed', childNodes: [{ part: '2', type: 'image/png', size: 9 * 1024 * 1024, disposition: 'attachment', dispositionParameters: { filename: 'huge.png' } }] };
+    const declared = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: big })]);
+    await expect(downloadWith(declared, '<msg-7@example.com>', 0)).rejects.toMatchObject({ code: 'too_large' });
+    expect(declared.downloads).toEqual([]);
+    const lying: BodyNode = { type: 'multipart/mixed', childNodes: [{ part: '2', type: 'image/png', size: 10, disposition: 'attachment', dispositionParameters: { filename: 'huge.png' } }] };
+    const stream = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: lying, parts: { '2': Buffer.alloc(8 * 1024 * 1024 + 1) } })]);
+    await expect(downloadWith(stream, '<msg-7@example.com>', 0)).rejects.toMatchObject({ code: 'too_large' });
+  });
+  it('times out and closes the connection', async () => {
+    const fake = new FakeInboxClient({} as InboxClientOptions, [message({ uid: 7, bodyStructure: multipart, parts: { '2': JPEG } })]);
+    fake.connect = () => new Promise(() => {});
+    await expect(downloadWith(fake)).rejects.toMatchObject({ code: 'timeout' });
+    expect(fake.closed).toBe(true);
   });
 });
