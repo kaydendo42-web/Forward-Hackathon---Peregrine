@@ -8,8 +8,11 @@ import type { IntakeProposal } from '../../../core/types';
 // One attachment per call: download from the firm mailbox, shrink or extract, ask the model,
 // check the answer, hand everything back to the browser. Nothing is stored or logged here.
 
-export const maxDuration = 60;
-const TOTAL_TIMEOUT_MS = 54_000;
+// The 11b vision model's answer time swings between ~10 s and ~80 s for the same photo
+// depending on NIM load, so the budget is generous; the browser shows progress meanwhile.
+export const maxDuration = 300;
+const TOTAL_TIMEOUT_MS = 170_000;
+const RETRY_MIN_REMAINING_MS = 60_000;
 
 const bodySchema = z.object({ messageId: z.string().max(1000), attachmentIndex: z.number().int().min(0).max(29), context: intakeContextSchema });
 const DOWNLOAD_STATUS: Record<InboxReadError['code'], number> = { configuration: 503, timeout: 504, provider: 502, not_found: 404, too_large: 413, unsupported_type: 415 };
@@ -28,6 +31,7 @@ export async function POST(req: Request) {
   const { messageId, attachmentIndex, context } = parsed;
 
   const controller = new AbortController();
+  const startedAt = Date.now();
   const timer = setTimeout(() => controller.abort(), TOTAL_TIMEOUT_MS);
   try {
     let file: Awaited<ReturnType<typeof downloadGmailAttachment>>;
@@ -47,6 +51,7 @@ export async function POST(req: Request) {
     const messages = buildIntakeMessages(context, prepared);
     let documents: RawIntakeDocument[] | undefined; let lastError = 'Model returned unusable output.';
     for (let attempt = 0; attempt < 2 && !documents; attempt++) {
+      if (attempt === 1 && Date.now() - startedAt > TOTAL_TIMEOUT_MS - RETRY_MIN_REMAINING_MS) break;   // a retry that cannot finish only delays the 502
       const conversation = attempt === 0 ? messages : [...messages, { role: 'user' as const, content: 'Return only the JSON object {"documents":[...]} with no other text.' }];
       let reply: string;
       try { reply = await completeChat(env.key!, chosenModel, conversation, controller.signal); }

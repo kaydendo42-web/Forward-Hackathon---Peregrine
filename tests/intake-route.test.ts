@@ -131,7 +131,7 @@ describe('POST /api/intake', () => {
       ? Promise.reject(abortError())
       : new Promise((_, reject) => init.signal.addEventListener('abort', () => reject(abortError())))));
     const pending = call(good);
-    await vi.advanceTimersByTimeAsync(54_000);
+    await vi.advanceTimersByTimeAsync(170_000);
     expect((await pending).status).toBe(504);
   });
   it('uses the text model for a PDF with a text layer', async () => {
