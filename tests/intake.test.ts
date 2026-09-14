@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyIntakeDocument, buildIntakeContext, buildIntakeMessages, intakeDocumentId, linkedRequestFor, parseIntakeAmount, parseIntakeReply, recordIntakeProposal, rejectIntakeProposal, verifyIntake, type RawIntakeDocument } from '../src/lib/intake';
+import { applyIntakeDocument, buildIntakeContext, suggestRequest, buildIntakeMessages, intakeDocumentId, linkedRequestFor, parseIntakeAmount, parseIntakeReply, recordIntakeProposal, rejectIntakeProposal, verifyIntake, type RawIntakeDocument } from '../src/lib/intake';
 import * as workflow from '../src/core/workflow';
 import type { Baseline, IntakeProposal } from '../src/core/types';
 import { baseline } from './fixtures';
@@ -217,5 +217,31 @@ describe('rejectIntakeProposal', () => {
     expect(next.intake![0].review).toMatchObject({ status: 'rejected', note: 'Belongs to another client' });
     expect(next.intake![0].review.decidedAt).not.toBe('');
     expect(next.audit.at(-1)).toMatchObject({ action: 'intake_rejected' });
+  });
+});
+
+describe('suggestRequest', () => {
+  const requests = [
+    { id: 'tr:CHANGES', entityId: 'taylor-family-trust', lineId: 'CHANGES', label: 'Current-year changes', category: 'current_year_changes' },
+    { id: 'tr:TR-BANK', entityId: 'taylor-family-trust', lineId: 'TR-BANK', label: 'Reconciled bank balance', category: 'bank' },
+    { id: 'tr:TR-INVEST', entityId: 'taylor-family-trust', lineId: 'TR-INVEST', label: 'Investment carrying amount', category: 'investments' },
+    { id: 'tr:TR-DIST-ALE', entityId: 'taylor-family-trust', lineId: 'TR-DIST-ALE', label: 'Alex Taylor ordinary-income allocation', category: 'beneficiary_info' },
+    { id: 'tr:TR-DIST-SAM', entityId: 'taylor-family-trust', lineId: 'TR-DIST-SAM', label: 'Sam Taylor ordinary-income allocation', category: 'beneficiary_info' },
+    { id: 'tr:TR-DOC', entityId: 'taylor-family-trust', lineId: 'TR-DOC', label: 'Trust document checklist', category: 'trust_documents' },
+    { id: 'al:ALE-DIV-CASH', entityId: 'alex-taylor', lineId: 'ALE-DIV-CASH', label: 'Cash dividends', category: 'dividends' },
+  ];
+  const doc = (docType: string, labels: string[] = []) => ({ docType, entityNameSeen: 'Taylor Family Trust', amounts: labels.map(label => ({ label, amountCents: null })) });
+  it('maps the six demo documents to their trust lines from their titles', () => {
+    expect(suggestRequest(doc('Memorandum - FY2026 Taylor Family Trust Update'), requests, 'taylor-family-trust')).toBe('tr:CHANGES');
+    expect(suggestRequest(doc('Trust Account Statement', ['Closing Balance']), requests, 'taylor-family-trust')).toBe('tr:TR-BANK');
+    expect(suggestRequest(doc('Financial Statement', ['Beneficiary Allocation Record - ALEX']), requests, 'taylor-family-trust')).toBe('tr:TR-DIST-ALE');
+    expect(suggestRequest(doc('TAYLOR FAMILY TRUST - FY2026 BENEFICIARY ALLOCATION RECORD - SAM'), requests, 'taylor-family-trust')).toBe('tr:TR-DIST-SAM');
+    expect(suggestRequest(doc('Trustee Resolution - FY2026 End-of-Year Distributions'), requests, 'taylor-family-trust')).toBe('tr:TR-DOC');
+    expect(suggestRequest(doc('Schedule of Acquisitions and Disposals'), requests, 'taylor-family-trust')).toBe('tr:TR-INVEST');
+  });
+  it('stays inside the chosen entity and returns empty when nothing fits', () => {
+    expect(suggestRequest(doc('Dividend statement'), requests, 'alex-taylor')).toBe('al:ALE-DIV-CASH');
+    expect(suggestRequest(doc('Dividend statement'), requests, 'taylor-family-trust')).toBe('');
+    expect(suggestRequest(doc('Photo of a cat'), requests, 'taylor-family-trust')).toBe('');
   });
 });

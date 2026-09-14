@@ -51,7 +51,7 @@ One matched dividend schedule does not complete the engagement; the other reques
 ### Family-group path (added 14 September)
 
 1. The sidebar is the **family tree**: Taylor family → four entities → request lines. Each entity shows what it is still missing ("2 awaiting client · 1 for adviser"); each line shows its status and how many documents are attached. Click a line to open its workpapers.
-2. Generate FY26 requests for several entities, then **Draft family email**. One email to the liaison, Alan Taylor, greets him by name with a season-aware line, then lists the outstanding items grouped by entity, and asks him to reply with documents attached. **Family reminder** is the gentler follow-up. Both appear in the Outbox from any member entity.
+2. Generate FY26 requests for several entities, then **Draft family email**. One email to the liaison, Alex Taylor, greets them by name with a season-aware line, then lists the outstanding items grouped by entity, and asks him to reply with documents attached. **Family reminder** is the gentler follow-up. Both appear in the Outbox from any member entity.
 3. When the family replies with photos, **Read N attachments** in the Inbox (see "Attachment intake"). Accept each checked proposal onto its line.
 4. **Export review workbook.** The Evidence sheet lists every document with its source and the adviser's decision, and the Attachments sheet embeds each accepted photo under a caption naming the line, document ID, amount and hash.
 
@@ -159,7 +159,7 @@ Only plain-text email content is retrieved, bounded to 20,000 characters. HTML-o
 
 ## Family group and liaison
 
-`src/core/family.ts` names the family group, its liaison (Alan Taylor, trustee — synthetic) and member entities. `queueGroupOutreach` builds one combined email with an Australian-season greeting (spring in September) and per-entity sections; the existing per-entity drafts remain for one-off use. A group draft carries `groupId` and is shown, matched and audited beside any member entity. Replies to the family email offer every included request (labelled by entity) when assigning an answer.
+`src/core/family.ts` names the family group, its liaison (Alex Taylor, trustee — synthetic) and member entities. `queueGroupOutreach` builds one combined email with an Australian-season greeting (spring in September) and per-entity sections; the existing per-entity drafts remain for one-off use. A group draft carries `groupId` and is shown, matched and audited beside any member entity. Replies to the family email offer every included request (labelled by entity) when assigning an answer.
 
 ## Family tree sidebar
 

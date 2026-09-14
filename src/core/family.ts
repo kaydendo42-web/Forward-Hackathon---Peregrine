@@ -10,7 +10,7 @@ export type FamilyGroup = {
 
 export const FAMILY_GROUPS: FamilyGroup[] = [{
   id: 'taylor-family', name: 'Taylor family',
-  liaison: { name: 'Alan Taylor', firstName: 'Alan', email: 'taylorfamilyexample@gmail.com', role: 'Trustee and family contact (synthetic)' },
+  liaison: { name: 'Alex Taylor', firstName: 'Alex', email: 'taylorfamilyexample@gmail.com', role: 'Family contact (synthetic)' },
   entityIds: ['alex-taylor', 'sam-taylor', 'taylor-services', 'taylor-family-trust'],
 }];
 

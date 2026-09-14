@@ -20,8 +20,8 @@ function family() {
 }
 
 describe('family group configuration', () => {
-  it('maps every synthetic entity to the Taylor family with Alan as liaison', () => {
-    expect(taylor).toMatchObject({ id: 'taylor-family', liaison: { firstName: 'Alan', email: 'taylorfamilyexample@gmail.com' } });
+  it('maps every synthetic entity to the Taylor family with Alex as liaison', () => {
+    expect(taylor).toMatchObject({ id: 'taylor-family', liaison: { firstName: 'Alex', email: 'taylorfamilyexample@gmail.com' } });
     for (const id of ['alex-taylor', 'sam-taylor', 'taylor-services', 'taylor-family-trust']) expect(groupFor(id)?.id).toBe('taylor-family');
     expect(groupFor('nobody')).toBeUndefined();
   });
@@ -33,10 +33,10 @@ describe('family group configuration', () => {
     expect(seasonOf(new Date('2026-12-01'))).toBe('summer');
   });
   it('greets by first name with a season line and a gentler reminder', () => {
-    expect(greeting('Alan', 'initial', SPRING)).toMatch(/^Hi Alan,/);
-    expect(greeting('Alan', 'initial', SPRING)).toMatch(/spring/i);
-    expect(greeting('Alan', 'initial', new Date('2026-07-01'))).toMatch(/warm/i);
-    expect(greeting('Alan', 'reminder', SPRING)).toMatch(/nudge/i);
+    expect(greeting('Alex', 'initial', SPRING)).toMatch(/^Hi Alex,/);
+    expect(greeting('Alex', 'initial', SPRING)).toMatch(/spring/i);
+    expect(greeting('Alex', 'initial', new Date('2026-07-01'))).toMatch(/warm/i);
+    expect(greeting('Alex', 'reminder', SPRING)).toMatch(/nudge/i);
   });
 });
 
@@ -46,7 +46,7 @@ describe('queueGroupOutreach', () => {
     const draft = state.outbox.at(-1)!;
     expect(draft).toMatchObject({ entityId: 'taylor-family', groupId: 'taylor-family', kind: 'initial', status: 'draft' });
     expect(draft.subject).toBe('FY2026 information request — Taylor family (2 entities)');
-    expect(draft.body.startsWith('Hi Alan,')).toBe(true);
+    expect(draft.body.startsWith('Hi Alex,')).toBe(true);
     expect(draft.body).toMatch(/spring/i);
     expect(draft.body.indexOf('Alex Taylor')).toBeLessThan(draft.body.indexOf('Taylor Family Trust'));
     expect(draft.body).toContain('1. FY2026: Provide the 30 June trust bank statement.');

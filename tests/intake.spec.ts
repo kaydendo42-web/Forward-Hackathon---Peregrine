@@ -35,14 +35,16 @@ test('reply attachment → read → mismatch blocks accept → adviser override 
   await page.getByRole('button', { name: 'Read 1 attachment' }).click();
   const doc = page.getByTestId('intake-document');
   await expect(doc).toContainText('Name mismatch');
-  await expect(doc).toContainText('Synthetic marker seen');
+  await expect(doc).toContainText('Synthetic demo marker seen');
   await expect(page.getByRole('img', { name: 'Attachment statement.jpg' })).toBeVisible();
   await expect(doc.getByRole('button', { name: /Accept/ })).toBeDisabled();
 
   await doc.getByLabel('Entity').selectOption('taylor-family-trust');
-  await doc.getByLabel('Request line').selectOption('taylor-family-trust:2026:TR-BANK');
-  await expect(doc.getByRole('button', { name: 'Accept with adviser override' })).toBeEnabled();
-  await doc.getByRole('button', { name: 'Accept with adviser override' }).click();
+  await expect(doc.getByLabel('Request line')).toHaveValue('taylor-family-trust:2026:TR-BANK');   // keyword suggestion from "Trust Account Statement"
+  await expect(doc.getByRole('button', { name: 'Accept as evidence' })).toBeDisabled();
+  await doc.getByLabel(/I confirm this document belongs to Taylor Family Trust/).check();
+  await expect(doc.getByRole('button', { name: 'Accept as evidence' })).toBeEnabled();
+  await doc.getByRole('button', { name: 'Accept as evidence' }).click();
   await expect(page.getByTestId('intake-linked')).toContainText('Linked to');
 
   await page.getByTestId('intake-linked').getByRole('button', { name: 'Open request' }).click();

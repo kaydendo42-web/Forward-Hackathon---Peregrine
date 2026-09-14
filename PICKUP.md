@@ -275,7 +275,7 @@ Verification: 144 unit/route tests, 6 Playwright journeys (2 new), typecheck, bu
 All on `feat/compliance-demo`, pushed. Specs: `docs/superpowers/specs/2026-09-14-family-group-email-design.md` (the tree and Excel steps were built to the decisions recorded there and in the README; no separate spec files).
 
 - **Merged** Jason's `feat/jason-guidance-agent` (Guidance tab, `guidance/` corpus). Both additive workspace fields (`intake`, `guidance`) kept.
-- **Family group + liaison**: `src/core/family.ts` (Taylor family → Alan Taylor), `queueGroupOutreach` in workflow, `Draft.groupId`, Outbox/Inbox/Activity show group drafts beside member entities. Season greeting by month (Australian seasons).
+- **Family group + liaison**: `src/core/family.ts` (Taylor family → Alex Taylor), `queueGroupOutreach` in workflow, `Draft.groupId`, Outbox/Inbox/Activity show group drafts beside member entities. Season greeting by month (Australian seasons).
 - **Family tree sidebar**: `src/core/tree.ts` rollups, `src/components/family-tree.tsx`. Entity button names and `aria-pressed` unchanged; lines have `aria-current`.
 - **Excel write-back**: `exportReview(state, entityId, loadOriginal?)` adds Evidence columns (line, source, adviser decision) and an Attachments sheet with embedded, browser-shrunk photos. Import caps raised to 25 MB / 60 MB expanded so the export→edit→re-import journey still works with photos.
 - **Intake on Vercel**: fixed a module-load crash (`DOMMatrix is not defined` from pdf.js) by importing `pdf-parse` lazily behind a stub and externalising `sharp`/`pdf-parse`/`pdfjs-dist` in `next.config.ts`. Production `/api/intake` returned 200 in 14 s on the real Alex allocation photo with the right target.

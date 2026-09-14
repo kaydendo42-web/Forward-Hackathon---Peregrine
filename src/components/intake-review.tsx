@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { IntakeProposal, Workspace } from '../core/types';
-import { applyIntakeDocument, linkedRequestFor, rejectIntakeProposal } from '../lib/intake';
+import { applyIntakeDocument, linkedRequestFor, rejectIntakeProposal, suggestRequest } from '../lib/intake';
 import { readOriginal } from '../lib/storage';
 import { money } from '../lib/format';
 
@@ -26,21 +26,25 @@ function DocumentReview({ state, proposal, index, busy, act, openRequest }: Prop
   const entities = state.baselines;
   const [entityId, setEntityId] = useState(doc.proposedEntityId || entities[0]?.entityId || '');
   const requests = state.requests.filter(r => r.entityId === entityId && r.review === 'pending' && !r.paused);
-  const [requestId, setRequestId] = useState(doc.flags.targetValid ? doc.proposedRequestId : '');
+  const openRequests = state.requests.filter(r => r.review === 'pending' && !r.paused);
+  const modelSilent = !doc.proposedRequestId;
+  const [requestId, setRequestId] = useState(doc.flags.targetValid ? doc.proposedRequestId : suggestRequest(doc, openRequests, doc.proposedEntityId || entities[0]?.entityId || ''));
+  const [confirmed, setConfirmed] = useState(false);
   const [amountIndex, setAmountIndex] = useState(doc.amounts.findIndex(a => a.amountCents !== null));
   const [manual, setManual] = useState('');
   const [description, setDescription] = useState([doc.docType, doc.entityNameSeen, [doc.periodStart, doc.periodEnd].filter(Boolean).join(' – ')].filter(Boolean).join(' — '));
   const linked = linkedRequestFor(state, proposal, index);
-  const override = requestId !== doc.proposedRequestId;
-  const blocked = (doc.flags.nameMatch === 'mismatch' || !doc.flags.targetValid) && !override;
+  const override = !modelSilent && requestId !== doc.proposedRequestId;
+  const entityName = entities.find(b => b.entityId === entityId)?.entityName ?? entityId;
+  const blocked = doc.flags.nameMatch === 'mismatch' && !confirmed;
   const amountCents = manual.trim() ? Math.round(Number(manual) * 100) : amountIndex >= 0 ? doc.amounts[amountIndex].amountCents : null;
   const badAmount = manual.trim() !== '' && !/^-?\d+(\.\d{1,2})?$/.test(manual.trim());
   const flags = [
     doc.flags.nameMatch === 'mismatch' && `Name mismatch: "${doc.entityNameSeen || '(none read)'}" is not an entity in this family.`,
     doc.flags.nameMatch === 'partial' && `Partial name match: "${doc.entityNameSeen}".`,
     !doc.flags.periodInYear && `Period outside FY2026: ${doc.periodStart} – ${doc.periodEnd}.`,
-    doc.flags.syntheticMarker && 'Synthetic marker seen on the document.',
-    !doc.flags.targetValid && 'Proposed request is missing, closed, or belongs to another entity.',
+    doc.flags.syntheticMarker && 'Synthetic demo marker seen on the document (expected in this demo).',
+    !doc.flags.targetValid && (modelSilent ? 'The model did not choose a request line; a keyword suggestion is preselected below — confirm it.' : 'Proposed request is missing, closed, or belongs to another entity — choose the right line below.'),
   ].filter((f): f is string => Boolean(f));
 
   return <div className="intake-document" data-testid="intake-document">
@@ -50,7 +54,7 @@ function DocumentReview({ state, proposal, index, busy, act, openRequest }: Prop
       {doc.amounts.map((a, i) => <tr key={i}><td>{a.label || '(no label)'}</td><td>{a.amountCents === null ? 'unreadable' : money(a.amountCents)}</td></tr>)}</tbody></table>}
     {flags.map(f => <p key={f} className="callout intake-flag">{f}</p>)}
     {linked ? <p className="notice" data-testid="intake-linked">Linked to {linked.label} as evidence. <button className="text-button" onClick={() => openRequest(linked.id)}>Open request</button></p> : proposal.review.status === 'rejected' ? <p className="hint">Proposal rejected{proposal.review.note ? `: ${proposal.review.note}` : '.'}</p> : <>
-      <label>Entity<select value={entityId} disabled={busy} onChange={e => { setEntityId(e.target.value); setRequestId(''); }}>
+      <label>Entity<select value={entityId} disabled={busy} onChange={e => { setEntityId(e.target.value); setRequestId(suggestRequest(doc, openRequests, e.target.value)); setConfirmed(false); }}>
         {entities.map(b => <option key={b.entityId} value={b.entityId}>{b.entityName}</option>)}</select></label>
       <label>Request line<select value={requestId} disabled={busy} onChange={e => setRequestId(e.target.value)}>
         <option value="">Select a request</option>{requests.map(r => <option key={r.id} value={r.id}>{r.label}</option>)}</select></label>
@@ -60,12 +64,13 @@ function DocumentReview({ state, proposal, index, busy, act, openRequest }: Prop
       {badAmount && <p className="error">Enter a number with up to two decimal places.</p>}
       <label>Evidence description<input value={description} disabled={busy} maxLength={4000} onChange={e => setDescription(e.target.value)} /></label>
       <p className="hint">Check the figure against the preview. Accepting links this file as evidence; adviser review of the request is still separate.</p>
+      {doc.flags.nameMatch === 'mismatch' && <label className="toggle"><input type="checkbox" checked={confirmed} disabled={busy} onChange={e => setConfirmed(e.target.checked)} />I confirm this document belongs to {entityName} despite the name on it.</label>}
       <div className="button-row">
         <button disabled={busy || blocked || !requestId || badAmount || !description.trim()} onClick={() => act(s => applyIntakeDocument(s, proposal.id, index, { requestId, amountCents, description }), 'Attachment linked as evidence. Adviser review is still required.')}>
           {override ? 'Accept with adviser override' : 'Accept as evidence'}</button>
         <button className="text-button" disabled={busy} onClick={() => act(s => rejectIntakeProposal(s, proposal.id, ''), 'Proposal rejected. The file stays in this browser.')}>Reject</button>
       </div>
-      {blocked && <p className="hint">Change the entity or request to accept this document; the model&apos;s target could not be verified.</p>}
+      {blocked && <p className="hint">Tick the confirmation to accept this document; the name on it did not match any entity in the family.</p>}
     </>}
   </div>;
 }

@@ -248,3 +248,30 @@ export function rejectIntakeProposal(state: Workspace, proposalId: string, note:
   const next = { ...state, intake: (state.intake ?? []).map(p => p.id === proposalId ? decided : p) };
   return logEvent(next, auditEntity(proposal), 'intake_rejected', `${proposal.filename} rejected by adviser${decided.review.note ? `: ${decided.review.note}` : '.'}`);
 }
+
+/**
+ * A keyword guess at the request line when the model leaves the target blank, so the
+ * adviser's picker starts somewhere sensible. Always confined to the chosen entity;
+ * the adviser still confirms. Returns '' when nothing fits.
+ */
+export function suggestRequest(doc: { docType: string; entityNameSeen: string; amounts: { label: string }[] },
+  requests: { id: string; entityId: string; lineId: string; label: string; category: string }[], entityId: string): string {
+  const own = requests.filter(r => r.entityId === entityId);
+  const text = `${doc.docType} ${doc.amounts.map(a => a.label).join(' ')}`.toLowerCase();
+  const byCategory = (c: string) => own.find(r => r.category === c)?.id ?? '';
+  const byLabel = (re: RegExp) => own.find(r => re.test(r.label))?.id ?? '';
+  const rules: [RegExp, () => string][] = [
+    [/memo|update|what changed|changes|cover letter/, () => own.find(r => r.lineId === 'CHANGES')?.id ?? ''],
+    [/resolution|deed|minutes|trustee/, () => byCategory('trust_documents')],
+    [/allocation|beneficiar|distribution/, () => (/alex/.test(text) && byLabel(/alex/i)) || (/sam\b/.test(text) && byLabel(/sam\b/i)) || byCategory('beneficiary_info') || byCategory('trust_income')],
+    [/bank|statement of account|reconciliation|closing balance/, () => byCategory('bank')],
+    [/portfolio|acquisition|disposal|investment|holding|share/, () => byCategory('investments')],
+    [/dividend|franking/, () => byCategory('dividends')],
+    [/interest/, () => byCategory('interest')],
+    [/payg|salary|wage|income statement|payment summary/, () => byCategory('employment')],
+    [/receivable|debtor/, () => byCategory('receivables')], [/payable|creditor/, () => byCategory('payables')],
+    [/equipment|asset|depreciation/, () => byCategory('assets')], [/loan|related part/, () => byCategory('related_parties')],
+  ];
+  for (const [pattern, pick] of rules) { if (pattern.test(text)) { const id = pick(); if (id) return id; } }
+  return '';
+}
