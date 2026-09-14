@@ -111,9 +111,11 @@ export default function Workspace() {
     setNotice(`Inbox checked: ${added} new ${added === 1 ? 'reply' : 'replies'}. No answers applied automatically.`);
   }
   async function readAllAttachments(passcode: string, message: InboxMessage) {
-    const failures: string[] = [];
+    const failures: string[] = []; let skipped = 0;
     for (let i = 0; i < message.attachments.length; i++) {
-      setIntakeProgress(`Reading ${i + 1} of ${message.attachments.length}: ${message.attachments[i].filename || 'attachment'}…`);
+      // Already read (pending or accepted) → leave it; only unread or failed files go to the model.
+      if ((stateRef.current.intake ?? []).some(p => p.messageId === message.messageId && p.attachmentIndex === i && p.review.status !== 'rejected')) { skipped += 1; continue; }
+      setIntakeProgress(`Reading ${i + 1} of ${message.attachments.length}: ${message.attachments[i].filename || 'attachment'}… (model reads take 15–90 s each)`);
       try {
         const base = stateRef.current;
         const proposal = await readAttachment(passcode, message.messageId, i, buildIntakeContext(base));
@@ -123,8 +125,9 @@ export default function Workspace() {
       } catch (e) { failures.push(`${message.attachments[i].filename || `attachment ${i + 1}`}: ${e instanceof Error ? e.message : 'failed'}`); }
     }
     setIntakeProgress('');
-    if (failures.length) throw new Error(`${message.attachments.length - failures.length} of ${message.attachments.length} attachments read. Not read — ${failures.join('; ')}`);
-    setNotice(`${message.attachments.length} attachment${message.attachments.length === 1 ? '' : 's'} read. Nothing linked yet — review each proposal below.`);
+    const read = message.attachments.length - failures.length - skipped;
+    if (failures.length) throw new Error(`${read} read${skipped ? `, ${skipped} already read` : ''}, ${failures.length} not read — press Read again to retry only those. ${failures.join('; ')}`);
+    setNotice(`${read} attachment${read === 1 ? '' : 's'} read${skipped ? ` (${skipped} already read, skipped)` : ''}. Nothing linked yet — review each proposal below.`);
   }
   async function sendMailDraft(draftId: string, to: string, passcode: string) {
     if (locked.current) throw new Error('Another operation is running. Try sending when it finishes.');
