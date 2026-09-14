@@ -36,7 +36,7 @@ function ReplyCard({ message, state, entityId, busy, act, openRequest, readAttac
       {progress && <p className="hint" role="status">{progress}</p>}
       <p className="hint">Each file is downloaded once, read by the vision model and shown as a proposal. Nothing is linked until you accept it.</p>
       {(state.intake ?? []).filter(p => p.messageId === message.messageId).sort((a, b) => a.attachmentIndex - b.attachmentIndex)
-        .map(p => <IntakeReview key={p.id} state={state} proposal={p} busy={busy} act={act} openRequest={openRequest} />)}
+        .map(p => <IntakeReview key={`${p.id}:${entityId}`} state={state} proposal={p} busy={busy} act={act} openRequest={openRequest} viewingEntityId={entityId} />)}
     </div>}
     <label>Assign reply to request<select value={requestId} disabled={busy} onChange={e => { setRequestId(e.target.value); setManual(false); }}>
       <option value="">Select a request</option>{requests.map(r => <option key={r.id} value={r.id}>{draft?.groupId ? `${state.baselines.find(b => b.entityId === r.entityId)?.entityName ?? r.entityId}: ` : ''}{r.label} · FY{r.financialYear}</option>)}

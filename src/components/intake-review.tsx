@@ -6,7 +6,7 @@ import { applyIntakeDocument, linkedRequestFor, rejectIntakeProposal, suggestReq
 import { readOriginal } from '../lib/storage';
 import { money } from '../lib/format';
 
-type Props = { state: Workspace; proposal: IntakeProposal; busy: boolean;
+type Props = { state: Workspace; proposal: IntakeProposal; busy: boolean; viewingEntityId: string;
   act: (operation: (s: Workspace) => Workspace, success?: string) => void; openRequest: (id: string) => void };
 
 function Thumbnail({ hash, contentType, filename }: { hash: string; contentType: string; filename: string }) {
@@ -21,14 +21,15 @@ function Thumbnail({ hash, contentType, filename }: { hash: string; contentType:
   return url ? <img className="intake-thumb" src={url} alt={`Attachment ${filename}`} /> : <p className="hint">Preview unavailable in this browser.</p>;
 }
 
-function DocumentReview({ state, proposal, index, busy, act, openRequest }: Props & { index: number }) {
+function DocumentReview({ state, proposal, index, busy, act, openRequest, viewingEntityId }: Props & { index: number }) {
   const doc = proposal.documents[index];
   const entities = state.baselines;
-  const [entityId, setEntityId] = useState(doc.proposedEntityId || entities[0]?.entityId || '');
+  // Model's entity if it gave one; otherwise the entity the adviser is looking at.
+  const [entityId, setEntityId] = useState(doc.proposedEntityId || viewingEntityId || entities[0]?.entityId || '');
   const requests = state.requests.filter(r => r.entityId === entityId && r.review === 'pending' && !r.paused);
   const openRequests = state.requests.filter(r => r.review === 'pending' && !r.paused);
   const modelSilent = !doc.proposedRequestId;
-  const [requestId, setRequestId] = useState(doc.flags.targetValid ? doc.proposedRequestId : suggestRequest(doc, openRequests, doc.proposedEntityId || entities[0]?.entityId || ''));
+  const [requestId, setRequestId] = useState(doc.flags.targetValid ? doc.proposedRequestId : suggestRequest(doc, openRequests, doc.proposedEntityId || viewingEntityId || entities[0]?.entityId || ''));
   const [confirmed, setConfirmed] = useState(false);
   const [amountIndex, setAmountIndex] = useState(doc.amounts.findIndex(a => a.amountCents !== null));
   const [manual, setManual] = useState('');
