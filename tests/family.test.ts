@@ -61,6 +61,13 @@ describe('queueGroupOutreach', () => {
     const changed = workflow.recordAnswer(once, 'alex-taylor:2026:ALE-DIV-CASH', 'Statement attached.');
     expect(changed.outbox.at(-1)!.status).toBe('superseded');
   });
+  it('a changed liaison yields a fresh draft and supersedes the older pending one', () => {
+    const once = workflow.queueGroupOutreach(family(), taylor, 'initial', SPRING);
+    const renamed = { ...taylor, liaison: { ...taylor.liaison, name: 'Alan Taylor', firstName: 'Alan' } };
+    const next = workflow.queueGroupOutreach(once, renamed, 'initial', SPRING);
+    expect(next.outbox.map(d => d.status)).toEqual(['superseded', 'draft']);
+    expect(next.outbox.at(-1)!.body.startsWith('Hi Alan,')).toBe(true);
+  });
   it('throws when nothing in the group needs outreach and skips entities with nothing outstanding', () => {
     expect(() => workflow.queueGroupOutreach(workflow.createWorkspace(), taylor, 'initial', SPRING)).toThrow(/No unanswered requests/);
     let s = family();

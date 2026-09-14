@@ -190,15 +190,17 @@ export function queueGroupOutreach(state: Workspace, group: FamilyGroup, kind: '
     .filter((s): s is { entity: Baseline; eligible: CollectionRequest[] } => Boolean(s.entity) && s.eligible.length > 0);
   const eligible = sections.flatMap(s => s.eligible);
   if (!eligible.length) throw new Error('No unanswered requests need outreach in this family group. Responses and evidence await adviser review.');
-  const fingerprint = JSON.stringify([kind, group.id, eligible.map(r => [r.id, r.question, r.review, r.reviewNote])]);
+  const fingerprint = JSON.stringify([kind, group.id, group.liaison.firstName, eligible.map(r => [r.id, r.question, r.review, r.reviewNote])]);
   if (state.outbox.some(d => d.groupId === group.id && d.fingerprint === fingerprint && d.status === 'draft')) return state;
+  // One pending family draft per kind: a fresh one replaces an older, now-stale one.
+  const outbox = state.outbox.map(d => d.groupId === group.id && d.kind === kind && d.status === 'draft' ? { ...d, status: 'superseded' as const } : d);
   const year = eligible[0].financialYear;
   const body = `${greeting(group.liaison.firstName, kind, now)}\n\n` +
     sections.map(s => `${s.entity.entityName}\n${itemLines(s.eligible)}`).join('\n\n') +
     '\n\nIf an item no longer applies or a document is not yet available, just let us know. Reply to this email with documents attached and we will sort each one to the right entity for you.' +
     `\n\nWarm regards,\nYour adviser at Peregrine${DEMO_FOOTER}`;
   const count = sections.length;
-  return change({ ...state, outbox: [...state.outbox, {
+  return change({ ...state, outbox: [...outbox, {
     id: `draft-${state.version + 1}`, entityId: group.id, groupId: group.id, kind, status: 'draft', requestIds: eligible.map(r => r.id),
     subject: `FY${year} information ${kind === 'reminder' ? 'reminder' : 'request'} — ${group.name} (${count} ${count === 1 ? 'entity' : 'entities'})`, body, fingerprint,
   }] }, group.id, 'outreach_drafted', `${kind} family draft to ${group.liaison.name} for ${eligible.length} requests across ${count} ${count === 1 ? 'entity' : 'entities'}. No email was sent.`);
